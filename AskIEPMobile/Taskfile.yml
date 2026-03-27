@@ -1,0 +1,223 @@
+version: '3'
+
+dotenv: ["../../.env"]
+
+
+vars:
+  ANDROID_AVD: Pixel_6_API_34
+  ANDROID_SERIAL: emulator-5554
+  IOS_DEVICE: "iPhone SE (3rd generation)"
+
+tasks:
+  # ── General ──────────────────────────────────────────────
+  install:
+    desc: Install JS dependencies
+    cmd: npm install
+
+  start:
+    desc: Start Expo dev server (choose platform interactively)
+    cmd: ./node_modules/.bin/expo start
+
+  reset:
+    desc: Reset Expo / Metro cache
+    cmd: ./node_modules/.bin/expo start --clear
+
+  reset-project:
+    desc: Reset project to boilerplate (destructive!)
+    cmd: node ./scripts/reset-project.js
+
+  clean:
+    desc: Remove node_modules and all build caches
+    cmds:
+      - rm -rf node_modules
+      - rm -rf ios/build ios/DerivedData
+      - rm -rf android/app/build android/build android/.gradle
+      - rm -rf $TMPDIR/metro-* $TMPDIR/haste-*
+      - rm -rf .expo
+
+  lint:
+    desc: Run Expo lint
+    cmd: ./node_modules/.bin/expo lint
+
+  typecheck:
+    desc: Run TypeScript type-check (skip lib checks, src + app only)
+    cmd: npx tsc --noEmit --skipLibCheck
+
+  test:
+    desc: Run Jest tests
+    cmd: npm test
+
+  # ── Web ──────────────────────────────────────────────────
+  web:
+    desc: Start Expo in browser (web)
+    cmd: ./node_modules/.bin/expo start --web
+
+  web:dev:
+    desc: Start Expo web in dev mode (opens browser)
+    cmd: ./node_modules/.bin/expo start --web --dev-client
+
+  # ── iOS ──────────────────────────────────────────────────
+  ios:
+    desc: Start Expo and open in iOS Simulator (boots simulator first)
+    cmds:
+      - task: ios:start
+      - ./node_modules/.bin/expo start --ios
+
+  ios:build:
+    desc: Full native iOS build via expo run:ios (uses existing Xcode project)
+    cmds:
+      - task: ios:start
+      - ./node_modules/.bin/expo run:ios --simulator "{{.IOS_DEVICE}}"
+
+  ios:device:
+    desc: Run on a connected physical iOS device
+    cmd: ./node_modules/.bin/expo run:ios --device
+
+  ios:start:
+    desc: Boot iOS Simulator (no-op if already booted)
+    cmds:
+      - |
+        if xcrun simctl list devices | grep -q "Booted"; then
+          echo "✅ iOS Simulator already booted"
+        else
+          echo "🚀 Booting iOS Simulator: {{.IOS_DEVICE}}"
+          xcrun simctl boot "{{.IOS_DEVICE}}" || true
+          open -a Simulator
+          echo "⏳ Waiting for simulator to be ready..."
+          sleep 5
+        fi
+
+  ios:list:
+    desc: List all available iOS simulators
+    cmd: xcrun simctl list devices available
+
+  ios:logs:
+    desc: Tail Expo/Metro logs from booted simulator
+    cmd: xcrun simctl spawn booted log stream --level debug | grep -E "(expo|AskIEP|Error|Warning)"
+
+  ios:screenshot:
+    desc: Take a screenshot from booted iOS Simulator
+    cmds:
+      - mkdir -p screenshots
+      - xcrun simctl io booted screenshot screenshots/ios-$(date +%Y%m%d-%H%M%S).png
+      - echo "📸 Screenshot saved to screenshots/"
+
+  # ── Android ──────────────────────────────────────────────
+  android:
+    desc: Start Expo and open in Android Emulator (boots emulator first)
+    cmds:
+      - task: android:start
+      - ./node_modules/.bin/expo start --android
+
+  android:tunnel:
+    desc: Start Expo with tunnel (stable URL for Google OAuth on physical Android device)
+    cmds:
+      - task: android:start
+      - ./node_modules/.bin/expo start --android --tunnel
+
+  android:build:
+    desc: Full native Android build via expo run:android
+    cmds:
+      - task: android:start
+      - ./node_modules/.bin/expo run:android
+
+  android:release:
+    desc: Build Android release APK
+    cmd: cd android && ./gradlew assembleRelease
+
+  android:aab:
+    desc: Build Android App Bundle (AAB) for Play Store
+    cmd: cd android && ./gradlew bundleRelease
+
+  android:start:
+    desc: Start Android emulator if not already running
+    cmds:
+      - |
+        set -e
+
+        # Already running and healthy
+        if adb devices | awk '{print $1,$2}' | grep -q "^{{.ANDROID_SERIAL}}[[:space:]]device$"; then
+          echo "✅ Android emulator already running: {{.ANDROID_SERIAL}}"
+          exit 0
+        fi
+
+        # Offline — reset adb
+        if adb devices | awk '{print $1,$2}' | grep -q "^{{.ANDROID_SERIAL}}[[:space:]]offline$"; then
+          echo "⚠️ Android is offline; resetting adb..."
+          adb kill-server || true
+          adb start-server
+        fi
+
+        # Any emulator already online (different serial)
+        if adb devices | awk '{print $1,$2}' | grep -q "^emulator-[0-9]\+[[:space:]]device$"; then
+          echo "✅ A different Android emulator is already running; skipping launch."
+          adb devices -l
+          exit 0
+        fi
+
+        echo "🚀 Starting Android emulator: {{.ANDROID_AVD}}"
+        rm -f /tmp/android-emulator.log /tmp/android-emulator.pid
+
+        nohup emulator -avd {{.ANDROID_AVD}} \
+          -no-snapshot -no-boot-anim \
+          -gpu swiftshader_indirect \
+          > /tmp/android-emulator.log 2>&1 &
+
+        echo $! > /tmp/android-emulator.pid
+        sleep 2
+
+        if ! ps -p "$(cat /tmp/android-emulator.pid)" >/dev/null 2>&1; then
+          echo "❌ Emulator exited immediately. Log:"
+          cat /tmp/android-emulator.log || true
+          exit 1
+        fi
+
+        echo "⏳ Waiting for Android emulator to boot (up to 60s)..."
+        adb -s {{.ANDROID_SERIAL}} wait-for-device
+        echo "✅ Android emulator ready (pid $(cat /tmp/android-emulator.pid))"
+
+  android:stop:
+    desc: Stop the Android emulator
+    cmd: adb -s {{.ANDROID_SERIAL}} emu kill || adb -e emu kill || true
+
+  android:adb:reset:
+    desc: Reset ADB server
+    cmds:
+      - adb kill-server || true
+      - adb start-server
+
+  android:list:
+    desc: List available Android Virtual Devices
+    cmd: emulator -list-avds
+
+  android:logs:
+    desc: Tail Android logcat filtered to Expo / React Native
+    cmd: adb logcat -s "ReactNativeJS" "ExpoModulesCore" "Expo" "*:E" | grep -v "^---"
+
+  android:screenshot:
+    desc: Take a screenshot from running Android emulator
+    cmds:
+      - mkdir -p screenshots
+      - adb exec-out screencap -p > screenshots/android-$(date +%Y%m%d-%H%M%S).png
+      - echo "📸 Screenshot saved to screenshots/"
+
+  # ── Expo Publish / Build (EAS) ────────────────────────────
+  eas:build:ios:
+    desc: EAS cloud build for iOS
+    cmd: npx eas build --platform ios
+
+  eas:build:android:
+    desc: EAS cloud build for Android
+    cmd: npx eas build --platform android
+
+  eas:build:all:
+    desc: EAS cloud build for both platforms
+    cmd: npx eas build --platform all
+
+  eas:update:
+    desc: Push OTA update via EAS Update
+    cmd: npx eas update --auto
+
+  env:check:
+    desc: Debug — print all EXPO_PUBLIC_* env vars Task sees
+    cmd: env | grep EXPO_PUBLIC || echo "⚠️  No EXPO_PUBLIC_* vars found — check dotenv path"
