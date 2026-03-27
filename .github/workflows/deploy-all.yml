@@ -1,0 +1,37 @@
+name: Deploy All (API + Web UI)
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deployment environment"
+        required: true
+        default: "production"
+        type: choice
+        options:
+          - production
+          - dev
+      components:
+        description: "Which components to deploy"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - api
+          - ui
+
+jobs:
+  deploy-api:
+    if: ${{ github.event.inputs.components == 'all' || github.event.inputs.components == 'api' }}
+    uses: ./.github/workflows/deploy-api.yml
+    with:
+      environment: ${{ github.event.inputs.environment }}
+    secrets: inherit
+
+  deploy-ui:
+    if: ${{ github.event.inputs.components == 'all' || github.event.inputs.components == 'ui' }}
+    uses: ./.github/workflows/deploy-ui.yml
+    with:
+      environment: ${{ github.event.inputs.environment }}
+    secrets: inherit
