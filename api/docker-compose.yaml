@@ -1,0 +1,27 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app-api
+    env_file:
+      - ../../.env
+    # Docker containers must override .env values because:
+    # - .env has POSTGRES_HOST=localhost (works for local dev, fails in Docker)
+    # - .env has POSTGRES_PORT=5464 (local proxy port, not container port 5432)
+    # - Containers communicate using service names (postgres, redis) not localhost
+    environment:
+      - POSTGRES_HOST=postgres
+      - REDIS_HOST=redis
+      - POSTGRES_PORT=5432
+      - REDIS_PORT=6379
+      - PORT=8080
+    ports:
+      - "3000:8080"
+    restart: unless-stopped
+    networks:
+      - iepapp-network
+
+networks:
+  iepapp-network:
+    external: true

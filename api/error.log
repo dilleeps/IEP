@@ -1,0 +1,375 @@
+ral)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0005-create-tracking-tables.ts:112:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+112   await queryInterface.addIndex("compliance_logs", ["service_date"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0005-create-tracking-tables.ts:228:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+228   await queryInterface.addIndex("goal_progress", ["child_id", "last_updated"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0005-create-tracking-tables.ts:244:50 - error TS2339: Property 'Op' does not exist on type 'typeof Sequelize'.
+
+244     where: { target_date: { [sequelize.Sequelize.Op.ne]: null } },
+                                                     ~~
+
+src/db/migrations/20260105-0005-create-tracking-tables.ts:352:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+352   await queryInterface.addIndex("communication_logs", ["child_id", "communication_date"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0005-create-tracking-tables.ts:358:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+358   await queryInterface.addIndex("communication_logs", ["communication_date"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0005-create-tracking-tables.ts:482:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+482   await queryInterface.addIndex("behavior_logs", ["child_id", "event_date", "event_time"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0005-create-tracking-tables.ts:488:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+488   await queryInterface.addIndex("behavior_logs", ["event_date"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:126:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+126   await queryInterface.addIndex("letter_drafts", ["child_id", "last_edited"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:142:54 - error TS2339: Property 'Op' does not exist on type 'typeof Sequelize'.
+
+142     where: { parent_draft_id: { [sequelize.Sequelize.Op.ne]: null } },
+                                                         ~~
+
+src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:250:46 - error TS2339: Property 'Op' does not exist on type 'typeof Sequelize'.
+
+250     where: { user_id: { [sequelize.Sequelize.Op.ne]: null } },
+                                                 ~~
+
+src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:265:49 - error TS2339: Property 'Op' does not exist on type 'typeof Sequelize'.
+
+265     where: { state_code: { [sequelize.Sequelize.Op.ne]: null } },
+                                                    ~~
+
+src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:352:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+352   await queryInterface.addIndex("ai_conversations", ["user_id", "last_message_at"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:360:47 - error TS2339: Property 'Op' does not exist on type 'typeof Sequelize'.
+
+360     where: { child_id: { [sequelize.Sequelize.Op.ne]: null } },
+                                                  ~~
+
+src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:459:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+459   await queryInterface.addIndex("advocacy_insights", ["user_id", "created_at"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:467:47 - error TS2339: Property 'Op' does not exist on type 'typeof Sequelize'.
+
+467     where: { child_id: { [sequelize.Sequelize.Op.ne]: null } },
+                                                  ~~
+
+src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:591:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+591   await queryInterface.addIndex("smart_prompts", ["user_id", "created_at"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:599:47 - error TS2339: Property 'Op' does not exist on type 'typeof Sequelize'.
+
+599     where: { child_id: { [sequelize.Sequelize.Op.ne]: null } },
+                                                  ~~
+
+src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:614:49 - error TS2339: Property 'Op' does not exist on type 'typeof Sequelize'.
+
+614     where: { expires_at: { [sequelize.Sequelize.Op.ne]: null } },
+                                                    ~~
+
+src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:731:45 - error TS2339: Property 'Op' does not exist on type 'typeof Sequelize'.
+
+731     where: { status: { [sequelize.Sequelize.Op.ne]: "compliant" } },
+                                                ~~
+
+src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:736:47 - error TS2339: Property 'Op' does not exist on type 'typeof Sequelize'.
+
+736     where: { due_date: { [sequelize.Sequelize.Op.ne]: null } },
+                                                  ~~
+
+src/db/migrations/20260105-0007-create-compliance-audit.ts:89:47 - error TS2339: Property 'Op' does not exist on type 'typeof Sequelize'.
+
+89     where: { child_id: { [sequelize.Sequelize.Op.ne]: null } },
+                                                 ~~
+
+src/db/migrations/20260105-0007-create-compliance-audit.ts:177:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+177   await queryInterface.addIndex("data_access_requests", ["user_id", "created_at"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0007-create-compliance-audit.ts:281:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+281   await queryInterface.addIndex("data_sharing_logs", ["user_id", "shared_at"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0007-create-compliance-audit.ts:288:47 - error TS2339: Property 'Op' does not exist on type 'typeof Sequelize'.
+
+288     where: { child_id: { [sequelize.Sequelize.Op.ne]: null } },
+                                                  ~~
+
+src/db/migrations/20260105-0007-create-compliance-audit.ts:388:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+388   await queryInterface.addIndex("audit_logs", ["user_id", "created_at"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0007-create-compliance-audit.ts:401:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+401   await queryInterface.addIndex("audit_logs", ["created_at"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0007-create-compliance-audit.ts:406:24 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(tableName: TableName, attributes: string[], options?: QueryInterfaceIndexOptions, rawTablename?: string): Promise<void>', gave the following error.
+    Object literal may only specify known properties, and 'order' does not exist in type 'QueryInterfaceIndexOptions'.
+  Overload 2 of 2, '(tableName: TableName, options: { name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); ... 7 more ...; fields: (string | ... 2 more ... | { ...; })[]; }, rawTablename?: string): Promise<...>', gave the following error.
+    Argument of type 'string[]' is not assignable to parameter of type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+      Property 'fields' is missing in type 'string[]' but required in type '{ name?: string; type?: IndexType; unique?: boolean; where?: WhereOptions<any>; logging?: boolean | ((sql: string, timing?: number) => void); benchmark?: boolean; transaction?: Transaction; ... 5 more ...; fields: (string | ... 2 more ... | { ...; })[]; }'.
+
+406   await queryInterface.addIndex("audit_logs", ["pii_accessed", "created_at"], {
+                           ~~~~~~~~
+
+  node_modules/sequelize/types/dialects/abstract/query-interface.d.ts:191:3
+    191   fields?: (string | { name: string; length?: number; order?: 'ASC' | 'DESC'; collate?: string; operator?: string } | Fn | Literal)[];
+          ~~~~~~
+    'fields' is declared here.
+
+src/db/migrations/20260105-0007-create-compliance-audit.ts:414:54 - error TS2339: Property 'Op' does not exist on type 'typeof Sequelize'.
+
+414     where: { retention_until: { [sequelize.Sequelize.Op.ne]: null } },
+                                                         ~~
+
+src/modules/admin/users/admin-users.repo.ts:88:9 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(this: ModelStatic<...>, values: { id?: string | Fn | Col | Literal; email?: string | Fn | Col | Literal; passwordHash?: string | Fn | Col | Literal; displayName?: string | ... 2 more ... | Literal; ... 7 more ...; updatedAt?: Date | ... 2 more ... | Literal; }, options: Omit<...> & { ...; }): Promise<...>', gave the following error.
+    Type 'string' is not assignable to type '"pending" | "active" | "suspended" | "inactive" | Fn | Col | Literal'.
+  Overload 2 of 2, '(this: ModelStatic<...>, values: { id?: string | Fn | Col | Literal; email?: string | Fn | Col | Literal; passwordHash?: string | Fn | Col | Literal; displayName?: string | ... 2 more ... | Literal; ... 7 more ...; updatedAt?: Date | ... 2 more ... | Literal; }, options: UpdateOptions<...>): Promise<...>', gave the following error.
+    Type 'string' is not assignable to type '"pending" | "active" | "suspended" | "inactive" | Fn | Col | Literal'.
+
+88       { status },
+           ~~~~~~
+
+  src/modules/auth/user.model.ts:9:3
+    9   status: 'active' | 'inactive' | 'pending' | 'suspended';
+        ~~~~~~
+    The expected type comes from property 'status' which is declared here on type '{ id?: string | Fn | Col | Literal; email?: string | Fn | Col | Literal; passwordHash?: string | Fn | Col | Literal; displayName?: string | ... 2 more ... | Literal; ... 7 more ...; updatedAt?: Date | ... 2 more ... | Literal; }'
+  src/modules/auth/user.model.ts:9:3
+    9   status: 'active' | 'inactive' | 'pending' | 'suspended';
+        ~~~~~~
+    The expected type comes from property 'status' which is declared here on type '{ id?: string | Fn | Col | Literal; email?: string | Fn | Col | Literal; passwordHash?: string | Fn | Col | Literal; displayName?: string | ... 2 more ... | Literal; ... 7 more ...; updatedAt?: Date | ... 2 more ... | Literal; }'
+
+src/modules/advocacy/advocacy.service.ts:90:26 - error TS2554: Expected 3 arguments, but got 1.
+
+90       await notification.sendEmail({
+                            ~~~~~~~~~
+
+  src/shared/notification/email.ts:32:3
+    32   subject: string,
+         ~~~~~~~~~~~~~~~
+    An argument for 'subject' was not provided.
+
+src/modules/ai/conversation/conversation.service.ts:72:7 - error TS2554: Expected 1 arguments, but got 3.
+
+72       messages.slice(-10).map(m => ({ role: m.role, content: m.content })),
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+73       { systemPrompt }
+   ~~~~~~~~~~~~~~~~~~~~~~
+
+src/modules/ai/conversation/conversation.service.ts:80:7 - error TS2322: Type 'ChatResponse' is not assignable to type 'string'.
+
+80       content: aiResponse,
+         ~~~~~~~
+
+  src/modules/ai/conversation/conversation.types.ts:31:3
+    31   content: string;
+         ~~~~~~~
+    The expected type comes from property 'content' which is declared here on type 'ConversationMessage'
+
+src/modules/letter/letter.service.ts:92:24 - error TS2554: Expected 3 arguments, but got 1.
+
+92     await notification.sendEmail({
+                          ~~~~~~~~~
+
+  src/shared/notification/email.ts:32:3
+    32   subject: string,
+         ~~~~~~~~~~~~~~~
+    An argument for 'subject' was not provided.
+
+src/shared/ai/langchainAi.service.ts:95:45 - error TS2769: No overload matches this call.
+  Overload 1 of 2, '(responseFormat: InteropZodType<unknown> | { schema: InteropZodType<unknown>; strict?: boolean; }): ProviderStrategy<unknown>', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'InteropZodType<unknown> | { schema: InteropZodType<unknown>; strict?: boolean; }'.
+  Overload 2 of 2, '(responseFormat: JsonSchemaFormat | { schema: JsonSchemaFormat; strict?: boolean; }): ProviderStrategy<Record<string, unknown>>', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'JsonSchemaFormat | { schema: JsonSchemaFormat; strict?: boolean; }'.
+
+95     const responseFormat = providerStrategy(req.responseJsonSchema ?? req.schema);
+                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+Found 44 errors in 12 files.
+
+Errors  Files
+     1  src/db/migrate.ts:6
+     1  src/db/migrations/20260105-0002-create-system-configuration.ts:103
+     1  src/db/migrations/20260105-0003-create-child-profiles-and-preferences.ts:264
+     6  src/db/migrations/20260105-0004-create-documents-and-resources.ts:131
+     8  src/db/migrations/20260105-0005-create-tracking-tables.ts:102
+    13  src/db/migrations/20260105-0006-create-letters-ai-advocacy.ts:126
+     8  src/db/migrations/20260105-0007-create-compliance-audit.ts:89
+     1  src/modules/admin/users/admin-users.repo.ts:88
+     1  src/modules/advocacy/advocacy.service.ts:90
+     2  src/modules/ai/conversation/conversation.service.ts:72
+     1  src/modules/letter/letter.service.ts:92
+     1  src/shared/ai/langchainAi.service.ts:95
