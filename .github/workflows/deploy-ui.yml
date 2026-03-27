@@ -76,7 +76,7 @@ jobs:
             --build-arg VITE_STRIPE_PUBLISHABLE_KEY=${{ secrets.VITE_STRIPE_PUBLISHABLE_KEY }} \
             -t "${IMAGE}" \
             -t "${IMAGE%:*}:latest" \
-            ./app/ui
+            ./app
           echo "IMAGE=${IMAGE}" >> $GITHUB_ENV
 
       - name: Push Docker image
