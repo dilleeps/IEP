@@ -1,0 +1,65 @@
+services:
+  postgres:
+    hostname: postgres
+    image: pgvector/pgvector:pg16
+    container_name: iepapp-creator-postgres
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    restart: always
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-iepapp}
+      - POSTGRES_USER=${POSTGRES_USER:-appuser}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_initdb:/docker-entrypoint-initdb.d
+    command: >
+      postgres
+      -c shared_preload_libraries=vector
+      -c max_connections=200
+    networks:
+      - iepapp-network
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-appuser} -d ${POSTGRES_DB:-iepapp}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+  redis:
+    hostname: redis
+    image: redis:7-alpine
+    container_name: iepapp-creator-redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    restart: always
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-changeme}
+    volumes:
+      - redis_data:/data
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD:-changeme}"]
+    networks:
+      - iepapp-network
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "redis-cli -a ${REDIS_PASSWORD:-changeme} ping | grep PONG",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+networks:
+  iepapp-network:
+    external: true
+
+volumes:
+  postgres_data:
+  redis_data:
+  postgres_initdb:

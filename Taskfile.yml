@@ -1,0 +1,314 @@
+version: "3"
+
+dotenv: [".env"]
+
+tasks:
+  # GCP Environment Setup
+  gcp:setup:dev:
+    desc: Full GCP environment setup for dev (service accounts, infra, buckets, database, secrets)
+    dir: infra/gcp
+    cmds:
+      - task dev:setup
+
+  gcp:setup:prod:
+    desc: Full GCP environment setup for production (service accounts, infra, buckets, database, secrets)
+    dir: infra/gcp
+    cmds:
+      - task prod:setup
+
+  # Local Starts
+  start:postgres:
+    desc: Start local PostgreSQL & Redis using Docker Compose
+    cmds:
+      - docker network create iepapp-network || echo "✅ Network iepapp-network already exists"
+      - docker compose  -f docker-compose-db.yaml up -d
+      - sleep 5
+      - task -t apps/api/Taskfile.yml setup-db
+
+  stop:postgres:
+    desc: Stop local PostgreSQL Docker Compose instance
+    cmds:
+      - docker compose -f docker-compose-db.yaml down
+
+  start:cloudsqlproxy-dev:
+    desc: Start Cloud SQL Proxy for dev environment
+    dotenv: ["./.env.dev"]
+    vars:
+      CLOUDSQL_POSTGRES_PORT: 5499
+    cmds:
+      - |
+        echo "🔌 Starting Cloud SQL Proxy for dev environment..."
+        echo "   Project: $GCP_PROJECT_ID"
+        echo "   Instance: $CLOUDSQL_CONNECTION_NAME"
+        echo "   Port: {{.CLOUDSQL_POSTGRES_PORT}}"
+        
+        if [ -z "$CLOUDSQL_CONNECTION_NAME" ] || [ -z "$GCP_PROJECT_ID" ]; then
+          echo "❌ Required variables not set in .env.dev"
+          echo "   Please ensure GCP_PROJECT_ID and CLOUDSQL_CONNECTION_NAME are set"
+          exit 1
+        fi
+        
+        # Check if cloud-sql-proxy is installed
+        if ! command -v cloud-sql-proxy &> /dev/null && ! command -v cloud_sql_proxy &> /dev/null; then
+          echo "❌ Cloud SQL Proxy not installed"
+          echo "   Install with: gcloud components install cloud-sql-proxy"
+          echo "   Or download from: https://cloud.google.com/sql/docs/mysql/sql-proxy"
+          exit 1
+        fi       
+        
+        echo "✅ Starting Cloud SQL Proxy on port {{.CLOUDSQL_POSTGRES_PORT}}..."
+        echo "   Press Ctrl+C to stop"
+        echo ""
+        cloud-sql-proxy $CLOUDSQL_CONNECTION_NAME --port={{.CLOUDSQL_POSTGRES_PORT}} 
+
+  clean:postgres:
+    desc: Stop local PostgreSQL Docker Compose instance (remove volumes & leftovers)
+    cmds:
+      - docker compose -f docker-compose-db.yaml down --volumes  --remove-orphans
+
+  start:api:
+    desc: Start API using docker-run task
+    dir: apps/api
+    cmd: task docker:run
+
+  start:web:
+    desc: Start web using docker-run task
+    dir: apps/ui
+    cmd: task docker:run
+
+  dev:api:
+    desc: Start API using dev task
+    dir: apps/api
+    cmd: task dev
+
+  dev:ui:
+    desc: Start web using dev task
+    dir: apps/ui
+    cmd: task dev
+
+  dev:logs:api:
+    desc: Read historical logs for API service in dev environment, then tail real-time logs
+    dotenv: ["./.env.dev"]
+    cmds:
+      - task: logs
+        vars:
+          SERVICE_NAME: iep-api-dev
+
+  dev:logs:web:
+    desc: Read historical logs for Web service in dev environment, then tail real-time logs
+    dotenv: ["./.env.dev"]
+    cmds:
+      - task: logs
+        vars:
+          SERVICE_NAME: iep-web-dev
+
+  deploy:api:
+    desc: Deploy  API using Kamal
+    cmd: kamal deploy  -c config/deploy-api.yml
+
+  dev:deploy:api:
+    desc: Deploy API to Cloud Run in dev environment
+    dotenv: ["./.env.dev"]
+    dir: apps/api
+    cmds:
+      - chmod +x ../../deploy/deploy-api.sh
+      - ../../deploy/deploy-api.sh
+
+  deploy-ui:
+    desc: Deploy UI on dev environment
+    cmds:
+      - chmod +x ./deploy/deploy-web.sh
+      - ./deploy/deploy-web.sh
+
+
+  dev:deploy-ui:
+    desc: Deploy UI on dev environment
+    dotenv: ["./.env.dev"]
+    cmds:
+      - chmod +x ./deploy/deploy-ui.sh
+      - ./deploy/deploy-ui.sh
+
+  logs:
+    desc: Read historical logs then tail real-time logs for a Cloud Run service
+    dotenv: ["./.env.dev"]
+    vars:
+      SERVICE_NAME: '{{.SERVICE_NAME | default "iep-api-dev"}}'
+      PROJECT_ID: '{{.PROJECT_ID | default .GCP_PROJECT_ID}}'
+    cmds:
+      - |
+        echo "📜 Reading historical logs for {{.SERVICE_NAME}} in project {{.PROJECT_ID}}..."
+        gcloud logging read \
+          'resource.type="cloud_run_revision"
+           AND resource.labels.service_name="{{.SERVICE_NAME}}"' \
+          --project="{{.PROJECT_ID}}" \
+          --freshness=1h \
+          --format="value(timestamp,textPayload,jsonPayload.message)"
+      - |
+        echo "📜 Tailing real-time logs for {{.SERVICE_NAME}} in project {{.PROJECT_ID}}..."
+        gcloud beta logging tail \
+          'resource.type="cloud_run_revision"
+           AND resource.labels.service_name="{{.SERVICE_NAME}}"' \
+          --project="{{.PROJECT_ID}}" \
+          --format="value(timestamp,textPayload,jsonPayload.message)"
+
+  logs:api:
+    desc: Read historical logs for API service in dev environment, then tail real-time logs
+    dotenv: ["./.env.dev"]
+    cmds:
+      - task: logs
+        vars:
+          SERVICE_NAME: iep-api-dev
+
+  logs:web:
+    desc: Read historical logs for Web service in dev environment, then tail real-time logs
+    dotenv: ["./.env.dev"]
+    cmds:
+      - task: logs
+        vars:
+          SERVICE_NAME: iep-web-dev
+
+  logs:api:prod:
+    desc: Read historical logs for API service in production environment, then tail real-time logs
+    dotenv: ["./.env.production"]
+    cmds:
+      - task: logs
+        vars:
+          SERVICE_NAME: iep-api-production
+          PROJECT_ID: $GCP_PROJECT_ID
+
+  prod:logs:api:
+    desc: Read historical logs for API service in production environment, then tail real-time logs
+    dotenv: ["./.env.production"]
+    cmds:
+      - task: logs
+        vars:
+          SERVICE_NAME: iep-api-production
+          PROJECT_ID: $GCP_PROJECT_ID
+
+  logs:web:prod:
+    desc: Read historical logs for Web service in production environment, then tail real-time logs
+    dotenv: ["./.env.production"]
+    cmds:
+      - task: logs
+        vars:
+          SERVICE_NAME: iep-web-production
+          PROJECT_ID: $GCP_PROJECT_ID
+
+  prod:logs:web:
+    desc: Read historical logs for Web service in production environment, then tail real-time logs
+    dotenv: ["./.env.production"]
+    cmds:
+      - task: logs
+        vars:
+          SERVICE_NAME: iep-web-production
+          PROJECT_ID: $GCP_PROJECT_ID
+
+  secrets:set:
+    internal: true
+    desc: Create GitHub secrets from env file
+    preconditions:
+      - sh: command -v go
+        msg: "Go is not installed. Please install Go from https://go.dev/dl/"
+      - sh: command -v gh
+        msg: "GitHub CLI is not installed. Please install it: brew install gh"
+      - sh: gh auth status
+        msg: "GitHub CLI is not authenticated. Please run: gh auth login"
+      - sh: test -f {{.ENV_FILE}}
+        msg: "Environment file {{.ENV_FILE}} not found"
+    cmds:
+      - |
+        export GITHUB_REPO="ASKIEP/iepapp"
+        export GITHUB_ENVIRONMENT="{{.GITHUB_ENVIRONMENT}}"
+        go run secrets.go {{.ENV_FILE}}
+
+  sync:dev:
+    desc: Sync secrets to GitHub dev environment from .env.dev
+    cmds:
+      - task: secrets:set
+        vars:
+          GITHUB_ENVIRONMENT: dev
+          ENV_FILE: .env.dev
+
+  # sync:production:
+  #   desc: Sync secrets to GitHub production environment from .env.production
+  #   cmds:
+  #     - task: secrets:set
+  #       vars:
+  #         GITHUB_ENVIRONMENT: production
+  #         ENV_FILE: .env.production
+
+  install:crypt:
+    desc: Install git-crypt on your system
+    cmds:
+      - |
+        if command -v git-crypt &> /dev/null; then
+          echo "✅ git-crypt is already installed"
+          git-crypt --version
+        elif command -v brew &> /dev/null; then
+          echo "📦 Installing git-crypt via Homebrew..."
+          brew install git-crypt
+          echo "✅ git-crypt installed successfully"
+        else
+          echo "❌ Homebrew not found. Please install git-crypt manually:"
+          echo "   Visit: https://github.com/AGWA/git-crypt"
+        fi
+
+  decrypt:
+    desc: Decrypt the vault using git-crypt-key in repo root
+    preconditions:
+      - sh: command -v git-crypt
+        msg: "git-crypt is not installed. Run: task install:crypt"
+      - sh: test -f git-crypt-key
+        msg: "git-crypt-key not found in repo root. Please obtain it from a team member."
+    cmds:
+      - |
+        echo "🔓 Unlocking vault..."
+        git-crypt unlock git-crypt-key
+        echo "✅ Vault decrypted successfully"
+
+  status:
+    desc: Check installation status of all reqwebred tools
+    cmds:
+      - |
+        echo "🔍 Checking reqwebred tools..."
+        echo ""
+
+        # Check git
+        if command -v git &> /dev/null; then
+          echo "✅ git: $(git --version)"
+        else
+          echo "❌ git: Not installed"
+        fi
+
+        # Check git-crypt
+        if command -v git-crypt &> /dev/null; then
+          echo "✅ git-crypt: $(git-crypt --version)"
+
+          # Check encryption status if git-crypt is installed
+          echo ""
+          echo "📁 Encryption status:"
+          git-crypt status 2>/dev/null || echo "   Repository not initialized with git-crypt"
+        else
+          echo "❌ git-crypt: Not installed (run: task install:crypt)"
+        fi
+
+        # Check GitHub CLI
+        if command -v gh &> /dev/null; then
+          echo "✅ gh: $(gh --version | head -n 1)"
+
+          # Check gh auth status
+          if gh auth status &> /dev/null; then
+            echo "   ✓ Authenticated"
+          else
+            echo "   ✗ Not authenticated (run: gh auth login)"
+          fi
+        else
+          echo "❌ gh: Not installed (run: brew install gh)"
+        fi
+
+        # Check Go
+        if command -v go &> /dev/null; then
+          echo "✅ go: $(go version)"
+        else
+          echo "❌ go: Not installed (visit: https://go.dev/dl/)"
+        fi

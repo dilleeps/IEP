@@ -1,0 +1,839 @@
+{
+  "metadata": {
+    "generated_date": "2026-01-27",
+    "total_stories": 106,
+    "total_story_points": 1046,
+    "source": "docs/projectmanage/userstories.md",
+    "repository": "ASKIEP/iepapp",
+        "boardUrl":"https://github.com/orgs/ASKIEP/projects/1/views/1"
+
+  },
+  "stories": [
+    {
+      "id": "US-M001",
+      "title": "View Child Dashboard on Mobile",
+      "body": "**As a** parent\n**I want to** view my child's IEP dashboard on my mobile device\n**So that** I can quickly check progress and alerts on-the-go\n\n## Acceptance Criteria\n- [ ] Dashboard displays all children with their photos/avatars\n- [ ] Shows current IEP status (active, needs review, expired)\n- [ ] Displays active alerts/prompts count with severity indicators\n- [ ] Shows upcoming meetings and deadlines\n- [ ] Quick access to recent progress updates\n- [ ] Pull-to-refresh functionality\n- [ ] Works in portrait and landscape modes\n- [ ] Loads within 2 seconds on 4G connection\n\n## Technical Notes\nRelated to mobile app parent dashboard implementation.\n\n## Story Points\n5",
+      "labels": ["mobile", "parent", "dashboard", "priority:high", "epic:mobile-parent"],
+      "milestone": "Phase 1 - Mobile Core",
+      "estimate": 5,
+      "priority": "HIGH",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M002",
+      "title": "Add/Edit Child Profile on Mobile",
+      "body": "**As a** parent\n**I want to** create and update my child's profile from my phone\n**So that** I can manage information anytime, anywhere\n\n## Acceptance Criteria\n- [ ] Form includes all required fields (name, DOB, grade, diagnosis)\n- [ ] Camera integration for profile photo\n- [ ] Photo library access for existing images\n- [ ] Diagnosis selection with primary/secondary options\n- [ ] School and district auto-complete/search\n- [ ] Form validation with clear error messages\n- [ ] Save draft capability if interrupted\n- [ ] Offline mode saves to local storage, syncs when online\n- [ ] Confirmation dialog before saving\n\n## Technical Notes\nImplement camera and photo library integrations for React Native.\n\n## Story Points\n8",
+      "labels": ["mobile", "parent", "profile", "priority:high", "epic:mobile-parent"],
+      "milestone": "Phase 1 - Mobile Core",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M003",
+      "title": "View Child's IEP Goals on Mobile",
+      "body": "**As a** parent\n**I want to** view all my child's IEP goals on my mobile device\n**So that** I can stay informed about what my child is working on\n\n## Acceptance Criteria\n- [ ] List view shows all goals with category tags\n- [ ] Each goal displays current progress percentage\n- [ ] Color-coded status indicators (on track, needs attention, achieved)\n- [ ] Tap to expand for full goal details\n- [ ] Shows baseline, current level, and target\n- [ ] Displays measurement method and frequency\n- [ ] Shows recent progress notes (last 3)\n- [ ] Filter by category, status, or service provider\n- [ ] Search functionality for goals\n- [ ] Swipe actions for quick access (view details, add note)\n\n## Story Points\n8",
+      "labels": ["mobile", "parent", "goals", "priority:high", "epic:mobile-parent"],
+      "milestone": "Phase 1 - Mobile Core",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M004",
+      "title": "Take Photos/Videos as Evidence",
+      "body": "**As a** parent\n**I want to** capture photos or videos as evidence of my child's progress or concerns\n**So that** I can document observations immediately\n\n## Acceptance Criteria\n- [ ] In-app camera for photos and videos\n- [ ] Option to select from photo library\n- [ ] Attach to specific goal or general observation\n- [ ] Add caption/notes to media\n- [ ] Tag with date and location (optional)\n- [ ] Preview before uploading\n- [ ] Upload progress indicator\n- [ ] Works offline (queues for upload)\n- [ ] Compression to optimize storage\n- [ ] Privacy notice for sensitive content\n\n## Story Points\n5",
+      "labels": ["mobile", "parent", "media", "priority:medium", "epic:mobile-parent"],
+      "milestone": "Phase 2 - Mobile Features",
+      "estimate": 5,
+      "priority": "MEDIUM",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M005",
+      "title": "Log Progress Update (Parent)",
+      "body": "**As a** parent\n**I want to** log my child's progress observations from my phone\n**So that** I can share what I see at home with the IEP team\n\n## Acceptance Criteria\n- [ ] Select goal from list\n- [ ] Enter observation notes (text area with character count)\n- [ ] Attach photos/videos\n- [ ] Select observation date (defaults to today)\n- [ ] Add tags (behavior, academic, social, communication)\n- [ ] Rate progress on simple scale (improved, same, declined)\n- [ ] Save as draft or publish\n- [ ] Notify teacher/therapist option\n- [ ] Works offline, syncs when online\n- [ ] Confirmation message after save\n\n## Story Points\n8",
+      "labels": ["mobile", "parent", "progress", "priority:high", "epic:mobile-parent"],
+      "milestone": "Phase 2 - Mobile Features",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M006",
+      "title": "View Progress Timeline",
+      "body": "**As a** parent\n**I want to** view a timeline of all progress updates for a goal\n**So that** I can see how my child has progressed over time\n\n## Acceptance Criteria\n- [ ] Chronological timeline view (newest first)\n- [ ] Each entry shows date, author, and summary\n- [ ] Tap to expand for full notes and attachments\n- [ ] Visual indicators for who logged (parent, teacher, therapist)\n- [ ] Filter by date range\n- [ ] Filter by author role\n- [ ] Scroll to load more (pagination)\n- [ ] Export timeline as PDF\n- [ ] Share timeline via email\n\n## Story Points\n5",
+      "labels": ["mobile", "parent", "progress", "timeline", "priority:medium", "epic:mobile-parent"],
+      "milestone": "Phase 2 - Mobile Features",
+      "estimate": 5,
+      "priority": "MEDIUM",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M007",
+      "title": "Log Communication from Mobile",
+      "body": "**As a** parent\n**I want to** log communications with school staff immediately after they happen\n**So that** I have an accurate record while details are fresh\n\n## Acceptance Criteria\n- [ ] Quick log button on dashboard\n- [ ] Select contact from IEP team list\n- [ ] Communication type (email, phone, in-person, video)\n- [ ] Date/time picker (defaults to now)\n- [ ] Subject line (required)\n- [ ] Notes (rich text with formatting)\n- [ ] Attach related documents/photos\n- [ ] Tag with topics (IEP meeting, progress, behavior, services)\n- [ ] Mark as follow-up required\n- [ ] Set reminder for follow-up\n- [ ] Works offline\n- [ ] Confirmation after save\n\n## Story Points\n8",
+      "labels": ["mobile", "parent", "communication", "priority:high", "epic:mobile-parent"],
+      "milestone": "Phase 2 - Mobile Features",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M008",
+      "title": "Send Quick Email to Teacher",
+      "body": "**As a** parent\n**I want to** send a quick email to my child's teacher from the app\n**So that** I can communicate efficiently without leaving the IEP context\n\n## Acceptance Criteria\n- [ ] Select teacher from contact list\n- [ ] Pre-filled templates for common requests\n- [ ] Subject and body fields\n- [ ] Attach documents from app\n- [ ] CC other team members option\n- [ ] Save as draft\n- [ ] Send and auto-log to communication history\n- [ ] Confirmation after send\n- [ ] View sent emails in communication log\n\n## Story Points\n5",
+      "labels": ["mobile", "parent", "communication", "email", "priority:medium", "epic:mobile-parent"],
+      "milestone": "Phase 2 - Mobile Features",
+      "estimate": 5,
+      "priority": "MEDIUM",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M009",
+      "title": "Receive Push Notification for Smart Prompt",
+      "body": "**As a** parent\n**I want to** receive push notifications when a legal prompt is triggered\n**So that** I'm alerted immediately to potential IEP issues\n\n## Acceptance Criteria\n- [ ] Push notification on mobile device\n- [ ] Notification shows prompt title and severity\n- [ ] Tap to open full prompt details in app\n- [ ] Badge indicator on app icon\n- [ ] Notification settings to customize alert types\n- [ ] Quiet hours setting (no alerts during sleep)\n- [ ] Group similar notifications\n- [ ] Works when app is closed\n- [ ] Delivered within 5 minutes of trigger\n\n## Story Points\n8",
+      "labels": ["mobile", "parent", "notifications", "smart-prompts", "priority:high", "epic:mobile-parent"],
+      "milestone": "Phase 1 - Mobile Core",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M010",
+      "title": "Review and Send Smart Prompt Email",
+      "body": "**As a** parent\n**I want to** review and send pre-drafted emails for legal prompts from my phone\n**So that** I can respond to IEP issues immediately\n\n## Acceptance Criteria\n- [ ] View prompt details (issue summary, context, legal basis)\n- [ ] Pre-filled email with child name, school, dates\n- [ ] Edit subject and body\n- [ ] Preview before sending\n- [ ] Select recipients (teacher, principal, case manager)\n- [ ] CC advocate option (toggle)\n- [ ] Schedule send for later\n- [ ] Send and log automatically\n- [ ] Confirmation with next steps\n- [ ] Set follow-up reminder (7, 14, 30 days)\n\n## Story Points\n13",
+      "labels": ["mobile", "parent", "smart-prompts", "email", "priority:critical", "epic:mobile-parent"],
+      "milestone": "Phase 1 - Mobile Core",
+      "estimate": 13,
+      "priority": "CRITICAL",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M011",
+      "title": "Access Meeting Prep Checklist on Mobile",
+      "body": "**As a** parent\n**I want to** access my IEP meeting prep checklist on my phone\n**So that** I can prepare while commuting or waiting\n\n## Acceptance Criteria\n- [ ] Checklist personalized to meeting type (annual, re-eval, etc.)\n- [ ] Check off items as completed\n- [ ] Progress indicator (X of Y items complete)\n- [ ] Tap item to see tips/guidance\n- [ ] Add custom checklist items\n- [ ] Attach documents to checklist items\n- [ ] Save notes per checklist item\n- [ ] Share checklist with advocate\n- [ ] Syncs across devices\n- [ ] Reminder notifications for incomplete items\n\n## Story Points\n8",
+      "labels": ["mobile", "parent", "meetings", "checklist", "priority:medium", "epic:mobile-parent"],
+      "milestone": "Phase 3 - Meeting Features",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M012",
+      "title": "Take Notes During IEP Meeting",
+      "body": "**As a** parent\n**I want to** take notes during an IEP meeting on my phone\n**So that** I can document what was discussed in real-time\n\n## Acceptance Criteria\n- [ ] Quick note entry screen\n- [ ] Voice-to-text input option\n- [ ] Timestamp for each note\n- [ ] Tag notes by topic (goals, services, placement, etc.)\n- [ ] Attach photos of meeting documents\n- [ ] Works offline (saves locally)\n- [ ] Auto-save every 30 seconds\n- [ ] Share notes after meeting\n- [ ] Add to meeting record automatically\n- [ ] Export as PDF\n\n## Story Points\n5",
+      "labels": ["mobile", "parent", "meetings", "notes", "priority:medium", "epic:mobile-parent"],
+      "milestone": "Phase 3 - Meeting Features",
+      "estimate": 5,
+      "priority": "MEDIUM",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M013",
+      "title": "View IEP Documents on Mobile",
+      "body": "**As a** parent\n**I want to** view my child's IEP documents on my phone\n**So that** I can reference them anytime without carrying paper copies\n\n## Acceptance Criteria\n- [ ] List all uploaded IEP documents\n- [ ] Sort by date (newest first)\n- [ ] Filter by type (IEP, evaluation, progress report)\n- [ ] In-app PDF viewer with zoom and scroll\n- [ ] Search within document\n- [ ] Highlight and annotate PDF\n- [ ] Download for offline access\n- [ ] Share via email or messaging\n- [ ] Pin frequently accessed documents\n- [ ] Delete option with confirmation\n\n## Story Points\n8",
+      "labels": ["mobile", "parent", "documents", "pdf", "priority:high", "epic:mobile-parent"],
+      "milestone": "Phase 2 - Mobile Features",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M014",
+      "title": "Upload Documents from Mobile",
+      "body": "**As a** parent\n**I want to** upload documents from my phone's camera or storage\n**So that** I can digitize paper IEP documents immediately\n\n## Acceptance Criteria\n- [ ] Take photo of document (multi-page support)\n- [ ] Select from device storage or cloud drives\n- [ ] Auto-crop and enhance document photos\n- [ ] Convert to PDF\n- [ ] Add document title and type\n- [ ] Tag with child and date\n- [ ] Preview before upload\n- [ ] Upload progress indicator\n- [ ] Works with poor connectivity (resume on reconnect)\n- [ ] Confirmation after successful upload\n\n## Story Points\n8",
+      "labels": ["mobile", "parent", "documents", "upload", "priority:high", "epic:mobile-parent"],
+      "milestone": "Phase 2 - Mobile Features",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M015",
+      "title": "Configure Mobile App Notifications",
+      "body": "**As a** parent\n**I want to** customize which notifications I receive on my mobile device\n**So that** I only get alerts that matter to me\n\n## Acceptance Criteria\n- [ ] Toggle notifications by type (progress, alerts, meetings, messages)\n- [ ] Set quiet hours (start and end time)\n- [ ] Choose notification sound per type\n- [ ] Enable/disable vibration\n- [ ] Set severity threshold (only high priority, or all)\n- [ ] Preview notification appearance\n- [ ] Test notification button\n- [ ] Sync settings across devices\n- [ ] Save changes confirmation\n\n## Story Points\n5",
+      "labels": ["mobile", "parent", "settings", "notifications", "priority:medium", "epic:mobile-parent"],
+      "milestone": "Phase 2 - Mobile Features",
+      "estimate": 5,
+      "priority": "MEDIUM",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M016",
+      "title": "Enable Biometric Login",
+      "body": "**As a** parent\n**I want to** log in using Face ID or fingerprint\n**So that** I can access the app quickly and securely\n\n## Acceptance Criteria\n- [ ] Detect device biometric capability (Face ID, Touch ID, fingerprint)\n- [ ] Prompt to enable during onboarding\n- [ ] Enable/disable in settings\n- [ ] Fallback to password if biometric fails\n- [ ] Re-authenticate after 7 days for security\n- [ ] Works with multiple biometric profiles (if device supports)\n- [ ] Clear error messages if biometric not available\n- [ ] Option to require biometric for sensitive actions (delete, share)\n\n## Story Points\n5",
+      "labels": ["mobile", "parent", "security", "authentication", "priority:medium", "epic:mobile-parent"],
+      "milestone": "Phase 2 - Mobile Features",
+      "estimate": 5,
+      "priority": "MEDIUM",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    },
+    {
+      "id": "US-M017",
+      "title": "View Assigned Students (Teacher)",
+      "body": "**As a** teacher/therapist\n**I want to** view all students assigned to me on my mobile device\n**So that** I can quickly access their IEP information\n\n## Acceptance Criteria\n- [ ] List view of all assigned students\n- [ ] Search by student name\n- [ ] Filter by grade, disability category, or service type\n- [ ] Each student card shows photo, name, grade, and active goals count\n- [ ] Tap to view full student profile\n- [ ] Quick access to goals and progress\n- [ ] Shows if parent has recent concerns/questions\n- [ ] Alerts for overdue progress updates\n- [ ] Pull-to-refresh\n\n## Story Points\n8",
+      "labels": ["mobile", "teacher", "students", "priority:high", "epic:mobile-teacher"],
+      "milestone": "Phase 3 - Multi-Role Mobile",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Mobile App - Teacher/Therapist User Stories",
+      "related_issues": [56]
+    },
+    {
+      "id": "US-M018",
+      "title": "Log Student Progress (Teacher)",
+      "body": "**As a** teacher/therapist\n**I want to** log student progress immediately after a session\n**So that** data is accurate and timely\n\n## Acceptance Criteria\n- [ ] Select student from my caseload\n- [ ] Select goal(s) addressed in session\n- [ ] Enter observation notes\n- [ ] Record quantitative data (trials, accuracy %)\n- [ ] Attach session photos/videos\n- [ ] Select session date/time (defaults to now)\n- [ ] Mark goal as achieved, in progress, or needs revision\n- [ ] Notify parent option\n- [ ] Save as draft or publish\n- [ ] Works offline\n- [ ] Bulk entry for multiple students (same activity)\n\n## Story Points\n13",
+      "labels": ["mobile", "teacher", "progress", "priority:high", "epic:mobile-teacher"],
+      "milestone": "Phase 3 - Multi-Role Mobile",
+      "estimate": 13,
+      "priority": "HIGH",
+      "epic": "Mobile App - Teacher/Therapist User Stories",
+      "related_issues": [56]
+    },
+    {
+      "id": "US-M019",
+      "title": "View Behavior ABC Data (Teacher)",
+      "body": "**As a** teacher\n**I want to** view behavior incident data for a student\n**So that** I can identify patterns and inform intervention strategies\n\n## Acceptance Criteria\n- [ ] Timeline of all behavior incidents\n- [ ] Filter by date range\n- [ ] Filter by behavior type\n- [ ] Each entry shows Antecedent, Behavior, Consequence\n- [ ] Visual summary (chart) of behavior frequency\n- [ ] Identify patterns (time of day, trigger frequency)\n- [ ] Export data as CSV or PDF\n- [ ] Share with IEP team\n- [ ] Add notes to existing incidents\n- [ ] Link to relevant goals\n\n## Story Points\n8",
+      "labels": ["mobile", "teacher", "behavior", "analytics", "priority:medium", "epic:mobile-teacher"],
+      "milestone": "Phase 3 - Multi-Role Mobile",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Mobile App - Teacher/Therapist User Stories",
+      "related_issues": [56]
+    },
+    {
+      "id": "US-M020",
+      "title": "Quick Log Behavior Incident (Teacher)",
+      "body": "**As a** teacher\n**I want to** quickly log a behavior incident from my phone\n**So that** I can document it immediately while details are fresh\n\n## Acceptance Criteria\n- [ ] Quick access button on student profile\n- [ ] Select student\n- [ ] Record Antecedent (what happened before)\n- [ ] Record Behavior (what student did)\n- [ ] Record Consequence (what happened after)\n- [ ] Time and location fields\n- [ ] Severity level (1-5)\n- [ ] Duration of behavior\n- [ ] Intervention used\n- [ ] Attach photos/video if safe to do so\n- [ ] Notify parent option\n- [ ] Works offline\n- [ ] Save time < 2 minutes\n\n## Story Points\n8",
+      "labels": ["mobile", "teacher", "behavior", "logging", "priority:high", "epic:mobile-teacher"],
+      "milestone": "Phase 3 - Multi-Role Mobile",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Mobile App - Teacher/Therapist User Stories",
+      "related_issues": [56]
+    },
+    {
+      "id": "US-M021",
+      "title": "Respond to Parent Messages (Teacher)",
+      "body": "**As a** teacher/therapist\n**I want to** read and respond to parent messages on my mobile device\n**So that** I can communicate promptly even when away from my desk\n\n## Acceptance Criteria\n- [ ] Notification for new parent message\n- [ ] Inbox view of all messages\n- [ ] Filter by student\n- [ ] Mark as read/unread\n- [ ] Reply with text\n- [ ] Attach documents or photos\n- [ ] Use message templates for common responses\n- [ ] Set flag for follow-up\n- [ ] Archive messages\n- [ ] Search message history\n- [ ] Auto-log to communication record\n\n## Story Points\n8",
+      "labels": ["mobile", "teacher", "communication", "messaging", "priority:high", "epic:mobile-teacher"],
+      "milestone": "Phase 3 - Multi-Role Mobile",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Mobile App - Teacher/Therapist User Stories",
+      "related_issues": [56]
+    },
+    {
+      "id": "US-M022",
+      "title": "Share Progress Update with Parent (Teacher)",
+      "body": "**As a** teacher/therapist\n**I want to** share a progress summary with a parent from my phone\n**So that** I can keep them informed throughout the marking period\n\n## Acceptance Criteria\n- [ ] Select student and goals to include\n- [ ] Auto-generate progress summary (achievements, challenges, next steps)\n- [ ] Edit message before sending\n- [ ] Attach supporting data/charts\n- [ ] Preview parent's view\n- [ ] Send via in-app message or email\n- [ ] Schedule send for specific date/time\n- [ ] Confirm parent received/viewed\n- [ ] Log as communication record\n- [ ] Request parent feedback/questions\n\n## Story Points\n8",
+      "labels": ["mobile", "teacher", "progress", "communication", "priority:medium", "epic:mobile-teacher"],
+      "milestone": "Phase 3 - Multi-Role Mobile",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Mobile App - Teacher/Therapist User Stories",
+      "related_issues": [56]
+    },
+    {
+      "id": "US-M023",
+      "title": "View Assigned Cases on Mobile (Advocate)",
+      "body": "**As an** advocate\n**I want to** view all my assigned cases on my mobile device\n**So that** I can stay updated on clients while traveling\n\n## Acceptance Criteria\n- [ ] List of all assigned families/children\n- [ ] Filter by status (active, on hold, closed)\n- [ ] Search by family name or child name\n- [ ] Each case card shows key info (child, school, next meeting date)\n- [ ] Alert indicators for urgent items\n- [ ] Tap to view full case details\n- [ ] Quick access to recent communications\n- [ ] Shows compliance alerts\n- [ ] Pull-to-refresh\n\n## Story Points\n8",
+      "labels": ["mobile", "advocate", "cases", "priority:medium", "epic:mobile-advocate"],
+      "milestone": "Phase 3 - Multi-Role Mobile",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Mobile App - Advocate User Stories",
+      "related_issues": [55]
+    },
+    {
+      "id": "US-M024",
+      "title": "Review Smart Legal Prompts (Advocate)",
+      "body": "**As an** advocate\n**I want to** review legal prompts for my clients on mobile\n**So that** I can advise parents on urgent issues immediately\n\n## Acceptance Criteria\n- [ ] Notification for new high-priority prompts\n- [ ] List of all active prompts per case\n- [ ] Filter by severity and type\n- [ ] View prompt details (issue, context, recommended action)\n- [ ] Review parent's draft email\n- [ ] Provide feedback/suggestions to parent\n- [ ] Mark prompt as reviewed\n- [ ] Add advocate notes (visible only to advocate)\n- [ ] Escalate to legal counsel option\n- [ ] Generate case summary for prompt\n\n## Story Points\n13",
+      "labels": ["mobile", "advocate", "smart-prompts", "priority:high", "epic:mobile-advocate"],
+      "milestone": "Phase 3 - Multi-Role Mobile",
+      "estimate": 13,
+      "priority": "HIGH",
+      "epic": "Mobile App - Advocate User Stories",
+      "related_issues": [55]
+    },
+    {
+      "id": "US-M025",
+      "title": "Prepare for IEP Meeting (Advocate)",
+      "body": "**As an** advocate\n**I want to** prepare for an IEP meeting using my mobile device\n**So that** I can review case details before arriving\n\n## Acceptance Criteria\n- [ ] View child's full IEP\n- [ ] Review all goals and current progress\n- [ ] See parent concerns and questions\n- [ ] Access meeting agenda\n- [ ] Review previous meeting notes\n- [ ] Check compliance status\n- [ ] View historical data/trends\n- [ ] Add advocate talking points\n- [ ] Generate meeting prep document (PDF)\n- [ ] Share prep notes with parent\n- [ ] Set meeting reminders\n\n## Story Points\n8",
+      "labels": ["mobile", "advocate", "meetings", "preparation", "priority:medium", "epic:mobile-advocate"],
+      "milestone": "Phase 3 - Multi-Role Mobile",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Mobile App - Advocate User Stories",
+      "related_issues": [55]
+    },
+    {
+      "id": "US-M026",
+      "title": "Access Advocacy Resources (Advocate)",
+      "body": "**As an** advocate\n**I want to** access legal resources and templates on my mobile device\n**So that** I can reference them during parent consultations\n\n## Acceptance Criteria\n- [ ] Searchable legal resource library\n- [ ] Filter by topic (IDEA, FERPA, LRE, etc.)\n- [ ] Quick reference guides\n- [ ] State-specific regulations\n- [ ] Template letters and forms\n- [ ] Case law summaries\n- [ ] Bookmark frequently used resources\n- [ ] Offline access to bookmarked items\n- [ ] Share resources with parents\n- [ ] Recently viewed history\n\n## Story Points\n8",
+      "labels": ["mobile", "advocate", "resources", "legal", "priority:medium", "epic:mobile-advocate"],
+      "milestone": "Phase 3 - Multi-Role Mobile",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Mobile App - Advocate User Stories",
+      "related_issues": [55]
+    },
+    {
+      "id": "US-SP001",
+      "title": "Detect Limited Progress",
+      "body": "**As the** system\n**I want to** automatically detect when a child is not making meaningful progress\n**So that** parents are alerted to request data-driven IEP reviews\n\n## Acceptance Criteria\n- [ ] Algorithm runs weekly on all active goals\n- [ ] Compares current performance to baseline and target\n- [ ] Considers time elapsed since IEP start\n- [ ] Triggers alert if progress < 25% of expected after 3 months\n- [ ] Accounts for goal difficulty and student needs\n- [ ] Considers frequency of progress entries (insufficient data flag)\n- [ ] Generates specific context (which goals, data trends)\n- [ ] Creates parent email with pre-filled details\n- [ ] Logs trigger event in audit trail\n- [ ] Notifies parent within 24 hours\n\n## Related Requirements\nSmart Legal Prompt #1 from requirements.md\n\n## Story Points\n13",
+      "labels": ["smart-prompts", "algorithm", "detection", "priority:critical", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 13,
+      "priority": "CRITICAL",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-SP002",
+      "title": "Detect Vague or Non-Measurable Goals",
+      "body": "**As the** system\n**I want to** identify IEP goals that lack clear measurement criteria\n**So that** parents can request IDEA-compliant goal revisions\n\n## Acceptance Criteria\n- [ ] NLP analysis of goal text during IEP upload\n- [ ] Flag goals without quantifiable metrics (%, accuracy, frequency)\n- [ ] Flag goals with vague terms (\"improve,\" \"increase\" without numbers)\n- [ ] Flag goals missing baseline data\n- [ ] Flag goals without clear measurement method\n- [ ] Trigger alert within 48 hours of IEP upload\n- [ ] Generate prompt with specific goals flagged\n- [ ] Pre-fill email requesting clarification\n- [ ] Provide examples of measurable alternatives\n- [ ] Allow parent to dismiss if reviewed with team\n\n## Related Requirements\nSmart Legal Prompt #2 from requirements.md\n\n## Story Points\n21",
+      "labels": ["smart-prompts", "algorithm", "nlp", "detection", "priority:critical", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 21,
+      "priority": "CRITICAL",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-SP003",
+      "title": "Detect Service Reduction Risk",
+      "body": "**As the** system\n**I want to** alert parents when services may be reduced without data support\n**So that** parents can request justification and prevent inappropriate reductions\n\n## Acceptance Criteria\n- [ ] Monitor IEP changes for service hour reductions\n- [ ] Compare proposed IEP to current IEP\n- [ ] Flag reduction > 20% in any service area\n- [ ] Check if progress data supports reduction\n- [ ] Consider regression risk factors\n- [ ] Trigger alert immediately upon detection\n- [ ] Generate email requesting data and PWN\n- [ ] Include ESY (extended school year) considerations\n- [ ] List questions for parent to ask team\n- [ ] Track if PWN was provided\n\n## Related Requirements\nSmart Legal Prompt #3 from requirements.md\n\n## Story Points\n13",
+      "labels": ["smart-prompts", "algorithm", "detection", "services", "priority:critical", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 13,
+      "priority": "CRITICAL",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-SP004",
+      "title": "Detect Missing Prior Written Notice",
+      "body": "**As the** system\n**I want to** identify when a parent request was refused without PWN\n**So that** parents can formally request required documentation\n\n## Acceptance Criteria\n- [ ] Track parent requests logged in system\n- [ ] Monitor for school response within 30 days\n- [ ] Flag if response indicates refusal\n- [ ] Check if PWN document was uploaded\n- [ ] Trigger alert if refused without PWN\n- [ ] Generate email formally requesting PWN\n- [ ] Include PWN legal requirements (34 CFR 300.503)\n- [ ] Template lists required PWN elements\n- [ ] Escalation recommendation if no response in 14 days\n- [ ] Log PWN status in compliance tracking\n\n## Related Requirements\nSmart Legal Prompt #4 from requirements.md\n\n## Story Points\n13",
+      "labels": ["smart-prompts", "algorithm", "detection", "compliance", "priority:critical", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 13,
+      "priority": "CRITICAL",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-SP005",
+      "title": "Detect Missing or Generic Progress Reports",
+      "body": "**As the** system\n**I want to** flag when progress reports lack meaningful data\n**So that** parents can request detailed, objective progress information\n\n## Acceptance Criteria\n- [ ] Analyze progress report text for specificity\n- [ ] Flag reports with generic phrases (\"making progress,\" \"doing well\")\n- [ ] Flag reports missing quantitative data\n- [ ] Check progress reporting frequency (per IEP requirement)\n- [ ] Trigger if report is overdue (> 2 weeks past due date)\n- [ ] Flag if no progress entries in 6 weeks\n- [ ] Generate prompt with specific concerns\n- [ ] Pre-fill email requesting objective data\n- [ ] Suggest questions to ask (baseline, current level, measurement)\n- [ ] Notify parent and log compliance concern\n\n## Related Requirements\nSmart Legal Prompt #5 from requirements.md\n\n## Story Points\n13",
+      "labels": ["smart-prompts", "algorithm", "detection", "progress", "priority:critical", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 13,
+      "priority": "CRITICAL",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-SP006",
+      "title": "Detect Unaddressed Parent Concerns",
+      "body": "**As the** system\n**I want to** track whether parent concerns are documented in the IEP\n**So that** parents can ensure their input is formally considered\n\n## Acceptance Criteria\n- [ ] Parent can flag concerns as \"needs IEP team response\"\n- [ ] Track concerns submitted before/during IEP meetings\n- [ ] Monitor IEP document for mention of concerns\n- [ ] Flag if meeting notes don't address logged concerns\n- [ ] Trigger alert after IEP meeting if concerns unaddressed\n- [ ] Generate email requesting documentation\n- [ ] Request PWN if concerns were rejected\n- [ ] Template includes parent participation rights (34 CFR 300.322)\n- [ ] Allow parent to mark concern as resolved\n- [ ] Compliance report includes concern tracking\n\n## Related Requirements\nSmart Legal Prompt #6 from requirements.md\n\n## Story Points\n13",
+      "labels": ["smart-prompts", "algorithm", "detection", "parent-input", "priority:high", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 13,
+      "priority": "HIGH",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-SP007",
+      "title": "Detect Restrictive Placement Concerns",
+      "body": "**As the** system\n**I want to** identify when a child's placement may violate LRE principles\n**So that** parents can request less restrictive options be considered\n\n## Acceptance Criteria\n- [ ] Monitor placement changes to more restrictive settings\n- [ ] Flag if child moved from general ed to separate classroom\n- [ ] Check IEP for LRE justification documentation\n- [ ] Verify continuum of options were considered\n- [ ] Trigger alert when restrictive placement proposed or implemented\n- [ ] Generate email requesting LRE documentation\n- [ ] Include questions about supports in less restrictive settings\n- [ ] Reference LRE requirements (34 CFR 300.114-116)\n- [ ] Suggest requesting placement review\n- [ ] Track placement decisions in compliance log\n\n## Related Requirements\nSmart Legal Prompt #7 from requirements.md\n\n## Story Points\n13",
+      "labels": ["smart-prompts", "algorithm", "detection", "lre", "placement", "priority:high", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 13,
+      "priority": "HIGH",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-SP008",
+      "title": "Detect Missed or Inconsistent Services",
+      "body": "**As the** system\n**I want to** identify patterns of missed IEP services\n**So that** parents can request compensatory services\n\n## Acceptance Criteria\n- [ ] Track service delivery logs from providers\n- [ ] Compare delivered services to IEP-mandated frequency\n- [ ] Flag if services missed > 20% in any month\n- [ ] Calculate total minutes owed\n- [ ] Pattern detection for specific days/providers\n- [ ] Trigger alert if threshold exceeded\n- [ ] Generate email requesting service logs\n- [ ] Include compensatory services language\n- [ ] Calculate make-up time owed\n- [ ] Escalation if pattern continues\n- [ ] Track compensation plan if provided\n\n## Related Requirements\nSmart Legal Prompt #8 from requirements.md\n\n## Story Points\n21",
+      "labels": ["smart-prompts", "algorithm", "detection", "services", "compliance", "priority:critical", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 21,
+      "priority": "CRITICAL",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-SP009",
+      "title": "Detect IEP Exit Pressure",
+      "body": "**As the** system\n**I want to** identify when schools may be pushing to exit a child from IEP prematurely\n**So that** parents can request proper reevaluation before exit\n\n## Acceptance Criteria\n- [ ] Monitor communications for exit language (\"might not need IEP anymore\")\n- [ ] Flag if exit suggested before required reevaluation timeline\n- [ ] Check if comprehensive reevaluation was conducted\n- [ ] Verify if regression risk was considered\n- [ ] Trigger alert when exit discussion detected\n- [ ] Generate email requesting reevaluation before exit\n- [ ] Include parent consent rights\n- [ ] Reference exit requirements (34 CFR 300.305)\n- [ ] Suggest questions about long-term impacts\n- [ ] Track exit process in compliance log\n\n## Related Requirements\nSmart Legal Prompt #9 from requirements.md\n\n## Story Points\n13",
+      "labels": ["smart-prompts", "algorithm", "detection", "compliance", "exit", "priority:high", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 13,
+      "priority": "HIGH",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-SP010",
+      "title": "Detect Pattern of Procedural Violations",
+      "body": "**As the** system\n**I want to** identify repeated procedural compliance issues\n**So that** parents can escalate systemic problems appropriately\n\n## Acceptance Criteria\n- [ ] Track all compliance concerns by type\n- [ ] Detect patterns (3+ of same issue in 12 months)\n- [ ] Flag timeline violations (meeting notices, evaluations)\n- [ ] Monitor documentation gaps (missing PWN, unsigned IEPs)\n- [ ] Trigger alert when pattern threshold met\n- [ ] Generate detailed compliance concern letter\n- [ ] Include history of violations\n- [ ] Reference procedural safeguards\n- [ ] Recommend escalation (complaint, mediation)\n- [ ] Provide links to state complaint process\n- [ ] Generate timeline report as evidence\n\n## Related Requirements\nSmart Legal Prompt #10 from requirements.md\n\n## Story Points\n21",
+      "labels": ["smart-prompts", "algorithm", "detection", "compliance", "escalation", "priority:high", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 21,
+      "priority": "HIGH",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-SP011",
+      "title": "Auto-Fill Email Context",
+      "body": "**As a** parent\n**I want** smart prompt emails to be pre-filled with my child's information\n**So that** I can send professional requests without starting from scratch\n\n## Acceptance Criteria\n- [ ] Email includes child's full name\n- [ ] School name and address populated\n- [ ] District name included\n- [ ] Teacher/case manager name (if available)\n- [ ] Relevant dates (IEP date, evaluation due date, etc.)\n- [ ] Specific goals or services affected\n- [ ] Primary and secondary diagnosis\n- [ ] Grade level\n- [ ] All fields editable by parent\n- [ ] Preview before sending\n\n## Related Requirements\nCore Requirement #3 from requirements.md\n\n## Story Points\n8",
+      "labels": ["smart-prompts", "email", "automation", "priority:critical", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 8,
+      "priority": "CRITICAL",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-SP012",
+      "title": "One-Click Send and Log",
+      "body": "**As a** parent\n**I want to** send a smart prompt email and automatically log it as evidence\n**So that** I have a documented record without extra steps\n\n## Acceptance Criteria\n- [ ] Single \"Send & Log\" button\n- [ ] Email sent via configured email service\n- [ ] Copy saved to parent's account\n- [ ] Automatically logged in communication history\n- [ ] Tagged with prompt type\n- [ ] Timestamped\n- [ ] Linked to relevant IEP/goal\n- [ ] Confirmation message shown\n- [ ] Option to download PDF copy\n- [ ] Viewable in evidence timeline\n- [ ] Can't be edited after sending (integrity)\n\n## Related Requirements\nCore Requirement #3 from requirements.md\n\n## Story Points\n8",
+      "labels": ["smart-prompts", "email", "logging", "priority:critical", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 8,
+      "priority": "CRITICAL",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-SP013",
+      "title": "Escalation Logic with Follow-up Reminders",
+      "body": "**As a** parent\n**I want** the system to remind me to follow up if school doesn't respond\n**So that** issues don't fall through the cracks\n\n## Acceptance Criteria\n- [ ] Parent sets expected response timeframe (7, 14, 30 days)\n- [ ] System tracks if school responds (parent marks as received)\n- [ ] If no response by deadline, send reminder notification\n- [ ] Reminder includes original email context\n- [ ] Suggests next escalation step (follow-up email, meeting request, complaint)\n- [ ] Pre-drafted escalation email available\n- [ ] Track escalation level (initial, follow-up, formal complaint)\n- [ ] Timeline visualization of request → response → escalation\n- [ ] Can snooze reminder if response in progress\n- [ ] Escalation recommendations based on issue severity\n\n## Related Requirements\nCore Requirement #3 from requirements.md\n\n## Story Points\n13",
+      "labels": ["smart-prompts", "escalation", "reminders", "priority:critical", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 13,
+      "priority": "CRITICAL",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-SP014",
+      "title": "Optional CC to Advocate",
+      "body": "**As a** parent\n**I want to** easily CC my advocate on smart prompt emails\n**So that** they're kept in the loop on advocacy efforts\n\n## Acceptance Criteria\n- [ ] Toggle switch \"CC my advocate\"\n- [ ] Advocate email populated from parent's advocate list\n- [ ] Option to add custom CC addresses\n- [ ] Preview shows all recipients\n- [ ] Advocate receives copy via email\n- [ ] Advocate can view email in their app dashboard\n- [ ] Parent can set advocate as default CC for all smart prompts\n- [ ] Advocate notified they were CC'd\n- [ ] Advocate can comment on thread (visible to parent only)\n- [ ] BCC option for discreet advocacy support\n\n## Related Requirements\nCore Requirement #3 from requirements.md\n\n## Story Points\n5",
+      "labels": ["smart-prompts", "email", "collaboration", "priority:high", "epic:smart-prompts"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 5,
+      "priority": "HIGH",
+      "epic": "Smart Legal Prompts"
+    },
+    {
+      "id": "US-LC001",
+      "title": "Link Goals Across IEP Years",
+      "body": "**As a** parent\n**I want to** see how similar goals have evolved across multiple IEPs\n**So that** I can understand my child's long-term progress in each skill area\n\n## Acceptance Criteria\n- [ ] System suggests goal matches across years (same skill domain)\n- [ ] Parent can manually link goals\n- [ ] Visual timeline shows goal progression year-over-year\n- [ ] Each year shows baseline → target → achieved for linked goals\n- [ ] Color coding for goal status per year\n- [ ] Tap goal to see full details for that year\n- [ ] Shows if goal continued, achieved, or modified\n- [ ] Export lineage as report\n- [ ] Share with IEP team\n\n## Related Requirements\nLC-01 from requirements.md\n\n## Story Points\n13",
+      "labels": ["lineage", "analytics", "goals", "priority:critical", "epic:lineage"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 13,
+      "priority": "CRITICAL",
+      "epic": "Lineage Comparison & Analytics"
+    },
+    {
+      "id": "US-LC002",
+      "title": "Multi-Year Trend Visualization",
+      "body": "**As a** parent\n**I want to** see charts comparing my child's progress across multiple years\n**So that** I can identify areas of growth and areas needing more support\n\n## Acceptance Criteria\n- [ ] Line charts for key skill areas (reading, math, behavior, social)\n- [ ] X-axis: time (by year or semester)\n- [ ] Y-axis: performance level\n- [ ] Multiple goals on same chart (if related)\n- [ ] Toggle between goal categories\n- [ ] Shows trend lines (improving, plateauing, declining)\n- [ ] Annotations for major events (evaluation, service changes)\n- [ ] Compare to grade-level expectations (if available)\n- [ ] Export chart as image or PDF\n- [ ] Zoom and pan on chart for details\n\n## Related Requirements\nLC-02 from requirements.md\n\n## Story Points\n13",
+      "labels": ["lineage", "analytics", "visualization", "charts", "priority:critical", "epic:lineage"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 13,
+      "priority": "CRITICAL",
+      "epic": "Lineage Comparison & Analytics"
+    },
+    {
+      "id": "US-LC003",
+      "title": "Service Continuity Analysis",
+      "body": "**As a** parent\n**I want to** compare services across IEP years\n**So that** I can see if supports have remained consistent or changed\n\n## Acceptance Criteria\n- [ ] Table view of services by year\n- [ ] Columns: service type, frequency, duration, provider\n- [ ] Highlight increases in green, decreases in red\n- [ ] Identify services added or removed\n- [ ] Calculate total service hours per year\n- [ ] Compare to progress in related goals\n- [ ] Flag large reductions (> 20%) with explanation prompt\n- [ ] Show if compensatory services were provided\n- [ ] Export comparison report\n- [ ] Filter by service type (speech, OT, PT, counseling)\n\n## Related Requirements\nLC-03 from requirements.md\n\n## Story Points\n13",
+      "labels": ["lineage", "analytics", "services", "comparison", "priority:critical", "epic:lineage"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 13,
+      "priority": "CRITICAL",
+      "epic": "Lineage Comparison & Analytics"
+    },
+    {
+      "id": "US-LC004",
+      "title": "Accommodation Consistency Tracking",
+      "body": "**As a** parent\n**I want to** track which accommodations persisted or changed over time\n**So that** I can advocate for supports that have proven helpful\n\n## Acceptance Criteria\n- [ ] List of all accommodations by IEP year\n- [ ] Group by category (testing, classroom, behavioral)\n- [ ] Mark accommodations as: continued, added, removed\n- [ ] Link accommodations to related goals/progress\n- [ ] Identify accommodations consistently used (3+ years)\n- [ ] Flag newly removed accommodations (with justification check)\n- [ ] Parent can add notes on accommodation effectiveness\n- [ ] Correlate accommodations with goal achievement\n- [ ] Export accommodation history\n- [ ] Share with IEP team before annual review\n\n## Related Requirements\nLC-04 from requirements.md\n\n## Story Points\n8",
+      "labels": ["lineage", "analytics", "accommodations", "tracking", "priority:high", "epic:lineage"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Lineage Comparison & Analytics"
+    },
+    {
+      "id": "US-LC005",
+      "title": "Summary Analytics Dashboard",
+      "body": "**As a** parent\n**I want to** see high-level analytics on my child's IEP history\n**So that** I can quickly understand overall progress patterns\n\n## Acceptance Criteria\n- [ ] % of goals achieved per IEP cycle\n- [ ] Average progress rate across all goals\n- [ ] Service hours trend over time\n- [ ] Number of IEP meetings per year\n- [ ] Compliance metrics (timely evaluations, meeting notices)\n- [ ] Areas of strength (consistently achieved goals)\n- [ ] Areas needing support (repeated goals, low progress)\n- [ ] Total time in IEP services\n- [ ] Placement history timeline\n- [ ] Visual dashboard with charts and key metrics\n- [ ] Filterable by date range\n- [ ] Export as PDF report\n\n## Related Requirements\nLC-05 from requirements.md\n\n## Story Points\n13",
+      "labels": ["lineage", "analytics", "dashboard", "summary", "priority:high", "epic:lineage"],
+      "milestone": "Phase 1 - Core Value",
+      "estimate": 13,
+      "priority": "HIGH",
+      "epic": "Lineage Comparison & Analytics"
+    },
+    {
+      "id": "US-MP001",
+      "title": "Dynamic Meeting Prep Checklist",
+      "body": "**As a** parent\n**I want** a personalized checklist for preparing for IEP meetings\n**So that** I don't forget important preparation steps\n\n## Acceptance Criteria\n- [ ] Checklist adapts to meeting type (annual, triennial, amendment)\n- [ ] Includes standard items (review current IEP, list concerns, prepare questions)\n- [ ] Suggests items based on child's situation (e.g., \"review behavior data\" if behavior goals exist)\n- [ ] Parent can add custom checklist items\n- [ ] Check off completed items\n- [ ] Progress indicator (X of Y complete)\n- [ ] Reminders X days before meeting\n- [ ] Attach documents to checklist items\n- [ ] Notes field per item\n- [ ] Share checklist with advocate\n- [ ] Reusable template for future meetings\n- [ ] Export as PDF\n\n## Related Requirements\nMP-03 from requirements.md\n\n## Story Points\n8",
+      "labels": ["meetings", "checklist", "preparation", "priority:high", "epic:meeting-prep"],
+      "milestone": "Phase 2 - Parent Empowerment",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Meeting Preparation Toolkit"
+    },
+    {
+      "id": "US-MP002",
+      "title": "Parent Questions & Concerns Entry",
+      "body": "**As a** parent\n**I want to** document my questions and concerns before a meeting\n**So that** I remember to address everything during the IEP meeting\n\n## Acceptance Criteria\n- [ ] Dedicated section for parent questions\n- [ ] Organize by category (goals, services, placement, behavior, etc.)\n- [ ] Priority flag (must ask vs. nice to ask)\n- [ ] Add supporting evidence/documents to questions\n- [ ] System suggests questions based on smart prompts or data trends\n- [ ] Print or email questions to self before meeting\n- [ ] Check off questions as addressed during meeting\n- [ ] Add notes on team's responses\n- [ ] Flag questions not answered for follow-up\n- [ ] Save questions as template for next year\n- [ ] Share questions with advocate beforehand\n\n## Related Requirements\nMP-04 from requirements.md\n\n## Story Points\n8",
+      "labels": ["meetings", "questions", "concerns", "priority:high", "epic:meeting-prep"],
+      "milestone": "Phase 2 - Parent Empowerment",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Meeting Preparation Toolkit"
+    },
+    {
+      "id": "US-MP003",
+      "title": "Upload Meeting Documents",
+      "body": "**As a** parent\n**I want to** upload documents to reference during a meeting\n**So that** all my supporting evidence is organized and accessible\n\n## Acceptance Criteria\n- [ ] Upload multiple documents at once\n- [ ] Document types: evaluations, medical reports, work samples, behavior logs\n- [ ] Attach to specific agenda items or goals\n- [ ] Tag documents for easy search\n- [ ] Preview documents in-app\n- [ ] Annotate/highlight key sections\n- [ ] Share uploaded docs with team before meeting (optional)\n- [ ] Quick access during meeting via mobile\n- [ ] Create meeting document packet (PDF)\n- [ ] Archive documents after meeting\n\n## Related Requirements\nMP-05 from requirements.md\n\n## Story Points\n8",
+      "labels": ["meetings", "documents", "upload", "priority:medium", "epic:meeting-prep"],
+      "milestone": "Phase 2 - Parent Empowerment",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Meeting Preparation Toolkit"
+    },
+    {
+      "id": "US-MP004",
+      "title": "Generate Meeting Prep Packet",
+      "body": "**As a** parent\n**I want to** generate a comprehensive meeting prep packet as a PDF\n**So that** I have a printed reference for the IEP meeting\n\n## Acceptance Criteria\n- [ ] Include current IEP summary\n- [ ] Include all goals with current progress data\n- [ ] Include services and accommodations summary\n- [ ] Include parent questions and concerns\n- [ ] Include relevant progress charts/graphs\n- [ ] Include behavior data (if applicable)\n- [ ] Include communication log summary\n- [ ] Include checklist\n- [ ] Professional formatting (not just raw data dump)\n- [ ] Table of contents\n- [ ] Page numbers\n- [ ] Customizable (parent selects sections to include)\n- [ ] Download as PDF\n- [ ] Email to self or advocate\n- [ ] Save template for future meetings\n\n## Related Requirements\nMP-06 from requirements.md\n\n## Story Points\n13",
+      "labels": ["meetings", "pdf", "export", "preparation", "priority:high", "epic:meeting-prep"],
+      "milestone": "Phase 2 - Parent Empowerment",
+      "estimate": 13,
+      "priority": "HIGH",
+      "epic": "Meeting Preparation Toolkit"
+    },
+    {
+      "id": "US-MP005",
+      "title": "Meeting Reminder Notifications",
+      "body": "**As a** parent\n**I want to** receive reminders before IEP meetings\n**So that** I have time to prepare adequately\n\n## Acceptance Criteria\n- [ ] Notification 30 days before annual review\n- [ ] Notification 14 days before meeting\n- [ ] Notification 3 days before meeting\n- [ ] Notification 1 day before meeting\n- [ ] Notification includes meeting type, date, time, location\n- [ ] Link to prep checklist\n- [ ] Shows prep completion status\n- [ ] Customizable reminder timing\n- [ ] Push notification + email\n- [ ] Snooze option\n- [ ] Add to device calendar option\n\n## Related Requirements\nMP-02 from requirements.md\n\n## Story Points\n5",
+      "labels": ["meetings", "reminders", "notifications", "priority:medium", "epic:meeting-prep"],
+      "milestone": "Phase 4 - Notifications",
+      "estimate": 5,
+      "priority": "MEDIUM",
+      "epic": "Meeting Preparation Toolkit"
+    },
+    {
+      "id": "US-PV001",
+      "title": "Visual Progress Bars per Goal",
+      "body": "**As a** parent\n**I want to** see color-coded progress bars for each goal\n**So that** I can quickly assess how my child is doing\n\n## Acceptance Criteria\n- [ ] Progress bar shows % toward target\n- [ ] Color-coded: green (on track), yellow (needs attention), red (not progressing)\n- [ ] Displays baseline, current level, and target\n- [ ] Hover/tap for detailed numbers\n- [ ] Shows time remaining in IEP cycle\n- [ ] Projected completion indicator (will achieve, might achieve, unlikely)\n- [ ] Historical comparison (vs. previous marking periods)\n- [ ] Works on mobile and desktop\n- [ ] Accessible (screen reader friendly)\n- [ ] Printable view\n\n## Related Requirements\nPT-04 from requirements.md\n\n## Story Points\n8",
+      "labels": ["progress", "visualization", "charts", "priority:high", "epic:progress-viz"],
+      "milestone": "Phase 2 - Parent Empowerment",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Progress Visualization"
+    },
+    {
+      "id": "US-PV002",
+      "title": "Progress Charts with Baseline and Target",
+      "body": "**As a** parent\n**I want to** see line charts showing my child's progress toward each goal\n**So that** I can visualize growth over time\n\n## Acceptance Criteria\n- [ ] Line chart per goal\n- [ ] X-axis: time (weeks or months)\n- [ ] Y-axis: performance level\n- [ ] Baseline marked clearly (starting point)\n- [ ] Target marked clearly (goal)\n- [ ] Current progress line\n- [ ] Trend line (projected progress)\n- [ ] Data points clickable for details\n- [ ] Annotations for key events (breaks, service changes)\n- [ ] Multiple goals on one chart (if related)\n- [ ] Zoom and pan controls\n- [ ] Export chart as image\n- [ ] Responsive design (mobile and desktop)\n\n## Related Requirements\nPT-04 from requirements.md\n\n## Story Points\n13",
+      "labels": ["progress", "visualization", "charts", "graphs", "priority:high", "epic:progress-viz"],
+      "milestone": "Phase 2 - Parent Empowerment",
+      "estimate": 13,
+      "priority": "HIGH",
+      "epic": "Progress Visualization"
+    },
+    {
+      "id": "US-PV003",
+      "title": "Dashboard Analytics Summary",
+      "body": "**As a** parent\n**I want to** see a dashboard with key progress metrics\n**So that** I get a quick overview of my child's IEP status\n\n## Acceptance Criteria\n- [ ] Total goals count\n- [ ] Goals achieved count and %\n- [ ] Goals on track count and %\n- [ ] Goals needing attention count and %\n- [ ] Average progress rate across all goals\n- [ ] Service hours completed vs. planned (current month)\n- [ ] Upcoming milestones or reviews\n- [ ] Recent communications count\n- [ ] Active smart prompts count\n- [ ] Visual charts and graphs\n- [ ] Filterable by date range\n- [ ] Drill down into details per metric\n- [ ] Export dashboard as PDF\n- [ ] Share dashboard with advocate\n\n## Related Requirements\nPT-04, Dashboard from requirements.md\n\n## Story Points\n13",
+      "labels": ["progress", "dashboard", "analytics", "summary", "priority:medium", "epic:progress-viz"],
+      "milestone": "Phase 2 - Parent Empowerment",
+      "estimate": 13,
+      "priority": "MEDIUM",
+      "epic": "Progress Visualization"
+    },
+    {
+      "id": "US-PV004",
+      "title": "Behavior Frequency Charts",
+      "body": "**As a** parent or teacher\n**I want to** see charts of behavior incident frequency\n**So that** I can identify patterns and measure intervention effectiveness\n\n## Acceptance Criteria\n- [ ] Bar chart: incidents per day/week/month\n- [ ] Line chart: trend over time\n- [ ] Filter by behavior type\n- [ ] Color-coded by severity\n- [ ] Identify peak times (time of day, day of week)\n- [ ] Compare before/after intervention implementation\n- [ ] Annotate with intervention changes\n- [ ] Export chart as image or PDF\n- [ ] Share with IEP team\n- [ ] Accessible on mobile\n\n## Related Requirements\nBehavior tracking from requirements.md\n\n## Story Points\n8",
+      "labels": ["behavior", "visualization", "charts", "analytics", "priority:medium", "epic:progress-viz"],
+      "milestone": "Phase 2 - Parent Empowerment",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Progress Visualization"
+    },
+    {
+      "id": "US-LK001",
+      "title": "Browse Plain-Language Legal Articles",
+      "body": "**As a** parent\n**I want to** read plain-language articles about special education law\n**So that** I can understand my rights and my child's entitlements\n\n## Acceptance Criteria\n- [ ] Article library organized by topic (IDEA, FERPA, 504, LRE, PWN, etc.)\n- [ ] Articles written at 6th-8th grade reading level\n- [ ] Search functionality\n- [ ] Filter by topic, relevance, or state\n- [ ] Each article includes: summary, key points, resources, related templates\n- [ ] Links to official sources (federal regulations, DOE guidance)\n- [ ] Bookmark articles\n- [ ] Share articles via email or link\n- [ ] Reading history\n- [ ] Prominent legal disclaimer (\"informational only, not legal advice\")\n- [ ] Suggest articles based on child's situation\n- [ ] Update notifications when laws change\n\n## Related Requirements\nLA-01 from requirements.md\n\n## Story Points\n13",
+      "labels": ["legal", "knowledge-base", "articles", "resources", "priority:medium", "epic:legal-kb"],
+      "milestone": "Phase 4 - Legal & Compliance",
+      "estimate": 13,
+      "priority": "MEDIUM",
+      "epic": "Legal Knowledge Base"
+    },
+    {
+      "id": "US-LK002",
+      "title": "State-Specific Regulations",
+      "body": "**As a** parent\n**I want to** access special education regulations specific to my state\n**So that** I understand local requirements and timelines\n\n## Acceptance Criteria\n- [ ] Auto-detect or let parent select their state\n- [ ] State-specific IEP timelines (evaluation, annual review, etc.)\n- [ ] State evaluation requirements\n- [ ] State dispute resolution processes\n- [ ] Contact info for state special education department\n- [ ] Parent Training & Information (PTI) center for state\n- [ ] State complaint form and instructions\n- [ ] Comparison to federal IDEA requirements\n- [ ] Download state regulations as PDF\n- [ ] Update notifications when state regs change\n- [ ] Prominent disclaimer on interpretation\n\n## Related Requirements\nLA-01, LA-05 from requirements.md\n\n## Story Points\n13",
+      "labels": ["legal", "knowledge-base", "state-regulations", "priority:medium", "epic:legal-kb"],
+      "milestone": "Phase 4 - Legal & Compliance",
+      "estimate": 13,
+      "priority": "MEDIUM",
+      "epic": "Legal Knowledge Base"
+    },
+    {
+      "id": "US-LK003",
+      "title": "Timeline and Deadline Tracker",
+      "body": "**As a** parent\n**I want** the system to automatically track IEP-related deadlines\n**So that** I can ensure the school complies with legal timelines\n\n## Acceptance Criteria\n- [ ] Track annual IEP review due date (365 days from last IEP)\n- [ ] Track triennial evaluation due date (every 3 years)\n- [ ] Track reevaluation consent timeline (60 days from request in most states)\n- [ ] Track meeting notice requirements (10 days before meeting in most states)\n- [ ] Track PWN timeline (reasonable time before implementation)\n- [ ] Alert parent if timeline approaching or missed\n- [ ] Color-coded status (green = on time, yellow = due soon, red = overdue)\n- [ ] Manual deadline entry for other important dates\n- [ ] Export timeline as report\n- [ ] Include in compliance tracking\n- [ ] State-specific timelines\n\n## Related Requirements\nLA-02 from requirements.md\n\n## Story Points\n13",
+      "labels": ["legal", "timelines", "deadlines", "compliance", "priority:high", "epic:legal-kb"],
+      "milestone": "Phase 4 - Legal & Compliance",
+      "estimate": 13,
+      "priority": "HIGH",
+      "epic": "Legal Knowledge Base"
+    },
+    {
+      "id": "US-LK004",
+      "title": "Downloadable Letter Templates",
+      "body": "**As a** parent\n**I want to** access downloadable templates for common IEP requests\n**So that** I can communicate professionally and effectively\n\n## Acceptance Criteria\n- [ ] Template library organized by purpose\n- [ ] Templates include: Request for IEP meeting, evaluation, reevaluation, records, IEE, PWN, disagreement, mediation, formal complaint\n- [ ] Templates in Word and PDF format\n- [ ] Pre-filled with parent/child info (editable)\n- [ ] Instructions for each template\n- [ ] Sample scenarios\n- [ ] State-specific versions where applicable\n- [ ] Download or email to self\n- [ ] Integration with smart prompt emails\n\n## Related Requirements\nLA-03 from requirements.md\n\n## Story Points\n8",
+      "labels": ["legal", "templates", "letters", "priority:medium", "epic:legal-kb"],
+      "milestone": "Phase 4 - Legal & Compliance",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Legal Knowledge Base"
+    },
+    {
+      "id": "US-LK005",
+      "title": "Action Triggers for Inactivity",
+      "body": "**As a** parent\n**I want** the system to alert me if there's been no IEP activity for too long\n**So that** I'm prompted to follow up with the school\n\n## Acceptance Criteria\n- [ ] Alert if no progress update logged in 6 weeks\n- [ ] Alert if no communication from school in 60 days\n- [ ] Alert if annual review approaching with no meeting scheduled\n- [ ] Alert if evaluation overdue\n- [ ] Notification includes suggested action (email teacher, request meeting)\n- [ ] Pre-drafted email for follow-up\n- [ ] Snooze option if parent knows situation is okay\n- [ ] Configurable inactivity thresholds\n- [ ] Notification via app and email\n- [ ] Link to relevant templates\n\n## Related Requirements\nLA-04 from requirements.md\n\n## Story Points\n8",
+      "labels": ["legal", "alerts", "inactivity", "reminders", "priority:medium", "epic:legal-kb"],
+      "milestone": "Phase 4 - Legal & Compliance",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Legal Knowledge Base"
+    },
+    {
+      "id": "US-LK006",
+      "title": "Local Advocacy Directory",
+      "body": "**As a** parent\n**I want to** find local advocates, attorneys, and support organizations\n**So that** I can get help when needed\n\n## Acceptance Criteria\n- [ ] Searchable directory by location (zip code, city, state)\n- [ ] Filter by type (advocate, attorney, parent group, disability-specific org)\n- [ ] Each listing includes: name, contact info, services offered, languages spoken\n- [ ] User ratings and reviews (optional)\n- [ ] Link to organization website\n- [ ] \"Request info\" button to contact directly\n- [ ] Save favorites\n- [ ] Share directory listings\n- [ ] National organizations (Wrightslaw, COPAA, etc.)\n- [ ] State PTI centers\n- [ ] Legal aid organizations\n- [ ] Disclaimer about referrals\n\n## Related Requirements\nLA-05 from requirements.md\n\n## Story Points\n13",
+      "labels": ["legal", "directory", "advocacy", "resources", "priority:low", "epic:legal-kb"],
+      "milestone": "Phase 4 - Legal & Compliance",
+      "estimate": 13,
+      "priority": "LOW",
+      "epic": "Legal Knowledge Base"
+    },
+    {
+      "id": "US-AC001",
+      "title": "Screen Reader Optimization",
+      "body": "**As a** parent with visual impairment\n**I want** the app to work seamlessly with screen readers\n**So that** I can manage my child's IEP independently\n\n## Acceptance Criteria\n- [ ] All UI elements have proper ARIA labels\n- [ ] Semantic HTML throughout\n- [ ] Skip navigation links\n- [ ] Focus indicators visible and clear\n- [ ] Keyboard navigation fully supported\n- [ ] Announce dynamic content changes\n- [ ] Form labels and error messages announced\n- [ ] Tables with proper headers\n- [ ] Images have descriptive alt text\n- [ ] Tested with NVDA (Windows) and VoiceOver (iOS/Mac)\n- [ ] Charts and graphs have text alternatives\n- [ ] Document structure (headings) logical\n\n## Related Requirements\nAC-01 (WCAG 2.2 AA) from requirements.md\n\n## Story Points\n21",
+      "labels": ["accessibility", "screen-reader", "wcag", "priority:high", "epic:accessibility"],
+      "milestone": "Phase 5 - Accessibility",
+      "estimate": 21,
+      "priority": "HIGH",
+      "epic": "Accessibility Features"
+    },
+    {
+      "id": "US-AC002",
+      "title": "High Contrast Mode",
+      "body": "**As a** parent with low vision\n**I want** a high contrast color theme\n**So that** I can read content more easily\n\n## Acceptance Criteria\n- [ ] High contrast theme toggle in settings\n- [ ] Meets WCAG AAA contrast ratios (7:1 for normal text)\n- [ ] Black backgrounds with white/yellow text option\n- [ ] White backgrounds with black text option\n- [ ] No information conveyed by color alone\n- [ ] Borders/outlines for all interactive elements\n- [ ] Consistent across all screens\n- [ ] Persists across sessions\n- [ ] Syncs across devices\n- [ ] Preview before applying\n\n## Related Requirements\nAC-01 from requirements.md\n\n## Story Points\n13",
+      "labels": ["accessibility", "contrast", "vision", "priority:medium", "epic:accessibility"],
+      "milestone": "Phase 5 - Accessibility",
+      "estimate": 13,
+      "priority": "MEDIUM",
+      "epic": "Accessibility Features"
+    },
+    {
+      "id": "US-AC003",
+      "title": "Text Resizing Controls",
+      "body": "**As a** parent with low vision\n**I want to** adjust text size without breaking the layout\n**So that** I can read comfortably\n\n## Acceptance Criteria\n- [ ] Text size options: small, medium, large, extra large\n- [ ] Slider or buttons for adjustment\n- [ ] Relative font sizing (rem/em) used throughout\n- [ ] Layout remains functional at 200% zoom\n- [ ] No horizontal scrolling at 200% zoom\n- [ ] Images and icons scale appropriately\n- [ ] Setting persists across sessions\n- [ ] Syncs across devices\n- [ ] Applies to all text (headings, body, buttons)\n- [ ] Tested on mobile and desktop\n\n## Related Requirements\nAC-01 from requirements.md\n\n## Story Points\n8",
+      "labels": ["accessibility", "text-size", "vision", "priority:medium", "epic:accessibility"],
+      "milestone": "Phase 5 - Accessibility",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Accessibility Features"
+    },
+    {
+      "id": "US-AC004",
+      "title": "Multilingual Support",
+      "body": "**As a** parent whose first language is not English\n**I want** the app in my preferred language\n**So that** I can understand and use it effectively\n\n## Acceptance Criteria\n- [ ] Language selector in settings and onboarding\n- [ ] Support for at least 5 languages: English, Spanish, Mandarin, Vietnamese, Arabic\n- [ ] All UI text translated\n- [ ] User-entered content remains in original language\n- [ ] Date/time formats localized\n- [ ] Number formats localized\n- [ ] Right-to-left (RTL) support for Arabic\n- [ ] Translation quality reviewed by native speakers\n- [ ] Legal disclaimer in each language\n- [ ] Language preference syncs across devices\n- [ ] Export/print documents in selected language\n- [ ] Fallback to English if translation missing\n\n## Related Requirements\nAC-02 from requirements.md\n\n## Story Points\n34",
+      "labels": ["accessibility", "i18n", "localization", "priority:medium", "epic:accessibility"],
+      "milestone": "Phase 5 - Accessibility",
+      "estimate": 34,
+      "priority": "MEDIUM",
+      "epic": "Accessibility Features"
+    },
+    {
+      "id": "US-AC005",
+      "title": "Simplified Language Mode",
+      "body": "**As a** parent with cognitive disabilities or low literacy\n**I want** a simplified language mode\n**So that** I can understand complex IEP information\n\n## Acceptance Criteria\n- [ ] Toggle for \"Simple Language\" mode\n- [ ] Rewrites complex sentences in plain language\n- [ ] Reduces jargon and technical terms\n- [ ] Provides definitions for required legal terms\n- [ ] Shorter sentences and paragraphs\n- [ ] More white space\n- [ ] Bullet points instead of long paragraphs\n- [ ] Icons and visuals to support text\n- [ ] Reading level 5th-6th grade\n- [ ] Option to see original text\n- [ ] Applies to articles, emails, and system messages\n- [ ] Maintains accuracy of legal information\n\n## Related Requirements\nAC-03 from requirements.md\n\n## Story Points\n21",
+      "labels": ["accessibility", "cognitive", "readability", "priority:low", "epic:accessibility"],
+      "milestone": "Phase 5 - Accessibility",
+      "estimate": 21,
+      "priority": "LOW",
+      "epic": "Accessibility Features"
+    },
+    {
+      "id": "US-AC006",
+      "title": "Text-to-Speech for Content",
+      "body": "**As a** parent with reading difficulties\n**I want** the app to read content aloud\n**So that** I can consume information audibly\n\n## Acceptance Criteria\n- [ ] Text-to-speech button on articles and documents\n- [ ] Plays in background (can navigate away)\n- [ ] Pause/resume controls\n- [ ] Speed adjustment (0.5x to 2x)\n- [ ] Highlight text as it's read\n- [ ] Natural-sounding voices (not robotic)\n- [ ] Language detection (reads in article's language)\n- [ ] Works on mobile and desktop\n- [ ] Accessible via keyboard shortcut\n- [ ] Stop/restart options\n- [ ] Skip forward/backward by sentence\n\n## Related Requirements\nAC-03 from requirements.md\n\n## Story Points\n13",
+      "labels": ["accessibility", "audio", "text-to-speech", "priority:low", "epic:accessibility"],
+      "milestone": "Phase 5 - Accessibility",
+      "estimate": 13,
+      "priority": "LOW",
+      "epic": "Accessibility Features"
+    },
+    {
+      "id": "US-FM001",
+      "title": "Centralized Document Library",
+      "body": "**As a** parent\n**I want** all my child's IEP-related documents in one place\n**So that** I can find what I need quickly\n\n## Acceptance Criteria\n- [ ] Library view lists all uploaded documents\n- [ ] Sort by: name, date uploaded, document type, file size\n- [ ] Filter by: document type (IEP, evaluation, progress report, medical, etc.)\n- [ ] Filter by: date range\n- [ ] Search by filename or content (OCR)\n- [ ] Folder/tag organization\n- [ ] Thumbnail previews for PDFs and images\n- [ ] Bulk select and download\n- [ ] Delete with confirmation\n- [ ] Storage usage indicator\n- [ ] Export list as CSV\n- [ ] Shareable folder links (with expiration)\n\n## Related Requirements\nFile management from requirements.md\n\n## Story Points\n13",
+      "labels": ["documents", "library", "organization", "priority:medium", "epic:file-mgmt"],
+      "milestone": "Phase 2 - Parent Empowerment",
+      "estimate": 13,
+      "priority": "MEDIUM",
+      "epic": "File Management & Document Library"
+    },
+    {
+      "id": "US-FM002",
+      "title": "In-App PDF Viewer",
+      "body": "**As a** parent\n**I want to** view PDF documents without leaving the app\n**So that** I can read IEPs and reports seamlessly\n\n## Acceptance Criteria\n- [ ] Renders PDFs in-app (no external viewer)\n- [ ] Zoom in/out\n- [ ] Scroll and pan\n- [ ] Page navigation (jump to page X)\n- [ ] Table of contents/bookmarks (if PDF has them)\n- [ ] Search within PDF\n- [ ] Highlight text\n- [ ] Add annotations/comments\n- [ ] Download option\n- [ ] Share option\n- [ ] Print option\n- [ ] Works on mobile and desktop\n- [ ] Handles large PDFs (100+ pages) efficiently\n\n## Related Requirements\nIEP document viewing from requirements.md\n\n## Story Points\n13",
+      "labels": ["documents", "pdf", "viewer", "priority:high", "epic:file-mgmt"],
+      "milestone": "Phase 2 - Parent Empowerment",
+      "estimate": 13,
+      "priority": "HIGH",
+      "epic": "File Management & Document Library"
+    },
+    {
+      "id": "US-FM003",
+      "title": "Document Tagging and Linking",
+      "body": "**As a** parent\n**I want to** tag documents and link them to specific goals or meetings\n**So that** I can organize evidence by context\n\n## Acceptance Criteria\n- [ ] Add multiple tags per document\n- [ ] Pre-defined tag library (IEP, evaluation, medical, progress, behavior)\n- [ ] Create custom tags\n- [ ] Link document to specific child, IEP, goal, meeting\n- [ ] View all documents linked to a goal\n- [ ] View all documents linked to a meeting\n- [ ] Tag management (rename, merge, delete tags)\n- [ ] Filter library by tags\n- [ ] Search by tags\n- [ ] Bulk tagging\n\n## Related Requirements\nFile management from requirements.md\n\n## Story Points\n8",
+      "labels": ["documents", "tagging", "organization", "priority:medium", "epic:file-mgmt"],
+      "milestone": "Phase 5 - Polish",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "File Management & Document Library"
+    },
+    {
+      "id": "US-FM004",
+      "title": "Document Sharing with Team",
+      "body": "**As a** parent\n**I want to** share documents securely with my child's IEP team\n**So that** they have necessary information for meetings\n\n## Acceptance Criteria\n- [ ] Select documents to share\n- [ ] Choose recipients (teacher, therapist, advocate, etc.)\n- [ ] Share via email with secure link\n- [ ] Share via in-app messaging\n- [ ] Set expiration for shared links (7, 30, 90 days, or never)\n- [ ] Revoke access at any time\n- [ ] Track who accessed shared documents\n- [ ] Require password for sensitive documents (optional)\n- [ ] Notification when document is viewed\n- [ ] Audit log of sharing actions\n- [ ] Watermark option (\"Confidential - For IEP Team Only\")\n\n## Related Requirements\nFile management from requirements.md\n\n## Story Points\n13",
+      "labels": ["documents", "sharing", "security", "priority:low", "epic:file-mgmt"],
+      "milestone": "Phase 5 - Polish",
+      "estimate": 13,
+      "priority": "LOW",
+      "epic": "File Management & Document Library"
+    },
+    {
+      "id": "US-FM005",
+      "title": "OCR for Scanned Documents",
+      "body": "**As a** parent\n**I want** the system to extract text from scanned IEP documents\n**So that** I can search within them and have data auto-populated\n\n## Acceptance Criteria\n- [ ] OCR runs automatically on uploaded images and scanned PDFs\n- [ ] Extract text from IEP sections (goals, services, accommodations)\n- [ ] Suggest auto-populating fields in app (with parent confirmation)\n- [ ] Make documents searchable by content\n- [ ] Works with handwriting (best effort)\n- [ ] Handles multi-page documents\n- [ ] Confidence indicator for extracted data\n- [ ] Parent can edit extracted text\n- [ ] Store original image + OCR text\n- [ ] Processing notification (may take 1-2 minutes)\n- [ ] Error handling for poor quality scans\n\n## Related Requirements\nIEP-01 (PDF extraction) from requirements.md\n\n## Story Points\n21",
+      "labels": ["documents", "ocr", "automation", "priority:low", "epic:file-mgmt"],
+      "milestone": "Phase 5 - Polish",
+      "estimate": 21,
+      "priority": "LOW",
+      "epic": "File Management & Document Library"
+    },
+    {
+      "id": "US-NR001",
+      "title": "Customizable Notification Preferences",
+      "body": "**As a** parent\n**I want to** control which notifications I receive\n**So that** I'm not overwhelmed but stay informed on what matters\n\n## Acceptance Criteria\n- [ ] Notification settings page\n- [ ] Toggle each notification type: progress updates, smart prompts, meetings, communications, deadlines, compliance alerts\n- [ ] Choose delivery method per type: push, email, SMS, in-app only\n- [ ] Set frequency: immediate, daily digest, weekly digest\n- [ ] Quiet hours (no notifications during set times)\n- [ ] Different settings for weekdays vs. weekends\n- [ ] Preview notifications before saving settings\n- [ ] Test notification button\n- [ ] Separate settings for each child (if multiple)\n- [ ] Save and sync across devices\n\n## Related Requirements\nNotifications from requirements.md\n\n## Story Points\n8",
+      "labels": ["notifications", "preferences", "settings", "priority:high", "epic:notifications"],
+      "milestone": "Phase 4 - Notifications",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Notifications & Reminders"
+    },
+    {
+      "id": "US-NR002",
+      "title": "Progress Update Reminders (Teacher)",
+      "body": "**As a** teacher\n**I want** reminders to log progress updates\n**So that** I don't forget to document student progress\n\n## Acceptance Criteria\n- [ ] Weekly reminder for students without recent progress (configurable frequency)\n- [ ] Shows list of students needing updates\n- [ ] Shows number of days since last update per student\n- [ ] One-tap to open progress entry form\n- [ ] Snooze reminder for X days\n- [ ] Mark student as \"no session this week\" to dismiss\n- [ ] Settings to disable reminders during breaks\n- [ ] Email and/or push notification\n- [ ] Reminder timing customizable (Friday afternoons, for example)\n\n## Related Requirements\nPT-03 from requirements.md\n\n## Story Points\n8",
+      "labels": ["notifications", "reminders", "teacher", "progress", "priority:medium", "epic:notifications"],
+      "milestone": "Phase 4 - Notifications",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Notifications & Reminders"
+    },
+    {
+      "id": "US-NR003",
+      "title": "Overdue Deadline Alerts",
+      "body": "**As a** parent\n**I want** alerts when IEP deadlines are missed\n**So that** I can hold the school accountable\n\n## Acceptance Criteria\n- [ ] Alert when annual IEP review is overdue\n- [ ] Alert when evaluation is overdue\n- [ ] Alert when meeting notice wasn't provided on time\n- [ ] Alert when progress report is late\n- [ ] Alert severity based on how overdue (yellow, orange, red)\n- [ ] Notification includes: what's overdue, by how many days, suggested action\n- [ ] Link to template email requesting compliance\n- [ ] Log alert in compliance tracking\n- [ ] Escalation recommendation if significantly overdue\n- [ ] Dismiss option if parent knows situation is handled\n\n## Related Requirements\nLA-02, Compliance from requirements.md\n\n## Story Points\n8",
+      "labels": ["notifications", "deadlines", "compliance", "alerts", "priority:high", "epic:notifications"],
+      "milestone": "Phase 4 - Notifications",
+      "estimate": 8,
+      "priority": "HIGH",
+      "epic": "Notifications & Reminders"
+    },
+    {
+      "id": "US-NR004",
+      "title": "Meeting Confirmation Reminders",
+      "body": "**As a** parent\n**I want** reminders to confirm IEP meeting attendance\n**So that** the school knows I'm attending and has time to reschedule if I can't\n\n## Acceptance Criteria\n- [ ] Notification 7 days before meeting: \"Confirm attendance\"\n- [ ] One-tap confirm button\n- [ ] One-tap request to reschedule (sends email to school)\n- [ ] If no confirmation after 3 days, send follow-up reminder\n- [ ] Confirmation logged in meeting record\n- [ ] Add to device calendar option\n- [ ] Include meeting details (date, time, location, type)\n- [ ] Option to add questions/concerns in response\n- [ ] Notification to school when parent confirms/reschedules\n\n## Related Requirements\nMeeting management from requirements.md\n\n## Story Points\n8",
+      "labels": ["notifications", "meetings", "reminders", "confirmation", "priority:medium", "epic:notifications"],
+      "milestone": "Phase 4 - Notifications",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Notifications & Reminders"
+    },
+    {
+      "id": "US-SC001",
+      "title": "Comprehensive Audit Trail",
+      "body": "**As a** system administrator\n**I want** all user actions logged in an audit trail\n**So that** we can track access and changes for FERPA compliance\n\n## Acceptance Criteria\n- [ ] Log all write operations (create, update, delete)\n- [ ] Log all access to sensitive data (IEPs, evaluations, progress)\n- [ ] Capture: user ID, action type, timestamp, IP address, affected resource, old/new values\n- [ ] Immutable logs (can't be edited or deleted)\n- [ ] Searchable by user, date range, action type, resource\n- [ ] Export audit logs as CSV\n- [ ] Admin-only access to full audit trail\n- [ ] Parent can view their own access history\n- [ ] Retention per compliance requirements (7 years for education records)\n- [ ] Alert on suspicious activity (multiple failed logins, unusual access patterns)\n- [ ] Performance: logging doesn't slow down app\n\n## Related Requirements\nSC-03 from requirements.md\n\n## Story Points\n21",
+      "labels": ["security", "audit", "compliance", "ferpa", "priority:high", "epic:security"],
+      "milestone": "Phase 4 - Legal & Compliance",
+      "estimate": 21,
+      "priority": "HIGH",
+      "epic": "Security & Compliance"
+    },
+    {
+      "id": "US-SC002",
+      "title": "Consent Management UI",
+      "body": "**As a** parent\n**I want to** grant and revoke access to my child's information\n**So that** I control who can see sensitive IEP data\n\n## Acceptance Criteria\n- [ ] Consent dashboard showing all granted access\n- [ ] List: who has access, their role, what data they can see, granted date, expiration (if any)\n- [ ] Grant access wizard: select person, select role, set permissions (view only, edit), set expiration\n- [ ] Revoke access button with confirmation\n- [ ] Instant revocation (user loses access immediately)\n- [ ] Audit log of all consent changes\n- [ ] Request consent from teacher/advocate (sends invitation)\n- [ ] Notification when someone's access expires\n- [ ] Export consent history\n- [ ] Different levels of access (full IEP, progress only, documents only)\n\n## Related Requirements\nUM-03, SC-01 from requirements.md\n\n## Story Points\n13",
+      "labels": ["security", "consent", "access-control", "priority:high", "epic:security"],
+      "milestone": "Phase 4 - Legal & Compliance",
+      "estimate": 13,
+      "priority": "HIGH",
+      "epic": "Security & Compliance"
+    },
+    {
+      "id": "US-SC003",
+      "title": "Data Retention Controls",
+      "body": "**As a** parent\n**I want to** control how long my data is kept\n**So that** I can delete information when I no longer need it\n\n## Acceptance Criteria\n- [ ] Settings to choose retention period (keep indefinitely, or X years)\n- [ ] Auto-delete after retention period expires\n- [ ] Manual \"Delete All Data\" option with strong confirmation\n- [ ] Explanation of what will be deleted\n- [ ] Grace period (30 days to undo deletion)\n- [ ] Export all data before deletion option\n- [ ] Compliance with education records retention laws (warning if < 7 years)\n- [ ] Cannot delete audit logs (compliance requirement)\n- [ ] Notification before auto-deletion occurs\n- [ ] Account closure = data deleted per schedule\n\n## Related Requirements\nSC-04 from requirements.md\n\n## Story Points\n13",
+      "labels": ["security", "data-retention", "privacy", "priority:medium", "epic:security"],
+      "milestone": "Phase 4 - Legal & Compliance",
+      "estimate": 13,
+      "priority": "MEDIUM",
+      "epic": "Security & Compliance"
+    },
+    {
+      "id": "US-SC004",
+      "title": "Privacy Policy & Terms in App",
+      "body": "**As a** parent\n**I want** easy access to the privacy policy and terms\n**So that** I understand how my data is used\n\n## Acceptance Criteria\n- [ ] Privacy policy link in footer and settings\n- [ ] Terms of service link in footer and settings\n- [ ] Plain-language summary of key points\n- [ ] Full legal text available\n- [ ] Data collection transparency (what, why, who)\n- [ ] User rights (access, correction, deletion)\n- [ ] Contact info for privacy questions\n- [ ] Version history (show what changed)\n- [ ] Notification when policy updates\n- [ ] Consent required if material changes\n- [ ] Available in all supported languages\n\n## Related Requirements\nSC-06 from requirements.md\n\n## Story Points\n5",
+      "labels": ["security", "privacy", "legal", "priority:medium", "epic:security"],
+      "milestone": "Phase 4 - Legal & Compliance",
+      "estimate": 5,
+      "priority": "MEDIUM",
+      "epic": "Security & Compliance"
+    },
+    {
+      "id": "US-SC005",
+      "title": "Role-Based Access Revocation",
+      "body": "**As an** admin\n**I want to** instantly revoke a user's access\n**So that** we can respond quickly to security concerns\n\n## Acceptance Criteria\n- [ ] Admin dashboard lists all users\n- [ ] \"Suspend\" and \"Revoke Access\" buttons per user\n- [ ] Confirm action with reason\n- [ ] User immediately logged out of all sessions\n- [ ] User cannot log back in\n- [ ] Email notification to user (optional, for non-malicious cases)\n- [ ] Audit log entry\n- [ ] Can reactivate user later\n- [ ] Bulk suspend option (e.g., former employees)\n- [ ] Shows users who haven't logged in recently\n\n## Related Requirements\nSC-05 from requirements.md\n\n## Story Points\n8",
+      "labels": ["security", "access-control", "admin", "priority:medium", "epic:security"],
+      "milestone": "Phase 4 - Legal & Compliance",
+      "estimate": 8,
+      "priority": "MEDIUM",
+      "epic": "Security & Compliance"
+    }
+  ]
+}

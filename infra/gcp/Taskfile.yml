@@ -1,0 +1,132 @@
+version: '3'
+
+tasks:
+
+  dev:setup:
+    desc: Full GCP environment setup for dev (service accounts, infra, buckets, database, secrets)
+    cmds:
+      - chmod +x ./setup-gcp-environment.sh
+      - ./setup-gcp-environment.sh dev
+
+  prod:setup:
+    desc: Full GCP environment setup for production (service accounts, infra, buckets, database, secrets)
+    cmds:
+      - chmod +x ./setup-gcp-environment.sh
+      - ./setup-gcp-environment.sh production
+
+  prod:bootstrap:
+    desc: Bootstrap askiep-production GCP project from scratch (APIs, registry, SAs, buckets)
+    dotenv: ["../../.env.production"]
+    cmds:
+      - chmod +x ./setup-production-project.sh
+      - ./setup-production-project.sh
+
+  dev:cicd:sa:
+    desc: Generate CI/CD service account key for dev (GitHub Actions/local deployment)
+    dotenv: ["../../.env.dev"]
+    cmds:
+      - chmod +x ./gen-gcp-sa.sh
+      - ./gen-gcp-sa.sh
+
+  prod:cicd:sa:
+    desc: Generate CI/CD service account key for production (GitHub Actions/local deployment)
+    dotenv: ["../../.env.production"]
+    cmds:
+      - chmod +x ./gen-gcp-sa.sh
+      - ./gen-gcp-sa.sh
+
+  dev:cloudrun:sa:
+    desc: Setup Cloud Run runtime service account for dev (create + grant permissions including signed URLs)
+    dotenv: ["../../.env.dev"]
+    cmds:
+      - chmod +x ./setup-cloudrun-sa.sh
+      - ./setup-cloudrun-sa.sh
+
+  prod:cloudrun:sa:
+    desc: Setup Cloud Run runtime service account for production (create + grant permissions including signed URLs)
+    dotenv: ["../../.env.production"]
+    cmds:
+      - chmod +x ./setup-cloudrun-sa.sh
+      - ./setup-cloudrun-sa.sh
+
+  generate:infra:
+    desc: Generate GCP infrastructuure , add registry , storage bucket , etc
+    cmds:
+      - chmod +x ./gen-gcp-infra.sh
+      - ./gen-gcp-infra.sh
+
+  dev:generate:infra:
+    desc: Generate GCP infrastructuure for dev environment
+    dotenv: ["../../.env.dev"]
+    cmds:
+      - chmod +x ./gen-gcp-infra.sh
+      - ./gen-gcp-infra.sh
+
+  prod:generate:infra:
+    desc: Generate GCP infrastructuure for production environment
+    dotenv: ["../../.env.production"]
+    cmds:
+      - chmod +x ./gen-gcp-infra.sh
+      - ./gen-gcp-infra.sh
+
+
+
+  db:configure:
+    desc: Get database connection string and setup (creates DB/user if needed)
+    cmds:
+      - chmod +x ./configure-db.sh
+      - ./configure-db.sh
+
+  dev:db:configure:
+    desc: Get dev database connection string and setup
+    dotenv: ["../../.env.dev"]
+    cmds:
+      - chmod +x ./configure-db.sh
+      - ./configure-db.sh
+
+  prod:db:configure:
+    desc: Get production database connection string and setup
+    dotenv: ["../../.env.production"]
+    cmds:
+      - chmod +x ./configure-db.sh
+      - ./configure-db.sh
+
+  dev:db-proxy:
+    desc: Run Cloud SQL Auth Proxy for dev database (local access)
+    dotenv: ["../../.env.dev"]
+    cmds:
+      - chmod +x ./run-db-proxy.sh
+      - ./run-db-proxy.sh
+
+  prod:db-proxy:
+    desc: Run Cloud SQL Auth Proxy for production database (local access)
+    dotenv: ["../../.env.production"]
+    cmds:
+      - chmod +x ./run-db-proxy.sh
+      - ./run-db-proxy.sh
+
+  deploy:secrets:
+    desc: Deploy Postgres SSL certificates to GCP Secret Manager
+    cmds:
+      - chmod +x *.sh
+      - ./deploy-secrets.sh
+
+  deploy:secrets:api-dev:
+    desc: Deploy secrets for API dev environment
+    dotenv: ["../../.env.dev"]
+    env:
+      CLOUD_RUN_SERVICE_NAME: iep-api-dev
+    cmds:
+      - chmod +x ./deploy-secrets.sh
+      - ./deploy-secrets.sh
+
+  deploy:secrets:api-prod:
+    desc: Deploy secrets for API production environment
+    dotenv: ["../../.env.production"]
+    env:
+      CLOUD_RUN_SERVICE_NAME: iep-api-production
+    cmds:
+      - chmod +x ./deploy-secrets.sh
+      - ./deploy-secrets.sh
+
+

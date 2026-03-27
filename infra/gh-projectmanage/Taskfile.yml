@@ -1,0 +1,52 @@
+version: "3"
+
+
+vars:
+  BULK_FILE: "new-user-stories.json"
+
+tasks:
+
+
+  bulk:insert:
+    desc: Bulk create labels and insert issues from JSON file to GitHub project board
+    preconditions:
+      - sh: command -v go
+        msg: "Go is not installed. Please install Go from https://go.dev/dl/"
+      - sh: command -v gh
+        msg: "GitHub CLI is not installed. Please install it: brew install gh"
+      - sh: gh auth status
+        msg: "GitHub CLI is not authenticated. Please run: gh auth login"
+      - sh: test -f {{.BULK_FILE}}
+        msg: "File {{.BULK_FILE}} not found"
+    cmds:
+      - go run insert/bulkinsert.go -in {{.BULK_FILE}}
+
+  bulk:delete:
+    desc: Bulk delete issues from JSON file titles
+    preconditions:
+      - sh: command -v go
+        msg: "Go is not installed. Please install Go from https://go.dev/dl/"
+      - sh: command -v gh
+        msg: "GitHub CLI is not installed. Please install it: brew install gh"
+      - sh: gh auth status
+        msg: "GitHub CLI is not authenticated. Please run: gh auth login"
+      - sh: test -f {{.BULK_FILE}}
+        msg: "File {{.BULK_FILE}} not found"
+    cmds:
+      - go run delete/bulkdelete.go -in {{.BULK_FILE}}
+
+  list:issues:
+    desc: List all issues from GitHub project board and export to CSV
+    preconditions:
+      - sh: command -v go
+        msg: "Go is not installed. Please install Go from https://go.dev/dl/"
+      - sh: command -v gh
+        msg: "GitHub CLI is not installed. Please install it: brew install gh"
+      - sh: gh auth status
+        msg: "GitHub CLI is not authenticated. Please run: gh auth login"
+      - sh: test -f {{.BULK_FILE}}
+        msg: "File {{.BULK_FILE}} not found"
+    cmds:
+      - go run list/listissues.go -in {{.BULK_FILE}} -output project_issues.csv
+
+  

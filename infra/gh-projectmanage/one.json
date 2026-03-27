@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "generated_date": "2026-01-27",
+    "total_stories": 106,
+    "total_story_points": 1046,
+    "source": "docs/projectmanage/userstories.md",
+    "repository": "ASKIEP/iepapp",
+    "boardUrl":"https://github.com/orgs/ASKIEP/projects/1/views/1"
+
+  },
+  "stories": [
+    {
+      "id": "US-M001",
+      "title": "View Child Dashboard on Mobile",
+      "body": "**As a** parent\n**I want to** view my child's IEP dashboard on my mobile device\n**So that** I can quickly check progress and alerts on-the-go\n\n## Acceptance Criteria\n- [ ] Dashboard displays all children with their photos/avatars\n- [ ] Shows current IEP status (active, needs review, expired)\n- [ ] Displays active alerts/prompts count with severity indicators\n- [ ] Shows upcoming meetings and deadlines\n- [ ] Quick access to recent progress updates\n- [ ] Pull-to-refresh functionality\n- [ ] Works in portrait and landscape modes\n- [ ] Loads within 2 seconds on 4G connection\n\n## Technical Notes\nRelated to mobile app parent dashboard implementation.\n\n## Story Points\n5",
+      "labels": ["mobile", "parent", "dashboard", "priority:high", "epic:mobile-parent"],
+      "milestone": "Phase 1 - Mobile Core",
+      "estimate": 5,
+      "priority": "HIGH",
+      "epic": "Mobile App - Parent User Stories",
+      "related_issues": [54]
+    }
+  ]
+}

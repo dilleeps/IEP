@@ -1,0 +1,18 @@
+version: '3'
+
+dotenv: ["../../.env"]
+
+tasks:
+
+
+  tg:chatid:
+    desc: Generate GCP service account key , so we can use it for deployment
+    cmds:
+      - chmod +x *.sh
+      - ./get-chat-id.sh
+      
+  tg:sendmessage:
+    desc: Send test message to telegram bot
+    cmds:
+      - chmod +x *.sh
+      - ./send-test-message.sh

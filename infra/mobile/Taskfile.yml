@@ -1,0 +1,144 @@
+version: "3"
+
+vars:
+  ANDROID_AVD: Pixel_6_API_34
+  ANDROID_SERIAL: emulator-5554
+  IOS_DEVICE: "iPhone SE (3rd generation)"
+
+tasks:
+
+  adb:reset:
+    desc: Reset ADB server
+    cmds:
+      - adb kill-server || true
+      - adb start-server
+
+  android:status:
+    silent: true
+    cmds:
+      - adb devices -l | sed -n '1,5p'
+
+  android:ps:
+    desc: Show emulator processes and last log lines
+    cmds:
+      - pgrep -fl "qemu-system|emulator" || true
+      - adb devices -l || true
+      - tail -n 80 /tmp/android-emulator.log || true
+
+  android:start:
+    desc: Start Android emulator only if not running (async, with logs)
+    cmds:
+      - |
+        set -e
+
+        # If already running and in 'device' state, do nothing
+        if adb devices | awk '{print $1,$2}' | grep -q "^{{.ANDROID_SERIAL}}[[:space:]]device$"; then
+          echo "Android already running: {{.ANDROID_SERIAL}}"
+          exit 0
+        fi
+
+        # If emulator exists but offline, reset adb
+        if adb devices | awk '{print $1,$2}' | grep -q "^{{.ANDROID_SERIAL}}[[:space:]]offline$"; then
+          echo "Android is offline; resetting adb..."
+          adb kill-server || true
+          adb start-server
+        fi
+
+        # If any emulator is running (any port), don't start another one
+        if adb devices | awk '{print $1,$2}' | grep -q "^emulator-[0-9]\+[[:space:]]device$"; then
+          echo "Some Android emulator already running; skipping new launch."
+          adb devices -l
+          exit 0
+        fi
+
+        echo "Starting Android emulator: {{.ANDROID_AVD}}"
+        rm -f /tmp/android-emulator.log /tmp/android-emulator.pid
+
+        # Start emulator detached; log everything
+        nohup emulator -avd {{.ANDROID_AVD}} \
+          -no-snapshot -no-boot-anim \
+          -gpu swiftshader_indirect \
+          > /tmp/android-emulator.log 2>&1 &
+
+        echo $! > /tmp/android-emulator.pid
+        sleep 1
+
+        # If it died instantly, show log
+        if ! ps -p "$(cat /tmp/android-emulator.pid)" >/dev/null 2>&1; then
+          echo "Emulator process exited immediately. Log:"
+          cat /tmp/android-emulator.log || true
+          exit 1
+        fi
+
+        echo "Android emulator started (pid $(cat /tmp/android-emulator.pid))."
+
+  android:wait:
+    desc: Wait for Android emulator to be fully booted
+    cmds:
+      - |
+        echo "Waiting for Android device..."
+        adb wait-for-device
+
+        # Ensure we are talking to the right emulator serial
+        until adb devices | awk '{print $1,$2}' | grep -q "^{{.ANDROID_SERIAL}} device$"; do
+          echo "Android not ready yet (state may be offline). Retrying..."
+          adb kill-server || true
+          adb start-server
+          sleep 2
+        done
+
+        echo "Waiting for sys.boot_completed..."
+        until [ "$(adb -s {{.ANDROID_SERIAL}} shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" = "1" ]; do
+          sleep 1
+        done
+
+        # Unlock screen (optional)
+        adb -s {{.ANDROID_SERIAL}} shell input keyevent 82 || true
+        echo "Android booted ✅"
+
+  ios:start:
+    desc: Boot iOS simulator (async)
+    cmds:
+      - |
+        if xcrun simctl list devices | grep -q "Booted"; then
+          echo "iOS simulator already Booted"
+        else
+          echo "Booting iOS simulator: {{.IOS_DEVICE}}"
+          xcrun simctl boot "{{.IOS_DEVICE}}" || true
+          open -a Simulator
+        fi
+
+  ios:wait:
+    desc: Wait for iOS simulator to be fully booted
+    cmds:
+      - |
+        DEVICE_ID=$(xcrun simctl list devices | awk -v name="{{.IOS_DEVICE}}" '$0 ~ name {gsub(/[()]/,""); print $NF; exit}')
+        if [ -z "$DEVICE_ID" ]; then
+          echo "Could not find iOS device '{{.IOS_DEVICE}}' in simctl list"
+          exit 1
+        fi
+        echo "Waiting for iOS boot ($DEVICE_ID)..."
+        xcrun simctl bootstatus "$DEVICE_ID" -b
+        echo "iOS booted ✅"
+
+  devices:start:
+    desc: Start Android + iOS asynchronously (does not wait)
+    cmds:
+      - task: android:start
+      - task: ios:start
+
+  devices:ready:
+    desc: Start both asynchronously AND wait until both are ready
+    cmds:
+      - task android:start &
+      - task ios:start &
+      - wait
+      - task android:wait &
+      - task ios:wait &
+      - wait
+      - echo "All devices ready 🚀"
+
+  android:log:
+    desc: Tail Android emulator log
+    cmds:
+      - tail -f /tmp/android-emulator.log
