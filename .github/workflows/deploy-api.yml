@@ -64,7 +64,7 @@ jobs:
       - name: Build Docker image
         run: |
           IMAGE="${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.AR_REPO }}/api:${{ github.sha }}"
-          docker build -t "${IMAGE}" -t "${IMAGE%:*}:latest" ./app/api
+          docker build -t "${IMAGE}" -t "${IMAGE%:*}:latest" ./api
           echo "IMAGE=${IMAGE}" >> $GITHUB_ENV
 
       - name: Push Docker image
