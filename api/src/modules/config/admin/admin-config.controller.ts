@@ -1,6 +1,6 @@
 // src/modules/config/admin/admin-config.controller.ts
 import { Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../../../middleware/authenticate.js';
 import { AdminConfigService } from './admin-config.service.js';
 import {
   createConfigSchema,

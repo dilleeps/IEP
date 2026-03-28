@@ -1,6 +1,6 @@
 // src/modules/config/public/config.controller.ts
 import { Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../../../middleware/authenticate.js';
 import { ConfigService } from './config.service.js';
 import { listConfigsSchema } from './config.validation.js';
 
