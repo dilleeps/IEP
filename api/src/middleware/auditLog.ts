@@ -15,7 +15,7 @@ export function auditLog(action: string, entityType?: string) {
         setImmediate(async () => {
           try {
             // Import dynamically to avoid circular dependencies
-            const { AuditLogService } = await import('../audit/audit.service.js');
+            const { AuditLogService } = await import('../modules/audit/audit.service.js');
             
             await AuditLogService.log({
               userId: req.user?.id,

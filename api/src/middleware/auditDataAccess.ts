@@ -24,7 +24,7 @@ export function auditDataAccess(options: AuditDataAccessOptions) {
       if (res.statusCode >= 200 && res.statusCode < 300) {
         setImmediate(async () => {
           try {
-            const { AuditLogService } = await import('../audit/audit.service.js');
+            const { AuditLogService } = await import('../modules/audit/audit.service.js');
 
             await AuditLogService.log({
               userId: req.user?.id,
