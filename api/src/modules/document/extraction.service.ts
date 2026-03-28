@@ -265,8 +265,8 @@ export class ExtractionService {
           });
         })(),
         // Supports
-        accommodations:      [...new Set(supports.accommodations || [])],
-        modifications:       [...new Set(supports.modifications  || [])],
+        accommodations:      [...new Set(supports.accommodations || [])] as string[],
+        modifications:       [...new Set(supports.modifications  || [])] as string[],
         // Analysis
         summary:             analysis.summary         || '',
         redFlags:            analysis.redFlags        || [],
