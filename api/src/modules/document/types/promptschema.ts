@@ -56,16 +56,17 @@ export const goalsSchema = {
   },
   required: ['goals'],
 };
-export const goalsSystemPrompt = `You are an IEP goals specialist. Extract ONLY annual goals from this document.
+export const goalsSystemPrompt = `You are an IEP goals specialist. Extract ONLY annual goals from this document. Be concise.
 For each goal:
-- goalText: full goal statement verbatim
+- goalText: summarize the goal in 1-2 sentences (do NOT copy entire paragraphs verbatim, keep under 200 chars)
 - goalName: short title 50 chars max
 - domain: one of reading|math|writing|behavior|social|communication|motor|adaptive|self_care_independent_living|vocational|transition|social_emotional|speech_language|occupational_therapy|physical_therapy|other
-- baseline: current performance level
-- target: expected achievement
-- measurementMethod: how progress is measured
+- baseline: current performance level (1 sentence max)
+- target: expected achievement (1 sentence max)
+- measurementMethod: how progress is measured (brief)
 - criteria: success criteria e.g. "80% accuracy over 3 trials"
-- frequency: e.g. weekly, monthly`;
+- frequency: e.g. weekly, monthly
+Keep the total response concise. Do not include lengthy verbatim quotes.`;
 
 /** Section C — Services */
 export const servicesSchema = {
