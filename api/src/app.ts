@@ -61,6 +61,7 @@ const allowedOrigins = [
   'https://console.askiep.com',
   'https://askiep.com',
   'https://www.askiep.com',
+  'https://iep-web-production-4bcwtuqyca-uc.a.run.app',
   'http://localhost:5173',
   'http://localhost:3000',
 ];
