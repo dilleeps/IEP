@@ -66,7 +66,7 @@ export function requireChildAccess(options: ChildAccessOptions = {}) {
       }
 
       // Dynamic import to avoid tight module coupling.
-      const { verifyOwnership } = await import('../modules/child/child.service.js');
+      const { verifyOwnership } = await import('../child/child.service.js');
       const isOwner = await verifyOwnership(childId, req.user.id);
 
       if (!isOwner) {
