@@ -24,12 +24,29 @@ export const metadataSchema = {
       enum: ['iep', 'progress_report', 'evaluation', 'pwn', 'other'],
     },
   },
+  required: ['studentName', 'grade', 'schoolName', 'primaryDisability', 'documentTypeHint'],
 };
-export const metadataSystemPrompt = `You are an IEP document reader. Extract ONLY student identity, school, contact, and date fields from this document.
-Return YYYY-MM-DD dates. For disability, extract exactly what appears in the eligibility section (e.g. "Autism", "Specific Learning Disability").
-For schoolName, extract the school the student currently attends. For schoolDistrict, extract the district of responsibility or service.
-For homeAddress, extract the student's home/residential address if listed. For phoneNumber, extract the parent/guardian phone number if listed.
-For country, extract the country if explicitly stated; otherwise infer from the state/district context (e.g. "United States" for US school districts).`;
+export const metadataSystemPrompt = `You are an IEP document reader. Extract ALL student identity, school, contact, and date fields from this document. You MUST provide values for ALL fields — never leave them empty or null.
+
+REQUIRED fields — always extract these:
+- studentName: full name of the student (e.g. "Smith, John A")
+- studentDob: date of birth in YYYY-MM-DD format. Look for "Date of Birth", "DOB", "Birth Date" on the cover page or demographics section.
+- grade: current grade level (e.g. "3rd", "5th", "K", "Pre-K"). Look for "Grade", "Grade Level", "Current Grade".
+- schoolName: the school the student currently attends. Look for "School", "Current School", "Building".
+- schoolDistrict: the school district. Look for "District", "LEA", "Local Education Agency".
+- primaryDisability: the primary eligibility category (e.g. "Autism", "Specific Learning Disability", "Speech or Language Impairment"). Look for "Eligibility", "Classification", "Primary Disability".
+- iepStartDate: IEP start date in YYYY-MM-DD format
+- iepEndDate: IEP end date in YYYY-MM-DD format
+- iepMeetingDate: date of the IEP meeting in YYYY-MM-DD format
+
+Also extract if found:
+- homeAddress: student's home/residential address
+- phoneNumber: parent/guardian phone number
+- country: infer from state/district context (e.g. "United States")
+- secondaryDisability: secondary eligibility if listed
+- otherDisabilities: any additional disabilities
+
+For all dates, return YYYY-MM-DD format. Never return "N/A" or "Unknown" — if truly not found, return empty string "".`;
 
 /** Section B — Goals */
 export const goalsSchema = {
