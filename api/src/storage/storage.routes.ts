@@ -3,10 +3,10 @@
 // Storage proxy routes for secure file downloads via ADC
 
 import { Router } from "express";
-import { authenticate } from "../../middleware/authenticate.js";
-import { getStorageService } from "../../shared/services.js";
-import { logger } from "../../config/logger.js";
-import type { AuthRequest } from "../../middleware/authenticate.js";
+import { authenticate } from "../middleware/authenticate.js";
+import { getStorageService } from "../shared/services.js";
+import { logger } from "../config/logger.js";
+import type { AuthRequest } from "../middleware/authenticate.js";
 
 const router = Router();
 

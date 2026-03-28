@@ -1,14 +1,14 @@
 import { Lead } from "./lead.model.js";
-import { AppError } from "../../shared/errors/appError.js";
+import { AppError } from "../shared/errors/appError.js";
 import {
   CreateLeadRequest,
   LeadResponse,
   LeadsListResponse,
   RecaptchaVerifyResponse,
 } from "./lead.types.js";
-import { appenv } from "../../config/appenv.js";
-import { sendTelegramMessage } from "../../shared/notification/telegram.js";
-import { sendEmailWithAttachment } from "../../shared/notification/email.js";
+import { appenv } from "../config/appenv.js";
+import { sendTelegramMessage } from "../shared/notification/telegram.js";
+import { sendEmailWithAttachment } from "../shared/notification/email.js";
 
 export class LeadService {
   private readonly RECAPTCHA_SECRET = appenv.get("RECAPTCHA_SECRET") || "";
