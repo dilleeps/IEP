@@ -18,6 +18,12 @@ router.use(authenticate);
 router.use(requireRole(STANDARD_PROTECTED_ROLES));
 
 // Progress entries
+router.get('/', async (req, res, next) => {
+  try {
+    // Return empty array when no child filter specified
+    res.json({ data: [], message: 'Use GET /progress-entries/child/:childId for child-specific entries' });
+  } catch (err) { next(err); }
+});
 router.post('/', requireChildAccess({ bodyField: 'childId' }), createProgressEntry);
 router.delete('/:id', deleteProgressEntry);
 

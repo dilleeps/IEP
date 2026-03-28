@@ -16,6 +16,16 @@ router.use(authenticate);
 router.use(requireRole(STANDARD_PROTECTED_ROLES));
 
 /**
+ * List services
+ * GET /api/services
+ */
+router.get('/', async (req: AuthRequest, res: Response, next: NextFunction) => {
+  try {
+    res.json({ data: [], message: 'Use GET /services/child/:childId/logs for child-specific service logs' });
+  } catch (err) { next(err); }
+});
+
+/**
  * Create service log
  * POST /api/services/logs
  */

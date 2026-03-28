@@ -19,6 +19,9 @@ const controller = new ConsultationController();
 
 router.use(authenticate);
 
+// List consultations (redirects to /mine for parents)
+router.get('/', requireRole(['PARENT', 'ADMIN', 'COUNSELOR']), controller.listMyConsultations);
+
 // ─── Parent routes ────────────────────────────────────────────────────────
 // View available slots (parents + admin)
 router.get(
