@@ -219,7 +219,7 @@ async function initAllModels(sequelize: Sequelize): Promise<void> {
   
   // Advocacy domain
   const { initAdvocacyInsightModel } = await import("../modules/advocacy/advocacy.model.js");
-  const { initSmartPromptModel } = await import("../modules/advocacy/smartPrompt.model.js");
+  const { initSmartPromptModel } = await import("../modules/smart-prompts/smart-prompts.model.js");
   
   // Resource domain
   const { initResourceModel } = await import("../modules/resource/resource.model.js");
@@ -322,7 +322,7 @@ async function setupAssociations(): Promise<void> {
   const { LetterDraft } = await import("../modules/letter/letter.model.js");
   const { LetterTemplate } = await import("../modules/letter/template.model.js");
   const { AdvocacyInsight } = await import("../modules/advocacy/advocacy.model.js");
-  const { SmartPrompt } = await import("../modules/advocacy/smartPrompt.model.js");
+  const { SmartPrompt } = await import("../modules/smart-prompts/smart-prompts.model.js");
   const { Resource } = await import("../modules/resource/resource.model.js");
   const { UserPreference } = await import("../modules/preference/preference.model.js");
   const { AuditLog } = await import("../modules/audit/audit.model.js");
