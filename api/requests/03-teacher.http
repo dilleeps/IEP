@@ -1,0 +1,46 @@
+### Teacher/Therapist (active): login
+POST {{BASE_URL}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{TEACHER_ACTIVE_EMAIL}}",
+  "password": "{{DEFAULT_PASSWORD}}"
+}
+
+> {%
+    client.test("Teacher login: 200 + token exists", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.global.set("TEACHER_TOKEN", response.body.token);
+    });
+%}
+
+### Teacher: /me should be TEACHER_THERAPIST
+GET {{BASE_URL}}/api/v1/auth/me
+Authorization: Bearer {{TEACHER_TOKEN}}
+
+> {%
+    client.test("/me returns TEACHER_THERAPIST role", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.assert(response.body.user.role === "TEACHER_THERAPIST", "Role mismatch");
+    });
+%}
+
+### Teacher: get own preferences (auth endpoint)
+GET {{BASE_URL}}/api/v1/settings/preferences
+Authorization: Bearer {{TEACHER_TOKEN}}
+
+> {%
+    client.test("Teacher preferences: 200", function () {
+        client.assert(response.status === 200, "Expected 200");
+    });
+%}
+
+### Teacher: should NOT access leads stats (admin only) => 403
+GET {{BASE_URL}}/api/v1/leads/stats
+Authorization: Bearer {{TEACHER_TOKEN}}
+
+> {%
+    client.test("Teacher cannot call /leads/stats (403)", function () {
+        client.assert(response.status === 403, "Expected 403");
+    });
+%}

@@ -1,0 +1,702 @@
+### ===========================================
+### IEP Document Analysis - Complete Workflow
+### Parent: parent@askiep.com
+### ===========================================
+
+### Step 1: Parent Login
+POST {{BASE_URL}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{PARENT_EMAIL}}",
+  "password": "{{DEFAULT_PASSWORD}}"
+}
+
+> {%
+    client.test("Parent login successful", function () {
+        client.assert(response.status === 200, "Expected 200 OK");
+        const body = response.body;
+        client.assert(!!body.token, "Token missing in response");
+        client.global.set("PARENT_TOKEN", body.token);
+        client.log("✓ Parent authenticated - Token saved");
+    });
+%}
+
+
+
+### Step 3: Create/Get Child Profile
+POST {{BASE_URL}}/api/v1/children
+Authorization: Bearer {{PARENT_TOKEN}}
+Content-Type: application/json
+
+{
+  "name": "{{PARENT_CHILD_1_NAME}}",
+  "dateOfBirth": "2016-01-15",
+  "grade": "{{PARENT_CHILD_1_GRADE}}",
+  "disabilities": ["ADHD", "Specific Learning Disability"]
+}
+
+> {%
+    client.test("Child profile created", function () {
+        client.assert(response.status === 201, "Expected 201 Created");
+        const childId = response.body.id;
+        client.assert(!!childId, "Child ID missing");
+        client.global.set("CHILD_ID", childId);
+        client.log("✓ Child profile created - ID: " + childId);
+    });
+%}
+
+### Step 4: List Children (Verify Child Exists)
+GET {{BASE_URL}}/api/v1/children?limit=50&offset=0
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Child listed successfully", function () {
+        client.assert(response.status === 200, "Expected 200");
+        const children = response.body.children || [];
+        const childId = client.global.get("CHILD_ID");
+        const found = children.some(c => c.id === childId);
+        client.assert(found, "Created child not found in list");
+        client.log("✓ Child found in list");
+    });
+%}
+
+### ===========================================
+### DOCUMENT 1: Current Year IEP (Reading Goals)
+### ===========================================
+
+### Step 4.1: Delete All Documents for Child (Testing Cleanup)
+# Use this to clean up test data before starting a new workflow
+DELETE {{BASE_URL}}/api/v1/iep/child/{{CHILD_ID}}/all
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("All documents deleted", function () {
+        client.assert(response.status === 200, "Expected 200");
+        const deletedCount = response.body.data.deletedCount;
+        client.log("✓ Deleted " + deletedCount + " documents for child");
+    });
+%}
+
+### Step 5.1: Upload IEP Document #1 - Current Year Reading Goals
+POST {{BASE_URL}}/api/v1/iep/upload
+Authorization: Bearer {{PARENT_TOKEN}}
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="childId"
+
+{{CHILD_ID}}
+--boundary
+Content-Disposition: form-data; name="file"; filename="doc1.pdf"
+Content-Type: application/pdf
+
+< ./docs/doc1.pdf
+--boundary--
+
+> {%
+    client.test("Document 1 uploaded successfully", function () {
+        client.assert(response.status === 201, "Expected 201 Created");
+        const docId = response.body.data.documentId;
+        client.assert(!!docId, "Document ID missing");
+        client.global.set("DOC_1_ID", docId);
+        client.log("✓ Document 1 uploaded - ID: " + docId);
+        client.log("  Status: " + response.body.data.status);
+        client.log("  Analysis Status: " + response.body.data.analysisStatus);
+    });
+%}
+
+### Step 5.2: Get Document #1 Details
+GET {{BASE_URL}}/api/v1/iep/{{DOC_1_ID}}
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Document 1 details retrieved", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.log("✓ Document 1 details:");
+        client.log("  File: " + response.body.originalFileName);
+        client.log("  Status: " + response.body.status);
+        client.log("  Analysis: " + response.body.analysisStatus);
+    });
+%}
+
+### Step 5.2.1: Delete Document #1 (If Duplicate or Need to Re-upload)
+DELETE {{BASE_URL}}/api/v1/iep/{{DOC_1_ID}}
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Document 1 deleted successfully", function () {
+        client.assert(response.status === 204, "Expected 204 No Content");
+        client.log("✓ Document 1 deleted - can now re-upload");
+        client.log("  Use Step 5.1 to upload again if needed");
+    });
+%}
+
+### Step 5.3: Analyze Document #1 with AI (NDJSON Stream)
+# NOTE: This returns NDJSON stream (application/x-ndjson)
+# Watch the response for progress events (30-60 seconds)
+# Format: One JSON object per line
+# Event types: {type:"log"}, {type:"result"}, {type:"error"}
+GET {{BASE_URL}}/api/v1/iep/{{DOC_1_ID}}/analyze-iep
+Authorization: Bearer {{PARENT_TOKEN}}
+Accept: application/x-ndjson
+
+> {%
+    client.test("Document 1 analysis triggered", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.log("✓ AI Analysis started for Document 1");
+        client.log("  Watch for NDJSON progress events...");
+        client.log("  Content-Type: " + response.headers.valueOf("Content-Type"));
+    });
+%}
+
+### Step 5.4: Wait 60 seconds for analysis to complete
+# In real usage, you'd listen to SSE events
+# For testing, we wait and then check status
+
+### Step 5.5: Get Extraction Results for Review (Document #1)
+GET {{BASE_URL}}/api/v1/iep/{{DOC_1_ID}}/extraction
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Document 1 extraction retrieved", function () {
+        client.assert(response.status === 200, "Expected 200");
+        const data = response.body.data;
+        client.log("✓ Extraction results for Document 1:");
+        client.log("  Status: " + data.extractionStatus);
+        client.log("  Review Required: " + data.reviewRequired);
+        if (data.lowConfidenceFields && data.lowConfidenceFields.length > 0) {
+            client.log("  Low Confidence Fields: " + data.lowConfidenceFields.join(", "));
+        }
+        if (data.extractedData) {
+            const metadata = data.extractedData.metadata || {};
+            client.log("  Student: " + (metadata.studentName || "N/A"));
+            client.log("  IEP Dates: " + (metadata.iepStartDate || "N/A") + " to " + (metadata.iepEndDate || "N/A"));
+            const goals = data.extractedData.goals || [];
+            client.log("  Goals Extracted: " + goals.length);
+            const services = data.extractedData.services || [];
+            client.log("  Services Extracted: " + services.length);
+        }
+    });
+%}
+
+### Step 5.6: Submit Corrections for Document #1 (if needed)
+POST {{BASE_URL}}/api/v1/iep/{{DOC_1_ID}}/corrections
+Authorization: Bearer {{PARENT_TOKEN}}
+Content-Type: application/json
+
+{
+  "corrections": [
+    {
+      "field": "metadata.iepEndDate",
+      "originalValue": "2026-09-20",
+      "correctedValue": "2026-09-19",
+      "aiConfidence": 0.85,
+      "reason": "End date should be one day before start date anniversary"
+    }
+  ],
+  "reviewCompleted": true
+}
+
+> {%
+    client.test("Document 1 corrections submitted", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.log("✓ Corrections applied to Document 1");
+        client.log("  Extraction marked as reviewed");
+    });
+%}
+
+### Step 5.7: Check if Document #1 Can Be Finalized
+GET {{BASE_URL}}/api/v1/iep/{{DOC_1_ID}}/can-finalize
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Document 1 finalization check", function () {
+        client.assert(response.status === 200, "Expected 200");
+        const canFinalize = response.body.data.canFinalize;
+        client.log("✓ Can finalize Document 1: " + canFinalize);
+        if (!canFinalize && response.body.data.reason) {
+            client.log("  Reason: " + response.body.data.reason);
+        }
+    });
+%}
+
+### Step 5.8: Finalize Document #1 (Normalize to Database)
+POST {{BASE_URL}}/api/v1/iep/{{DOC_1_ID}}/finalize
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Document 1 finalized", function () {
+        client.assert(response.status === 200, "Expected 200");
+        const data = response.body.data;
+        client.log("✓ Document 1 finalized successfully");
+        client.log("  Goals Created: " + (data.goalsCreated || 0));
+        client.log("  Services Created: " + (data.servicesCreated || 0));
+        client.log("  Smart Prompts Created: " + (data.promptsCreated || 0));
+        
+        // EXTRACT GOAL AND SERVICE IDs FOR LATER USE
+        // These IDs are auto-generated during finalization
+        // You'll need to query them to use in progress/service logging
+        if (data.goals && data.goals.length > 0) {
+            client.global.set("GOAL_ID", data.goals[0].id);
+            client.log("  First Goal ID saved: " + data.goals[0].id);
+        }
+        if (data.services && data.services.length > 0) {
+            client.global.set("SERVICE_ID", data.services[0].id);
+            client.log("  First Service ID saved: " + data.services[0].id);
+        }
+    });
+%}
+
+### Step 5.9: Get Goals for Child (Auto-Generated from Finalization)
+# Goal IDs are created during document finalization
+# Use this to see all goals and their IDs
+GET {{BASE_URL}}/api/v1/goal-progress/child/{{CHILD_ID}}
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Goals retrieved", function () {
+        if (response.status === 200) {
+            const goals = response.body.data || [];
+            client.log("✓ Total goals for child: " + goals.length);
+            goals.forEach((goal, i) => {
+                client.log("  " + (i+1) + ". " + goal.goalName + " (ID: " + goal.id + ")");
+                // Save first goal ID for testing
+                if (i === 0) {
+                    client.global.set("GOAL_ID", goal.id);
+                    client.log("     → Saved as GOAL_ID");
+                }
+            });
+        }
+    });
+%}
+
+### Step 5.10: Get Services for Child (Auto-Generated from Finalization)
+# Service IDs are created during document finalization
+# Use this to see all services and their IDs
+GET {{BASE_URL}}/api/v1/services/child/{{CHILD_ID}}
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Services retrieved", function () {
+        if (response.status === 200) {
+            const services = response.body.data || [];
+            client.log("✓ Total services for child: " + services.length);
+            services.forEach((service, i) => {
+                client.log("  " + (i+1) + ". " + service.serviceType + " - " + service.minutesPerSession + " min/session (ID: " + service.id + ")");
+                // Save first service ID for testing
+                if (i === 0) {
+                    client.global.set("SERVICE_ID", service.id);
+                    client.log("     → Saved as SERVICE_ID");
+                }
+            });
+        }
+    });
+%}
+
+### ===========================================
+### DOCUMENT 2: Previous Year IEP (Lineage Tracking)
+### ===========================================
+
+### Step 6.1: Upload IEP Document #2 - Previous Year
+POST {{BASE_URL}}/api/v1/iep/upload
+Authorization: Bearer {{PARENT_TOKEN}}
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="childId"
+
+{{CHILD_ID}}
+--boundary
+Content-Disposition: form-data; name="file"; filename="iep-sample-2-previous-year.txt"
+Content-Type: text/plain
+
+< ./docs/iep-sample-2-previous-year.txt
+--boundary--
+
+> {%
+    client.test("Document 2 uploaded successfully", function () {
+        client.assert(response.status === 201, "Expected 201 Created");
+        const docId = response.body.data.documentId;
+        client.global.set("DOC_2_ID", docId);
+        client.log("✓ Document 2 (Previous Year) uploaded - ID: " + docId);
+    });
+%}
+
+### Step 6.2: Analyze Document #2
+GET {{BASE_URL}}/api/v1/iep/{{DOC_2_ID}}/analyze-iep
+Authorization: Bearer {{PARENT_TOKEN}}
+Accept: application/x-ndjson
+
+> {%
+    client.test("Document 2 analysis triggered", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.log("✓ AI Analysis started for Document 2");
+    });
+%}
+
+### Step 6.3: Get Extraction and Finalize Document #2
+GET {{BASE_URL}}/api/v1/iep/{{DOC_2_ID}}/extraction
+Authorization: Bearer {{PARENT_TOKEN}}
+
+### Step 6.4: Mark as Reviewed and Finalize
+POST {{BASE_URL}}/api/v1/iep/{{DOC_2_ID}}/corrections
+Authorization: Bearer {{PARENT_TOKEN}}
+Content-Type: application/json
+
+{
+  "corrections": [],
+  "reviewCompleted": true
+}
+
+### Step 6.5: Finalize Document #2
+POST {{BASE_URL}}/api/v1/iep/{{DOC_2_ID}}/finalize
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Document 2 finalized", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.log("✓ Document 2 (Previous Year) finalized");
+    });
+%}
+
+### ===========================================
+### DOCUMENT 3: Autism/Social Goals IEP
+### ===========================================
+
+### Step 7.1: Upload Document #3 - Autism Social Goals
+POST {{BASE_URL}}/api/v1/iep/upload
+Authorization: Bearer {{PARENT_TOKEN}}
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="childId"
+
+{{CHILD_ID}}
+--boundary
+Content-Disposition: form-data; name="file"; filename="iep-sample-3-autism-social-goals.txt"
+Content-Type: text/plain
+
+< ./docs/iep-sample-3-autism-social-goals.txt
+--boundary--
+
+> {%
+    client.test("Document 3 uploaded", function () {
+        client.assert(response.status === 201, "Expected 201");
+        client.global.set("DOC_3_ID", response.body.data.documentId);
+        client.log("✓ Document 3 (Autism Social) uploaded");
+    });
+%}
+
+### ===========================================
+### DOCUMENT 4: Speech/Articulation IEP
+### ===========================================
+
+### Step 8.1: Upload Document #4 - Speech Articulation
+POST {{BASE_URL}}/api/v1/iep/upload
+Authorization: Bearer {{PARENT_TOKEN}}
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="childId"
+
+{{CHILD_ID}}
+--boundary
+Content-Disposition: form-data; name="file"; filename="iep-sample-4-speech-articulation.txt"
+Content-Type: text/plain
+
+< ./docs/iep-sample-4-speech-articulation.txt
+--boundary--
+
+> {%
+    client.test("Document 4 uploaded", function () {
+        client.assert(response.status === 201, "Expected 201");
+        client.global.set("DOC_4_ID", response.body.data.documentId);
+        client.log("✓ Document 4 (Speech) uploaded");
+    });
+%}
+
+### ===========================================
+### DOCUMENT 5: Red Flags Example (Bad IEP)
+### ===========================================
+
+### Step 9.1: Upload Document #5 - Red Flags Example
+POST {{BASE_URL}}/api/v1/iep/upload
+Authorization: Bearer {{PARENT_TOKEN}}
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="childId"
+
+{{CHILD_ID}}
+--boundary
+Content-Disposition: form-data; name="file"; filename="iep-sample-5-red-flags-bad-iep.txt"
+Content-Type: text/plain
+
+< ./docs/iep-sample-5-red-flags-bad-iep.txt
+--boundary--
+
+> {%
+    client.test("Document 5 uploaded", function () {
+        client.assert(response.status === 201, "Expected 201");
+        client.global.set("DOC_5_ID", response.body.data.documentId);
+        client.log("✓ Document 5 (Red Flags) uploaded");
+    });
+%}
+
+### Step 9.2: Analyze Document #5 (Should detect multiple red flags)
+GET {{BASE_URL}}/api/v1/iep/{{DOC_5_ID}}/analyze-iep
+Authorization: Bearer {{PARENT_TOKEN}}
+Accept: application/x-ndjson
+
+> {%
+    client.test("Document 5 analysis triggered", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.log("✓ AI Analysis started for Document 5 (Red Flags)");
+        client.log("  This document should trigger multiple Smart Prompts");
+    });
+%}
+
+### Step 9.3: Get Extraction - Should Show Red Flags
+GET {{BASE_URL}}/api/v1/iep/{{DOC_5_ID}}/extraction
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Document 5 extraction shows red flags", function () {
+        client.assert(response.status === 200, "Expected 200");
+        const data = response.body.data;
+        client.log("✓ Document 5 extraction results:");
+        if (data.extractedData && data.extractedData.redFlags) {
+            const redFlags = data.extractedData.redFlags;
+            client.log("  Red Flags Detected: " + redFlags.length);
+            redFlags.forEach((flag, i) => {
+                client.log("  " + (i+1) + ". [" + flag.severity + "] " + flag.type + ": " + flag.message.substring(0, 80));
+            });
+        }
+    });
+%}
+
+### ===========================================
+### LIST ALL DOCUMENTS
+### ===========================================
+
+### Step 10: List All Documents for Child
+GET {{BASE_URL}}/api/v1/iep?childId={{CHILD_ID}}&limit=20
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("All documents listed", function () {
+        client.assert(response.status === 200, "Expected 200");
+        const docs = response.body.data || [];
+        client.log("✓ Total documents for child: " + docs.length);
+        docs.forEach((doc, i) => {
+            client.log("  " + (i+1) + ". " + doc.originalFileName + " - " + doc.status + "/" + doc.analysisStatus);
+        });
+    });
+%}
+
+### ===========================================
+### PROGRESS TRACKING
+### NOTE: Goal IDs are auto-generated during document finalization
+### Use Step 5.9 above to get actual goal IDs from the database
+### The GOAL_ID variable is automatically saved from finalization response
+### ===========================================
+
+### Step 11: Log Progress Entry for Goal
+POST {{BASE_URL}}/api/v1/progress-entries
+Authorization: Bearer {{PARENT_TOKEN}}
+Content-Type: application/json
+
+{
+  "goalId": "{{GOAL_ID}}",
+  "childId": "{{CHILD_ID}}",
+  "reportedDate": "2025-11-15",
+  "currentLevel": "Alex read 70 words per minute on a 4th grade passage with 88% accuracy",
+  "progressValue": 70,
+  "progressUnit": "words per minute",
+  "notes": "Significant improvement in fluency. Alex is gaining confidence and no longer avoiding reading activities.",
+  "evidence": ["Reading fluency assessment 11/15", "Teacher observation log"],
+  "confidenceLevel": "high",
+  "reportedByRole": "parent",
+  "observationContext": "Home reading practice and teacher assessment"
+}
+
+> {%
+    client.test("Progress entry created", function () {
+        if (response.status === 201) {
+            client.log("✓ Progress entry logged successfully");
+        } else {
+            client.log("⚠ Progress entry failed - may need valid goal ID");
+        }
+    });
+%}
+
+### Step 12: Get Progress Timeline for Child
+GET {{BASE_URL}}/api/v1/progress-entries/child/{{CHILD_ID}}?startDate=2020-09-01&endDate=2027-12-31
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Progress timeline retrieved", function () {
+        if (response.status === 200) {
+            const entries = response.body.data || [];
+            client.log("✓ Progress entries: " + entries.length);
+        }
+    });
+%}
+
+### ===========================================
+### SERVICE DELIVERY TRACKING
+### NOTE: Service IDs are auto-generated during document finalization
+### Use Step 5.10 above to get actual service IDs from the database
+### The SERVICE_ID variable is automatically saved from finalization response
+### ===========================================
+
+### Step 13: Log Service Delivery
+POST {{BASE_URL}}/api/v1/services/logs
+Authorization: Bearer {{PARENT_TOKEN}}
+Content-Type: application/json
+
+{
+  "serviceId": "{{SERVICE_ID}}",
+  "childId": "{{CHILD_ID}}",
+  "sessionDate": "2025-11-15",
+  "minutesDelivered": 45,
+  "provider": "Ms. Sarah Martinez",
+  "location": "resource_room",
+  "status": "completed",
+  "notes": "Focused on phonemic awareness and decoding strategies. Alex showed good engagement.",
+  "goalsAddressed": ["{{GOAL_ID}}"]
+}
+
+> {%
+    client.test("Service log created", function () {
+        if (response.status === 201) {
+            client.log("✓ Service session logged");
+        } else {
+            client.log("⚠ Service log failed - may need valid service ID");
+        }
+    });
+%}
+
+### Step 14: Get Service Compliance
+GET {{BASE_URL}}/api/v1/services/{{SERVICE_ID}}/compliance
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Service compliance retrieved", function () {
+        if (response.status === 200) {
+            const data = response.body.data;
+            client.log("✓ Service Compliance:");
+            client.log("  Planned Sessions: " + data.totalSessionsPlanned);
+            client.log("  Delivered Sessions: " + data.totalSessionsDelivered);
+            client.log("  Delivery Percentage: " + data.deliveryPercentage + "%");
+        }
+    });
+%}
+
+### ===========================================
+### DASHBOARD & ANALYTICS
+### ===========================================
+
+### Step 15: Get Dashboard Overview
+GET {{BASE_URL}}/api/v1/dashboard/overview?childId={{CHILD_ID}}
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Dashboard overview retrieved", function () {
+        client.assert(response.status === 200, "Expected 200");
+        const data = response.body.data;
+        client.log("✓ Dashboard Overview:");
+        
+        if (data.child) {
+            client.log("  Child: " + data.child.name);
+        }
+        
+        if (data.complianceHealth) {
+            client.log("  Service Delivery: " + data.complianceHealth.serviceDeliveryPercentage + "%");
+            client.log("  Missed Sessions: " + data.complianceHealth.totalMissedSessions);
+            client.log("  Review Status: " + data.complianceHealth.reviewStatus);
+        }
+        
+        if (data.goalMastery) {
+            client.log("  Mastered Goals: " + data.goalMastery.masteredGoals);
+            client.log("  Progressing Goals: " + data.goalMastery.progressingGoals);
+            client.log("  Emerging Goals: " + data.goalMastery.emergingGoals);
+            client.log("  Average Progress: " + data.goalMastery.averageProgress + "%");
+        }
+        
+        if (data.actionItems && data.actionItems.length > 0) {
+            client.log("  Action Items: " + data.actionItems.length);
+            data.actionItems.forEach((item, i) => {
+                client.log("    " + (i+1) + ". [" + item.priority + "] " + item.title);
+            });
+        }
+    });
+%}
+
+### Step 16: Refresh Dashboard Views (Manual)
+POST {{BASE_URL}}/api/v1/dashboard/refresh
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Dashboard views refreshed", function () {
+        if (response.status === 200) {
+            client.log("✓ Materialized views refreshed");
+        }
+    });
+%}
+
+### ===========================================
+### DOWNLOAD ORIGINAL DOCUMENT
+### ===========================================
+
+### Step 17: Download Original Document #1
+GET {{BASE_URL}}/api/v1/iep/{{DOC_1_ID}}/download
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Document download initiated", function () {
+        if (response.status === 200 || response.status === 302) {
+            client.log("✓ Document download URL generated");
+        }
+    });
+%}
+
+### ===========================================
+### CLEANUP (Optional)
+### ===========================================
+
+### Step 18: Soft Delete Document (Optional)
+DELETE {{BASE_URL}}/api/v1/iep/{{DOC_3_ID}}
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("Document soft deleted", function () {
+        if (response.status === 200 || response.status === 204) {
+            client.log("✓ Document 3 soft deleted");
+        }
+    });
+%}
+
+### ===========================================
+### END OF WORKFLOW
+### ===========================================
+### 
+### Summary of Operations:
+### 1. ✓ Parent authentication
+### 2. ✓ Child profile creation
+### 3. ✓ Upload 5 IEP documents
+### 4. ✓ AI extraction with SSE streaming
+### 5. ✓ Manual correction workflow
+### 6. ✓ Document finalization (JSONB → normalized tables)
+### 7. ✓ Progress entry logging
+### 8. ✓ Service delivery tracking
+### 9. ✓ Dashboard analytics
+### 10. ✓ Document download
+###
+### Red Flags Demonstrated:
+### - Document 5 shows vague goals, missing data, service reductions
+### - AI should detect and create Smart Prompts
+### - Parent can review compliance health and goal mastery metrics
+###
+### ===========================================

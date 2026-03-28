@@ -1,0 +1,46 @@
+### Advocate (active): login
+POST {{BASE_URL}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{ADVOCATE_ACTIVE_EMAIL}}",
+  "password": "{{DEFAULT_PASSWORD}}"
+}
+
+> {%
+    client.test("Advocate login: 200 + token exists", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.global.set("ADVOCATE_TOKEN", response.body.token);
+    });
+%}
+
+### Advocate: /me should be ADVOCATE
+GET {{BASE_URL}}/api/v1/auth/me
+Authorization: Bearer {{ADVOCATE_TOKEN}}
+
+> {%
+    client.test("/me returns ADVOCATE role", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.assert(response.body.user.role === "ADVOCATE", "Role mismatch");
+    });
+%}
+
+### Advocate: can read config (public-ish endpoint)
+GET {{BASE_URL}}/api/v1/config?category=disabilities
+Authorization: Bearer {{ADVOCATE_TOKEN}}
+
+> {%
+    client.test("Config disabilities: 200", function () {
+        client.assert(response.status === 200, "Expected 200");
+    });
+%}
+
+### Advocate: should NOT access admin users list (expect 403)
+GET {{BASE_URL}}/api/v1/admin/users
+Authorization: Bearer {{ADVOCATE_TOKEN}}
+
+> {%
+    client.test("Advocate cannot call /admin/users (403)", function () {
+        client.assert(response.status === 403, "Expected 403");
+    });
+%}

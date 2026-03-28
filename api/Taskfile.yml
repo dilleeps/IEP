@@ -1,0 +1,83 @@
+version: "3"
+
+dotenv: ["../../.env"]
+
+tasks:
+  dev:
+    desc: Start API using dev task
+    deps:
+      - task: docs
+    cmd: npm run dev
+    
+  docs:
+    desc: Open API documentation in browser
+    cmd: npm run docs
+  
+  docker-run:
+    desc: Run API in Docker container
+    cmds:
+      - docker compose up  --build
+  
+  migrate:up:
+    desc: Run database migrations
+    cmd: npm run db:migrate
+
+  migrate:down:
+    desc: Rollback last migration
+    cmd: npm run db:migrate:down
+
+  seed:up:
+    desc: Run database seeds
+    cmd: npm run db:seed
+
+  seed:down:
+    desc: Rollback last seed
+    cmd: npm run db:seed:down
+
+  setup-db:
+    desc: Setup database (migrate and seed)
+    cmds:
+      - task: migrate:up
+      - task: seed:up
+      - echo "✅ Database ready!"
+  
+  upload:dev:config:
+    desc: Upload encrypted config files to GCS (dev environment)
+    cmd: node_modules/.bin/tsx src/cmd/configuploader.ts
+    dotenv: ["../../.env.dev"]
+  
+  upload:prod:config:
+    desc: Upload encrypted config files to GCS (production environment)
+    cmd: node_modules/.bin/tsx src/cmd/configuploader.ts
+    dotenv: ["../../.env.production"]
+  
+  db:reset:
+    desc: Drop all tables and reset database completely
+    cmds:
+      - psql "host=${POSTGRES_HOST} port=${POSTGRES_PORT} dbname=${POSTGRES_DB} user=${POSTGRES_USER}" -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public; GRANT ALL ON SCHEMA public TO ${POSTGRES_USER}; GRANT ALL ON SCHEMA public TO public;"
+      - echo "✅ All tables dropped!"
+      - task: setup-db
+    env:
+      PGPASSWORD: "{{.POSTGRES_PASSWORD}}"
+  
+  db:shell:
+    desc: Open PostgreSQL shell
+    cmd: psql "host=${POSTGRES_HOST} port=${POSTGRES_PORT} dbname=${POSTGRES_DB} user=${POSTGRES_USER}"
+    env:
+      PGPASSWORD: "{{.POSTGRES_PASSWORD}}"
+  
+  db:check-table:
+    desc: Check communication_logs table schema
+    cmd: psql "host=${POSTGRES_HOST} port=${POSTGRES_PORT} dbname=${POSTGRES_DB} user=${POSTGRES_USER}" -c "\d communication_logs"
+    env:
+      PGPASSWORD: "{{.POSTGRES_PASSWORD}}"
+  
+  test:http:
+    desc: Run all HTTP request files
+    cmds:
+      - mkdir -p logs
+      # - ijhttp --log-level=VERBOSE --env-file=requests/http-client.env.json --env=local requests/01-parent.http > logs/01-parent.log 2>&1 || true
+      # - ijhttp --log-level=VERBOSE --env-file=requests/http-client.env.json --env=local requests/02-advocate.http > logs/02-advocate.log 2>&1 || true
+      # - ijhttp --log-level=VERBOSE --env-file=requests/http-client.env.json --env=local requests/03-teacher.http > logs/03-teacher.log 2>&1 || true
+      - ijhttp --log-level=VERBOSE --env-file=requests/http-client.env.json --env=local requests/04-admin.http > logs/04-admin.log 2>&1 || true
+      - echo "✅ HTTP tests completed! Check logs/ directory for details"

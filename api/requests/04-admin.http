@@ -1,0 +1,49 @@
+### Admin: login
+POST {{BASE_URL}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{ADMIN_EMAIL}}",
+  "password": "{{DEFAULT_PASSWORD}}"
+}
+
+> {%
+    client.test("Admin login: 200 + token exists", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.global.set("ADMIN_TOKEN", response.body.token);
+    });
+%}
+
+### Admin: /me should be ADMIN
+GET {{BASE_URL}}/api/v1/auth/me
+Authorization: Bearer {{ADMIN_TOKEN}}
+
+> {%
+    client.test("/me returns ADMIN role", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.assert(response.body.user.role === "ADMIN", "Role mismatch");
+    });
+%}
+
+### Admin: list all users
+GET {{BASE_URL}}/api/v1/admin/users
+Authorization: Bearer {{ADMIN_TOKEN}}
+
+> {%
+    client.test("Admin can list users: 200 + array", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.assert(response.body.users && Array.isArray(response.body.users), "Expected an array of users");
+        client.assert(response.body.total >= 0, "Expected total count");
+    });
+%}
+
+### Admin: leads stats
+GET {{BASE_URL}}/api/v1/leads/stats
+Authorization: Bearer {{ADMIN_TOKEN}}
+
+> {%
+    client.test("Admin can read leads stats: 200 + totalLeads exists", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.assert(typeof response.body.totalLeads === "number", "totalLeads missing or not a number");
+    });
+%}

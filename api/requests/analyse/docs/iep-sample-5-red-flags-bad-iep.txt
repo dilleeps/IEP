@@ -1,0 +1,177 @@
+INDIVIDUALIZED EDUCATION PROGRAM (IEP) - RED FLAGS EXAMPLE
+
+Student Information:
+Name: Jordan Taylor
+Date of Birth: May 12, 2015
+Age: 10 years
+Grade: 5th Grade
+School: Washington Elementary
+District: Central Unified School District
+
+IEP Meeting Date: November 1, 2025
+IEP Start Date: November 8, 2025
+IEP End Date: November 7, 2026
+Annual Review Date: November 1, 2026
+
+Primary Disability: Specific Learning Disability (Math)
+
+PRESENT LEVELS OF ACADEMIC ACHIEVEMENT
+
+Mathematics:
+Jordan is making progress in math. He works hard and is improving his skills.
+
+Reading:
+Jordan reads pretty well. He is at grade level and doing okay.
+
+ANNUAL GOALS
+
+Goal 1: Math Skills
+Jordan will improve his math skills by the end of the year.
+
+Goal 2: Math Facts
+Jordan will get better at math facts.
+
+SPECIAL EDUCATION SERVICES
+
+Math Support:
+- Provider: Resource Teacher
+- Frequency: As needed
+- Duration: Varies
+
+Note: Due to budget constraints and staffing shortages, we are reducing Jordan's math support services from 60 minutes per week to 30 minutes per week. The team believes this will be sufficient as Jordan is making progress.
+
+ACCOMMODATIONS
+- Extra time when needed
+- Help as needed
+- Calculator use sometimes
+
+LEAST RESTRICTIVE ENVIRONMENT
+
+Jordan will receive services in the resource room as needed. Exact percentage of time not specified.
+
+PROGRESS REPORTING
+
+Parents will be notified of progress periodically.
+
+PARENT CONCERNS
+
+Parents expressed concerns about:
+1. Jordan's continued struggles with multi-digit multiplication and division
+2. Frequent tears and frustration during math homework
+3. Jordan saying he feels "stupid" compared to classmates
+4. Lack of specific information about what skills are being targeted
+5. Request for more frequent progress updates
+6. Request for specific homework modifications
+7. Concern that 30 minutes per week is not enough support
+
+The team appreciates the parents' input.
+
+PRIOR WRITTEN NOTICE
+
+Parents requested increased services to 90 minutes per week based on lack of progress over the past year. This request was denied as the team believes current services are appropriate.
+
+Parents were not provided with evaluation data or progress monitoring data during the meeting. When parents requested this information, they were told it would be provided "soon."
+
+Parents requested Prior Written Notice (PWN) documenting the denial of increased services. School did not provide PWN at the meeting and stated it would be "mailed later."
+
+ADDITIONAL NOTES
+
+Meeting was scheduled during parents' work hours despite request for after-school meeting time. Only 30 minutes was allocated for the meeting. When parents tried to ask questions about progress data and goal specifics, they were told there wasn't time and the meeting needed to conclude.
+
+Parents requested Independent Educational Evaluation (IEE) due to concerns about progress monitoring and current service levels. Team stated they would "consider" this request.
+
+IEP TEAM MEMBERS
+- Parent: Alex Taylor (Parent - arrived late due to work conflict)
+- Parent: Jamie Taylor (Parent - unable to attend due to work)
+- General Education Teacher: Name not provided
+- Special Education Teacher: Ms. Roberts (case manager)
+- District Representative: Name and title not clearly identified
+
+RED FLAGS PRESENT IN THIS IEP:
+
+1. VAGUE GOALS - Goals lack:
+   - Baseline data
+   - Measurable criteria
+   - Specific measurement methods
+   - Time-bound criteria for success
+   
+2. GENERIC PRESENT LEVELS
+   - "Making progress" without data
+   - "Pretty well" and "doing okay" are not measurable
+   - No specific assessment data provided
+   
+3. SERVICE REDUCTION WITHOUT JUSTIFICATION
+   - Services reduced from 60 to 30 minutes (50% reduction)
+   - No evaluation data supporting reduction
+   - No progress data showing goals are being met
+   - Parents not provided with data supporting this decision
+   
+4. MISSING PROCEDURAL SAFEGUARDS
+   - Prior Written Notice not provided at meeting
+   - Parents' request for increased services denied without data
+   - PWN for denial not provided
+   
+5. PARENT CONCERNS IGNORED
+   - Multiple specific parent concerns documented but not addressed in IEP
+   - No modifications or supports added despite parent reports of frustration and emotional distress
+   - No homework modifications despite parent request
+   
+6. VAGUE SERVICE DELIVERY
+   - "As needed" is not a measurable frequency
+   - "Varies" is not a specific duration
+   - LRE percentage not calculated or specified
+   
+7. INADEQUATE PROGRESS REPORTING
+   - "Periodically" is not a specific schedule
+   - Does not meet IDEA requirement for progress reporting at least as often as general education students
+   
+8. PROCEDURAL VIOLATIONS
+   - Meeting not scheduled at mutually convenient time
+   - Insufficient time allocated (30 minutes)
+   - Data not provided to parents
+   - IEE request not formally addressed
+   - District representative not clearly identified
+   
+9. LRE NOT CLEARLY DOCUMENTED
+   - No percentage of time in general education vs. special education
+   - No justification for removal from general education
+   - No consideration of supplementary aids and services in general education
+   
+10. LACK OF DATA-DRIVEN DECISION MAKING
+    - No baseline data for goals
+    - No progress monitoring data shared
+    - Service reduction not based on data
+    - No assessment results provided
+
+WHAT SHOULD HAVE HAPPENED:
+
+Goals should include:
+- Current performance level with specific data (e.g., "Jordan solves 2-digit by 1-digit multiplication problems with 35% accuracy")
+- Specific, measurable target (e.g., "85% accuracy")
+- Clear measurement method (e.g., "weekly curriculum-based assessments of 20 problems")
+- Criteria for success (e.g., "85% accuracy on 3 consecutive weekly assessments")
+- Progress reporting schedule (e.g., "bi-weekly")
+
+Services should specify:
+- Exact minutes per session and sessions per week
+- Total weekly minutes calculated
+- Provider name and credentials
+- Specific location
+- Start and end dates
+
+Parents should have received:
+- Prior Written Notice BEFORE implementation of any changes
+- All evaluation and progress data
+- Written response to IEE request within specific timeline
+- Meeting scheduled at mutually agreeable time
+- Adequate time for meaningful participation
+- Clear explanation of LRE decision with data
+
+This IEP would likely not meet IDEA compliance requirements and could be challenged through:
+- Request for IEE (formally, in writing)
+- Written request for Prior Written Notice
+- Written request for all evaluation and progress monitoring data
+- Request to reconvene IEP meeting with adequate time
+- Filing of state complaint for procedural violations
+- Request for mediation
+- Due process if necessary

@@ -1,0 +1,63 @@
+### Login as parent for legal support chat
+POST {{BASE_URL}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{PARENT_EMAIL}}",
+  "password": "{{DEFAULT_PASSWORD}}"
+}
+
+> {%
+    client.test("Login returns token", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.assert(!!response.body.token, "token missing");
+        client.global.set("LEGAL_TOKEN", response.body.token);
+    });
+%}
+
+### Create a new legal support session
+POST {{BASE_URL}}/api/v1/agent/legal-support/sessions
+Authorization: Bearer {{LEGAL_TOKEN}}
+
+> {%
+    client.test("Create session returns id", function () {
+        client.assert(response.status === 201, "Expected 201");
+        client.assert(!!response.body.sessionId, "sessionId missing");
+        client.assert(Array.isArray(response.body.messages), "messages should be array");
+        client.assert(response.body.messages.length === 0, "messages should start empty");
+        client.global.set("LEGAL_SESSION_ID", response.body.sessionId);
+    });
+%}
+
+### Send a legal support question
+POST {{BASE_URL}}/api/v1/agent/legal-support/sessions/{{LEGAL_SESSION_ID}}/messages
+Authorization: Bearer {{LEGAL_TOKEN}}
+Content-Type: application/json
+
+{
+  "message": "What should I mention if the school delays services? Please remind that this is not legal advice."
+}
+
+> {%
+    client.test("Send message returns reply and messages array", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.assert(typeof response.body.reply === "string" && response.body.reply.length > 0, "reply missing");
+        client.assert(Array.isArray(response.body.messages), "messages should be array");
+        const messages = response.body.messages;
+        client.assert(messages.length >= 2, "expected user + assistant messages");
+        const last = messages[messages.length - 1];
+        client.assert(last.role === "assistant", "last message should be assistant");
+    });
+%}
+
+### Fetch the session to confirm history persists
+GET {{BASE_URL}}/api/v1/agent/legal-support/sessions/{{LEGAL_SESSION_ID}}
+Authorization: Bearer {{LEGAL_TOKEN}}
+
+> {%
+    client.test("Session fetch returns existing messages", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.assert(response.body.sessionId === client.global.get("LEGAL_SESSION_ID"), "sessionId mismatch");
+        client.assert(Array.isArray(response.body.messages) && response.body.messages.length >= 2, "messages missing");
+    });
+%}

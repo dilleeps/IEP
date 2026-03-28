@@ -1,0 +1,61 @@
+### Parent: login
+POST {{BASE_URL}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{PARENT_EMAIL}}",
+  "password": "{{DEFAULT_PASSWORD}}"
+}
+
+> {%
+    client.test("Parent login: 200 + token exists", function () {
+        client.assert(response.status === 200, "Expected 200");
+        const body = response.body;
+        client.assert(!!body.token, "accessToken missing");
+        client.global.set("PARENT_TOKEN", body.token);
+    });
+%}
+
+### Parent: /me should be PARENT
+GET {{BASE_URL}}/api/v1/auth/me
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("/me returns PARENT role", function () {
+        client.assert(response.status === 200, "Expected 200");
+        client.assert(response.body.user.role === "PARENT", "Role mismatch");
+    });
+%}
+
+### Parent: create a child
+POST {{BASE_URL}}/api/v1/children
+Authorization: Bearer {{PARENT_TOKEN}}
+Content-Type: application/json
+
+{
+  "name": "{{PARENT_CHILD_1_NAME}}",
+  "dateOfBirth": "2016-01-15",
+  "grade": "{{PARENT_CHILD_1_GRADE}}",
+  "disabilities": ["ADHD", "Specific Learning Disability"]
+}
+
+> {%
+    client.test("Create child: 201 + id exists", function () {
+        client.assert(response.status === 201, "Expected 201");
+        client.assert(!!response.body.id, "Child id missing");
+        client.global.set("PARENT_CHILD_ID", response.body.id);
+    });
+%}
+
+### Parent: list children; should include the created child
+GET {{BASE_URL}}/api/v1/children?limit=50&offset=0
+Authorization: Bearer {{PARENT_TOKEN}}
+
+> {%
+    client.test("List children: 200 + contains created child id", function () {
+        client.assert(response.status === 200, "Expected 200");
+        const data = response.body.children || [];
+        const id = client.global.get("PARENT_CHILD_ID");
+        client.assert(data.some(c => c.id === id), "Created child not found in list");
+    });
+%}
