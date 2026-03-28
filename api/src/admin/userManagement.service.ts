@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { Op, QueryTypes } from 'sequelize';
 import { User } from '../auth/user.model.js';
 import { UserRegistrationRequest } from './userRegistrationRequest.model.js';
-import { getFirebaseAuth } from '../../config/firebase.js';
+import { getFirebaseAuth } from '../config/firebase.js';
 import {
   CreateUserDto,
   UpdateUserDto,
@@ -13,8 +13,8 @@ import {
   RegistrationRequestResponse,
   UserStatsResponse,
 } from './userManagement.types.js';
-import { AppError } from '../../shared/errors/appError.js';
-import { logger } from '../../config/logger.js';
+import { AppError } from '../shared/errors/appError.js';
+import { logger } from '../config/logger.js';
 
 const SALT_ROUNDS = 10;
 

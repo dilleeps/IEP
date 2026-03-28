@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { LeadService } from './lead.service.js';
-import { logger } from '../../config/logger.js';
+import { logger } from '../config/logger.js';
 
 export class LeadController {
   private leadService: LeadService;

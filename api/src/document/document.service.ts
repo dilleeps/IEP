@@ -2,15 +2,15 @@ import { IepDocument } from './document.model.js';
 import { IepAnalysis } from './analysis.model.js';
 import { DocumentRepository, AnalysisRepository } from './document.repo.js';
 import { CreateDocumentDto, UpdateDocumentDto } from './document.types.js';
-import { AppError } from '../../shared/errors/appError.js';
-import { getAiService, getStorageService, getVectorDbService } from '../../shared/services.js';
+import { AppError } from '../shared/errors/appError.js';
+import { getAiService, getStorageService, getVectorDbService } from '../shared/services.js';
 import { Readable } from 'stream';
 import { Buffer } from 'buffer';
 import crypto from 'crypto';
 import { GoalRepository } from '../goal/goal.repo.js';
 import { ChildProfile } from '../child/child.model.js';
-import { logger } from '../../config/logger.js';
-import { getSequelize } from '../../config/sequelize.js';
+import { logger } from '../config/logger.js';
+import { getSequelize } from '../config/sequelize.js';
 import { QueryTypes } from 'sequelize';
 
 export class DocumentService {

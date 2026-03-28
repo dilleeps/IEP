@@ -1,6 +1,6 @@
 // src/modules/admin/users/admin-users.controller.ts
 import { Response, NextFunction } from 'express';
-import { AuthRequest } from '../../../middleware/authenticate.js';
+import { AuthRequest } from '../../middleware/authenticate.js';
 import { AdminUsersService } from './admin-users.service.js';
 import {
   createUserSchema,

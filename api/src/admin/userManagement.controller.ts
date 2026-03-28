@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { userManagementService } from './userManagement.service.js';
 import { z } from 'zod';
 

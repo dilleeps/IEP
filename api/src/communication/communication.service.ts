@@ -2,8 +2,8 @@
 import { CommunicationLog } from './communication.model.js';
 import { CommunicationRepository } from './communication.repo.js';
 import { CreateCommunicationLogDto, UpdateCommunicationLogDto } from './communication.types.js';
-import { AppError } from '../../shared/errors/appError.js';
-import { notification } from '../../shared/services.js';
+import { AppError } from '../shared/errors/appError.js';
+import { notification } from '../shared/services.js';
 
 export class CommunicationService {
   private repo: CommunicationRepository;

@@ -2,7 +2,7 @@
 import { Router, Request, Response } from 'express';
 import Stripe from 'stripe';
 import { User } from '../auth/user.model.js';
-import { logger } from '../../config/logger.js';
+import { logger } from '../config/logger.js';
 
 const router = Router();
 

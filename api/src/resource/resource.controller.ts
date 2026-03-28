@@ -1,6 +1,6 @@
 // src/modules/resource/resource.controller.ts
 import { Request, Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { ResourceService } from './resource.service.js';
 import { ResourceResponse } from './resource.types.js';
 

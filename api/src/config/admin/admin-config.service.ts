@@ -6,7 +6,7 @@ import {
   AdminConfigResponse,
   AdminConfigListResponse,
 } from './admin-config.types.js';
-import { AppError } from '../../../shared/errors/appError.js';
+import { AppError } from '../../shared/errors/appError.js';
 import { v4 as uuidv4 } from 'uuid';
 
 export class AdminConfigService {

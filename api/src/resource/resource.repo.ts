@@ -1,6 +1,6 @@
 // src/modules/resource/resource.repo.ts
 import { Resource } from './resource.model.js';
-import { BaseRepo } from '../../shared/db/base.repo.js';
+import { BaseRepo } from '../shared/db/base.repo.js';
 import { Op } from 'sequelize';
 
 export interface ResourceFilters {

@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { authenticate } from '../../../middleware/authenticate.js';
-import { requireRole } from '../../../middleware/authorize.js';
-import { validate } from '../../../middleware/validate.js';
+import { authenticate } from '../../middleware/authenticate.js';
+import { requireRole } from '../../middleware/authorize.js';
+import { validate } from '../../middleware/validate.js';
 import { LegalSupportController } from './legalSupport.controller.js';
 import { getSessionSchema, sendMessageSchema } from './legalSupport.validation.js';
 

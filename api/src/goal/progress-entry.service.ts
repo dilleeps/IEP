@@ -1,9 +1,9 @@
 import { ProgressEntry } from './progress-entries.model.js';
 import { GoalProgress } from './goal.model.js';
 import { GoalRepository } from './goal.repo.js';
-import { AppError } from '../../shared/errors/appError.js';
-import { logger } from '../../config/logger.js';
-import { getSequelize } from '../../config/sequelize.js';
+import { AppError } from '../shared/errors/appError.js';
+import { logger } from '../config/logger.js';
+import { getSequelize } from '../config/sequelize.js';
 
 export interface CreateProgressEntryInput {
   goalId: string;

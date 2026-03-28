@@ -1,6 +1,6 @@
 // src/modules/ai/conversation/conversation.controller.ts
 import { Response, NextFunction } from 'express';
-import { AuthRequest } from '../../../middleware/authenticate.js';
+import { AuthRequest } from '../../middleware/authenticate.js';
 import { ConversationService } from './conversation.service.js';
 import {
   createConversationSchema,

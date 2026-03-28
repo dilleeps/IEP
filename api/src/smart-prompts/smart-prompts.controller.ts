@@ -1,6 +1,6 @@
 // src/modules/smart-prompts/smart-prompts.controller.ts
 import { Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { SmartPromptService } from './smart-prompts.service.js';
 import { listPromptsSchema, acknowledgePromptSchema } from './smart-prompts.validation.js';
 

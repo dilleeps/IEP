@@ -1,6 +1,6 @@
 // src/modules/behavior/behavior.controller.ts
 import { Request, Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { BehaviorService } from './behavior.service.js';
 import { BehaviorLogResponse, BehaviorPatternResponse } from './behavior.types.js';
 

@@ -1,6 +1,6 @@
 // src/modules/advocacy/advocacy.controller.ts
 import { Request, Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { AdvocacyService } from './advocacy.service.js';
 import { AdvocacyInsightResponse, SimilarCaseResponse, AdvocacyStatsResponse } from './advocacy.types.js';
 

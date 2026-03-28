@@ -1,7 +1,7 @@
 // src/modules/goal/goal.repo.ts
 import { GoalProgress } from './goal.model.js';
 import { IepDocument } from '../document/document.model.js';
-import { BaseRepo } from '../../shared/db/base.repo.js';
+import { BaseRepo } from '../shared/db/base.repo.js';
 
 export interface GoalFilters {
   childId?: string;

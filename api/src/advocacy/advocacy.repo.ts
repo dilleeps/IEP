@@ -1,6 +1,6 @@
 // src/modules/advocacy/advocacy.repo.ts
 import { AdvocacyInsight } from './advocacy.model.js';
-import { BaseRepo } from '../../shared/db/base.repo.js';
+import { BaseRepo } from '../shared/db/base.repo.js';
 import { Op } from 'sequelize';
 
 export interface AdvocacyFilters {

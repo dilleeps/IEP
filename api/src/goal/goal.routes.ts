@@ -1,12 +1,12 @@
 // src/modules/goal/goal.routes.ts
 import { Router } from 'express';
 import { GoalController } from './goal.controller.js';
-import { authenticate } from '../../middleware/authenticate.js';
-import { requireRole } from '../../middleware/authorize.js';
-import { STANDARD_PROTECTED_ROLES } from '../../middleware/roles.js';
-import { validate } from '../../middleware/validate.js';
-import { requireResourceOwnership } from '../../middleware/resourceOwnership.js';
-import { requireChildAccess } from '../../middleware/childAccess.js';
+import { authenticate } from '../middleware/authenticate.js';
+import { requireRole } from '../middleware/authorize.js';
+import { STANDARD_PROTECTED_ROLES } from '../middleware/roles.js';
+import { validate } from '../middleware/validate.js';
+import { requireResourceOwnership } from '../middleware/resourceOwnership.js';
+import { requireChildAccess } from '../middleware/childAccess.js';
 import {
   createGoalSchema,
   updateGoalSchema,

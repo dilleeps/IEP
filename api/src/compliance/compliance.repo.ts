@@ -1,6 +1,6 @@
 // src/modules/compliance/compliance.repo.ts
 import { ComplianceLog } from './compliance.model.js';
-import { BaseRepo } from '../../shared/db/base.repo.js';
+import { BaseRepo } from '../shared/db/base.repo.js';
 
 export interface ComplianceFilters {
   childId?: string;

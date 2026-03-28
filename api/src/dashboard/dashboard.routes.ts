@@ -1,7 +1,7 @@
 // src/modules/dashboard/dashboard.routes.ts
 import { Router } from 'express';
 import { DashboardController } from './dashboard.controller.js';
-import { authenticate } from '../../middleware/authenticate.js';
+import { authenticate } from '../middleware/authenticate.js';
 
 const router = Router();
 const controller = new DashboardController();

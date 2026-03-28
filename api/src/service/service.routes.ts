@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { Response, NextFunction } from 'express';
-import { authenticate } from '../../middleware/authenticate.js';
-import { type AuthRequest } from '../../middleware/authenticate.js';
-import { requireRole } from '../../middleware/authorize.js';
-import { STANDARD_PROTECTED_ROLES } from '../../middleware/roles.js';
-import { requireChildAccess } from '../../middleware/childAccess.js';
+import { authenticate } from '../middleware/authenticate.js';
+import { type AuthRequest } from '../middleware/authenticate.js';
+import { requireRole } from '../middleware/authorize.js';
+import { STANDARD_PROTECTED_ROLES } from '../middleware/roles.js';
+import { requireChildAccess } from '../middleware/childAccess.js';
 import { ServiceLogService } from './service-log.service.js';
-import { AppError } from '../../shared/errors/appError.js';
+import { AppError } from '../shared/errors/appError.js';
 
 const router = Router();
 const serviceLogService = new ServiceLogService();

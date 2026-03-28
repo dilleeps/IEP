@@ -1,6 +1,6 @@
 import { VectorEmbedding } from './vectorEmbedding.model.js';
-import { getSequelize } from '../../config/sequelize.js';
-import { appenv } from '../../config/appenv.js';
+import { getSequelize } from '../config/sequelize.js';
+import { appenv } from '../config/appenv.js';
 
 interface ChatMessage {
   role: 'user' | 'assistant' | 'system';

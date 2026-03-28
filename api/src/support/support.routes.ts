@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { sendEmail } from '../../shared/notification/email.js';
+import { sendEmail } from '../shared/notification/email.js';
 
 export const supportRouter = Router();
 

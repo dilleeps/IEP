@@ -1,6 +1,6 @@
 // src/modules/goal/goal.controller.ts
 import { Request, Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { GoalService } from './goal.service.js';
 import { GoalResponse, GoalSummaryResponse } from './goal.types.js';
 

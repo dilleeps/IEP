@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { AuthController } from './auth.controller.js';
-import { validateBody } from '../../middleware/validate.js';
-import { authenticate } from '../../middleware/authenticate.js';
-import { authRateLimit } from '../../middleware/rateLimit.js';
+import { validateBody } from '../middleware/validate.js';
+import { authenticate } from '../middleware/authenticate.js';
+import { authRateLimit } from '../middleware/rateLimit.js';
 import { registerSchema, registerParentSchema, registerAdvocateSchema, registerTeacherSchema, loginSchema, refreshTokenSchema, changePasswordSchema, exchangeFirebaseTokenSchema } from './auth.validation.js';
 
 export const authRouter = Router();

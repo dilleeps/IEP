@@ -1,6 +1,6 @@
 // src/modules/config/admin/admin-config.repo.ts
 import { SystemConfiguration } from '../config.model.js';
-import { BaseRepo } from '../../../shared/db/base.repo.js';
+import { BaseRepo } from '../../shared/db/base.repo.js';
 import { Op } from 'sequelize';
 
 interface ListAdminConfigFilters {

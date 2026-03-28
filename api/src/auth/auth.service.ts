@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { User } from './user.model.js';
 import { UserRegistrationRequest } from '../admin/userRegistrationRequest.model.js';
-import { AppError } from '../../shared/errors/appError.js';
+import { AppError } from '../shared/errors/appError.js';
 import {
   AuthResponse,
   RegisterDto,
@@ -12,9 +12,9 @@ import {
   ExchangeTokenResponse,
 } from './auth.types.js';
 import { ChildProfile } from '../child/child.model.js';
-import { appenv } from '../../config/appenv.js';
-import { getFirebaseAuth } from '../../config/firebase.js';
-import { logger } from '../../config/logger.js';
+import { appenv } from '../config/appenv.js';
+import { getFirebaseAuth } from '../config/firebase.js';
+import { logger } from '../config/logger.js';
 
 /**
  * Decode a Firebase ID token without cryptographic verification.

@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { DocumentService } from './document.service.js';
 import { ExtractionService } from './extraction.service.js';
 import { CorrectionService } from './correction.service.js';
 import { NormalizationService } from './normalization.service.js';
 import { DocumentResponse, AnalysisResponse } from './document.types.js';
-import { appenv } from '../../config/appenv.js';
-import { AppError } from '../../shared/errors/appError.js';
-import { createNdjsonStream } from '../../shared/streaming/ndjson-stream.js';
+import { appenv } from '../config/appenv.js';
+import { AppError } from '../shared/errors/appError.js';
+import { createNdjsonStream } from '../shared/streaming/ndjson-stream.js';
 import multer from 'multer';
 
 // Configure multer for memory storage (no local files)

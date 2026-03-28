@@ -1,11 +1,11 @@
 // src/modules/advocacy/advocacy.routes.ts
 import { Router } from 'express';
 import { AdvocacyController } from './advocacy.controller.js';
-import { authenticate } from '../../middleware/authenticate.js';
-import { requireRole } from '../../middleware/authorize.js';
-import { STANDARD_PROTECTED_ROLES } from '../../middleware/roles.js';
-import { validate } from '../../middleware/validate.js';
-import { requireChildAccess } from '../../middleware/childAccess.js';
+import { authenticate } from '../middleware/authenticate.js';
+import { requireRole } from '../middleware/authorize.js';
+import { STANDARD_PROTECTED_ROLES } from '../middleware/roles.js';
+import { validate } from '../middleware/validate.js';
+import { requireChildAccess } from '../middleware/childAccess.js';
 import {
   createAdvocacyInsightSchema,
   updateAdvocacyInsightSchema,

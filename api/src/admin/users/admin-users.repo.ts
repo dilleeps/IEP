@@ -1,6 +1,6 @@
 // src/modules/admin/users/admin-users.repo.ts
 import { User } from '../../auth/user.model.js';
-import { BaseRepo } from '../../../shared/db/base.repo.js';
+import { BaseRepo } from '../../shared/db/base.repo.js';
 import { Op } from 'sequelize';
 
 interface ListUsersFilters {

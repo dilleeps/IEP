@@ -1,10 +1,10 @@
 import { Response } from 'express';
 import { DocumentRepository } from './document.repo.js';
-import { AppError } from '../../shared/errors/appError.js';
-import { getStorageService } from '../../shared/services.js';
+import { AppError } from '../shared/errors/appError.js';
+import { getStorageService } from '../shared/services.js';
 import { GeminiService } from '../ai/gemini.service.js';
-import { logger } from '../../config/logger.js';
-import { createNdjsonStream } from '../../shared/streaming/ndjson-stream.js';
+import { logger } from '../config/logger.js';
+import { createNdjsonStream } from '../shared/streaming/ndjson-stream.js';
 import {
   ExtractionResult,
   metadataSchema, metadataSystemPrompt,

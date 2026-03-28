@@ -1,6 +1,6 @@
 // src/modules/smart-prompts/smart-prompts.repo.ts
 import { SmartPrompt } from './smart-prompts.model.js';
-import { BaseRepo } from '../../shared/db/base.repo.js';
+import { BaseRepo } from '../shared/db/base.repo.js';
 import { Op } from 'sequelize';
 
 interface ListPromptsFilters {

@@ -2,7 +2,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { PlanRepository } from './plan.repo.js';
 import { CreatePlanDto, UpdatePlanDto, PlanResponse, PlansListResponse } from './plan.types.js';
-import { AppError } from '../../shared/errors/appError.js';
+import { AppError } from '../shared/errors/appError.js';
 import { SubscriptionPlan } from './plan.model.js';
 
 function formatPrice(cents: number, period: string): string {

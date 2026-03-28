@@ -1,10 +1,10 @@
 // src/modules/resource/resource.routes.ts
 import { Router } from 'express';
 import { ResourceController } from './resource.controller.js';
-import { authenticate } from '../../middleware/authenticate.js';
-import { requireRole } from '../../middleware/authorize.js';
-import { STANDARD_PROTECTED_ROLES } from '../../middleware/roles.js';
-import { validate } from '../../middleware/validate.js';
+import { authenticate } from '../middleware/authenticate.js';
+import { requireRole } from '../middleware/authorize.js';
+import { STANDARD_PROTECTED_ROLES } from '../middleware/roles.js';
+import { validate } from '../middleware/validate.js';
 import {
   createResourceSchema,
   updateResourceSchema,

@@ -5,7 +5,7 @@ import {
   ConfigListResponse,
   ConfigByCategoryResponse,
 } from './config.types.js';
-import { AppError } from '../../../shared/errors/appError.js';
+import { AppError } from '../../shared/errors/appError.js';
 
 export class ConfigService {
   private repo: ConfigRepository;

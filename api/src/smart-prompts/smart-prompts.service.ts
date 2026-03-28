@@ -5,7 +5,7 @@ import {
   SmartPromptListResponse,
   AcknowledgePromptDto,
 } from './smart-prompts.types.js';
-import { AppError } from '../../shared/errors/appError.js';
+import { AppError } from '../shared/errors/appError.js';
 
 export class SmartPromptService {
   private repo: SmartPromptRepository;

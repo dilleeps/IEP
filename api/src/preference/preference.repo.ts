@@ -1,6 +1,6 @@
 // src/modules/preference/preference.repo.ts
 import { UserPreference } from './preference.model.js';
-import { BaseRepo } from '../../shared/db/base.repo.js';
+import { BaseRepo } from '../shared/db/base.repo.js';
 
 export class PreferenceRepository extends BaseRepo<UserPreference> {
   constructor() {

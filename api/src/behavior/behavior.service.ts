@@ -2,7 +2,7 @@
 import { BehaviorLog } from './behavior.model.js';
 import { BehaviorRepository } from './behavior.repo.js';
 import { CreateBehaviorLogDto, UpdateBehaviorLogDto } from './behavior.types.js';
-import { AppError } from '../../shared/errors/appError.js';
+import { AppError } from '../shared/errors/appError.js';
 
 export class BehaviorService {
   private repo: BehaviorRepository;

@@ -2,7 +2,7 @@
 import { ComplianceLog } from './compliance.model.js';
 import { ComplianceRepository } from './compliance.repo.js';
 import { CreateComplianceLogDto, UpdateComplianceLogDto, UpdateStatusDto } from './compliance.types.js';
-import { AppError } from '../../shared/errors/appError.js';
+import { AppError } from '../shared/errors/appError.js';
 
 export class ComplianceService {
   private repo: ComplianceRepository;

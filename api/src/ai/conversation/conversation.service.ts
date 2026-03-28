@@ -8,7 +8,7 @@ import {
   AiMessageResponse,
   ConversationMessage,
 } from './conversation.types.js';
-import { AppError } from '../../../shared/errors/appError.js';
+import { AppError } from '../../shared/errors/appError.js';
 import { GeminiService } from '../gemini.service.js';
 import { v4 as uuidv4 } from 'uuid';
 

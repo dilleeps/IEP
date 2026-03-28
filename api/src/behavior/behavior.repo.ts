@@ -1,6 +1,6 @@
 // src/modules/behavior/behavior.repo.ts
 import { BehaviorLog } from './behavior.model.js';
-import { BaseRepo } from '../../shared/db/base.repo.js';
+import { BaseRepo } from '../shared/db/base.repo.js';
 import { Op } from 'sequelize';
 
 export interface BehaviorFilters {

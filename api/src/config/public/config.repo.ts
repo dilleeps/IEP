@@ -1,6 +1,6 @@
 // src/modules/config/public/config.repo.ts
 import { SystemConfiguration } from '../config.model.js';
-import { BaseRepo } from '../../../shared/db/base.repo.js';
+import { BaseRepo } from '../../shared/db/base.repo.js';
 
 interface ListConfigFilters {
   category?: string;

@@ -1,6 +1,6 @@
 // src/modules/ai/conversation/conversation.repo.ts
 import { AiConversation } from '../conversation.model.js';
-import { BaseRepo } from '../../../shared/db/base.repo.js';
+import { BaseRepo } from '../../shared/db/base.repo.js';
 import { Op } from 'sequelize';
 
 interface ListConversationsFilters {

@@ -1,5 +1,5 @@
 import { ChildProfile } from './child.model.js';
-import { BaseRepo } from '../../shared/db/base.repo.js';
+import { BaseRepo } from '../shared/db/base.repo.js';
 
 export class ChildRepository extends BaseRepo<ChildProfile> {
   constructor() {

@@ -1,8 +1,8 @@
 import { ExtractionCorrection } from './extraction-corrections.model.js';
 import { IepDocument } from './document.model.js';
 import { DocumentRepository } from './document.repo.js';
-import { AppError } from '../../shared/errors/appError.js';
-import { logger } from '../../config/logger.js';
+import { AppError } from '../shared/errors/appError.js';
+import { logger } from '../config/logger.js';
 
 export interface CorrectionInput {
   field: string;

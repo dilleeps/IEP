@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { authenticate } from '../../middleware/authenticate.js';
-import { requireRole } from '../../middleware/authorize.js';
-import { STANDARD_PROTECTED_ROLES } from '../../middleware/roles.js';
-import { validateBody, validateParams, validateQuery } from '../../middleware/validate.js';
-import { requireResourceOwnership } from '../../middleware/resourceOwnership.js';
-import { requireChildAccess } from '../../middleware/childAccess.js';
-import { auditLog } from '../../middleware/auditLog.js';
-import { uploadRateLimit } from '../../middleware/rateLimit.js';
+import { authenticate } from '../middleware/authenticate.js';
+import { requireRole } from '../middleware/authorize.js';
+import { STANDARD_PROTECTED_ROLES } from '../middleware/roles.js';
+import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
+import { requireResourceOwnership } from '../middleware/resourceOwnership.js';
+import { requireChildAccess } from '../middleware/childAccess.js';
+import { auditLog } from '../middleware/auditLog.js';
+import { uploadRateLimit } from '../middleware/rateLimit.js';
 import { DocumentController } from './document.controller.js';
 import {
   createDocumentSchema,

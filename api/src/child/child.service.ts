@@ -1,7 +1,7 @@
 import { ChildProfile } from './child.model.js';
 import { ChildRepository } from './child.repo.js';
 import { CreateChildDto, UpdateChildDto } from './child.types.js';
-import { AppError } from '../../shared/errors/appError.js';
+import { AppError } from '../shared/errors/appError.js';
 
 export class ChildService {
   constructor(private repo: ChildRepository) {}

@@ -1,6 +1,6 @@
 // src/modules/communication/communication.controller.ts
 import { Request, Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { CommunicationService } from './communication.service.js';
 import { CommunicationLogResponse, CommunicationStatsResponse } from './communication.types.js';
 

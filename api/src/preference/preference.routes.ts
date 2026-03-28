@@ -1,8 +1,8 @@
 // src/modules/preference/preference.routes.ts
 import { Router } from 'express';
 import { PreferenceController } from './preference.controller.js';
-import { authenticate } from '../../middleware/authenticate.js';
-import { validate } from '../../middleware/validate.js';
+import { authenticate } from '../middleware/authenticate.js';
+import { validate } from '../middleware/validate.js';
 import { updatePreferenceSchema } from './preference.validation.js';
 
 const router = Router();

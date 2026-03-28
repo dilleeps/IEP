@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { LeadController } from './lead.controller.js';
-import { validateBody, validateQuery } from '../../middleware/validate.js';
-import { authenticate } from '../../middleware/authenticate.js';
-import { requireRole } from '../../middleware/authorize.js';
-import { authRateLimit } from '../../middleware/rateLimit.js';
+import { validateBody, validateQuery } from '../middleware/validate.js';
+import { authenticate } from '../middleware/authenticate.js';
+import { requireRole } from '../middleware/authorize.js';
+import { authRateLimit } from '../middleware/rateLimit.js';
 import { createLeadSchema, listLeadsSchema } from './lead.validation.js';
 
 export const leadRouter = Router();

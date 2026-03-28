@@ -2,7 +2,7 @@
 import { Resource } from './resource.model.js';
 import { ResourceRepository } from './resource.repo.js';
 import { CreateResourceDto, UpdateResourceDto, ResourceFiltersDto } from './resource.types.js';
-import { AppError } from '../../shared/errors/appError.js';
+import { AppError } from '../shared/errors/appError.js';
 
 export class ResourceService {
   private repo: ResourceRepository;

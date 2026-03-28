@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { ChildService } from './child.service.js';
 import { ChildRepository } from './child.repo.js';
 import { ChildResponse } from './child.types.js';

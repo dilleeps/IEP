@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { ProgressEntryService } from './progress-entry.service.js';
-import { AppError } from '../../shared/errors/appError.js';
+import { AppError } from '../shared/errors/appError.js';
 import { DashboardService } from '../dashboard/dashboard.service.js';
 import { GoalService } from './goal.service.js';
 

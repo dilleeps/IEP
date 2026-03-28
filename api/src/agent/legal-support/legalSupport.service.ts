@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { AppError } from '../../../shared/errors/appError.js';
+import { AppError } from '../../shared/errors/appError.js';
 import { GeminiService } from '../../ai/gemini.service.js';
 import {
   CreateSessionResponse,

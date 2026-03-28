@@ -1,9 +1,9 @@
 // src/modules/dashboard/dashboard.service.ts
 import { DashboardSummaryResponse, DashboardOverviewResponse } from './dashboard.types.js';
-import { getSequelize } from '../../config/sequelize.js';
+import { getSequelize } from '../config/sequelize.js';
 import { QueryTypes } from 'sequelize';
-import { logger } from '../../config/logger.js';
-import { AppError } from '../../shared/errors/appError.js';
+import { logger } from '../config/logger.js';
+import { AppError } from '../shared/errors/appError.js';
 
 export class DashboardService {
   /**

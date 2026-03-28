@@ -1,6 +1,6 @@
 // src/modules/letter/letter.controller.ts
 import { Request, Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { LetterService } from './letter.service.js';
 import { LetterResponse, TemplateResponse } from './letter.types.js';
 

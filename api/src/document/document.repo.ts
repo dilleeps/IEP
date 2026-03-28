@@ -1,6 +1,6 @@
 import { IepDocument } from './document.model.js';
 import { IepAnalysis } from './analysis.model.js';
-import { BaseRepo } from '../../shared/db/base.repo.js';
+import { BaseRepo } from '../shared/db/base.repo.js';
 
 export class DocumentRepository extends BaseRepo<IepDocument> {
   constructor() {

@@ -9,7 +9,7 @@ import {
   DirectRegisterDto,
   RegisterRoleDto,
 } from './admin-users.types.js';
-import { AppError } from '../../../shared/errors/appError.js';
+import { AppError } from '../../shared/errors/appError.js';
 import { User } from '../../auth/user.model.js';
 import { v4 as uuidv4 } from 'uuid';
 import * as bcrypt from 'bcrypt';

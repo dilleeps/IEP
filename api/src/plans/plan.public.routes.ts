@@ -1,7 +1,7 @@
 // src/modules/plans/plan.public.routes.ts
 import { Router } from 'express';
 import { PlanController } from './plan.controller.js';
-import { authenticate } from '../../middleware/authenticate.js';
+import { authenticate } from '../middleware/authenticate.js';
 
 const router = Router();
 const controller = new PlanController();

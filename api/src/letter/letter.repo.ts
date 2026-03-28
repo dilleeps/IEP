@@ -1,7 +1,7 @@
 // src/modules/letter/letter.repo.ts
 import { LetterDraft } from './letter.model.js';
 import { LetterTemplate } from './template.model.js';
-import { BaseRepo } from '../../shared/db/base.repo.js';
+import { BaseRepo } from '../shared/db/base.repo.js';
 
 export interface LetterFilters {
   childId?: string;

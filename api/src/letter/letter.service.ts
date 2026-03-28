@@ -4,8 +4,8 @@ import { LetterTemplate } from './template.model.js';
 import { LetterRepository, LetterTemplateRepository } from './letter.repo.js';
 import { CreateLetterDto, UpdateLetterDto, GenerateLetterDto, SendLetterDto } from './letter.types.js';
 import { ChildProfile } from '../child/child.model.js';
-import { AppError } from '../../shared/errors/appError.js';
-import { getAiService, notification } from '../../shared/services.js';
+import { AppError } from '../shared/errors/appError.js';
+import { getAiService, notification } from '../shared/services.js';
 import { z } from 'zod';
 
 const langchainAi = getAiService();

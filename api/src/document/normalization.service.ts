@@ -6,9 +6,9 @@ import { DocumentRepository } from '../document/document.repo.js';
 import { GoalRepository } from '../goal/goal.repo.js';
 import { ChildProfile } from '../child/child.model.js';
 import type { DisabilitySourceTracking, ProfileUpdateLogEntry } from '../child/child.model.js';
-import { AppError } from '../../shared/errors/appError.js';
-import { logger } from '../../config/logger.js';
-import { getSequelize } from '../../config/sequelize.js';
+import { AppError } from '../shared/errors/appError.js';
+import { logger } from '../config/logger.js';
+import { getSequelize } from '../config/sequelize.js';
 import { ExtractionResult } from './types/promptschema.js';
 
 /**

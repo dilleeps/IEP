@@ -1,6 +1,6 @@
 // src/modules/compliance/compliance.controller.ts
 import { Request, Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { ComplianceService } from './compliance.service.js';
 import { ComplianceLogResponse, ComplianceSummaryResponse } from './compliance.types.js';
 

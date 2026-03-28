@@ -1,6 +1,6 @@
 // src/modules/preference/preference.controller.ts
 import { Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { PreferenceService } from './preference.service.js';
 import { PreferenceResponse } from './preference.types.js';
 

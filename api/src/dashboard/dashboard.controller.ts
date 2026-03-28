@@ -1,6 +1,6 @@
 // src/modules/dashboard/dashboard.controller.ts
 import { Response, NextFunction } from 'express';
-import { AuthRequest } from '../../middleware/authenticate.js';
+import { AuthRequest } from '../middleware/authenticate.js';
 import { DashboardService } from './dashboard.service.js';
 
 export class DashboardController {

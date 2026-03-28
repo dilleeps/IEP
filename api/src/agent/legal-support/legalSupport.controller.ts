@@ -1,5 +1,5 @@
 import { Response, NextFunction } from 'express';
-import { AuthRequest } from '../../../middleware/authenticate.js';
+import { AuthRequest } from '../../middleware/authenticate.js';
 import { LegalSupportService } from './legalSupport.service.js';
 import { getSessionSchema, sendMessageSchema } from './legalSupport.validation.js';
 

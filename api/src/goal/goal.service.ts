@@ -2,7 +2,7 @@
 import { GoalProgress } from './goal.model.js';
 import { GoalRepository } from './goal.repo.js';
 import { CreateGoalDto, UpdateGoalDto, UpdateProgressDto } from './goal.types.js';
-import { AppError } from '../../shared/errors/appError.js';
+import { AppError } from '../shared/errors/appError.js';
 
 export class GoalService {
   private repo: GoalRepository;

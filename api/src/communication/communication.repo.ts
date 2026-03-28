@@ -1,6 +1,6 @@
 // src/modules/communication/communication.repo.ts
 import { CommunicationLog } from './communication.model.js';
-import { BaseRepo } from '../../shared/db/base.repo.js';
+import { BaseRepo } from '../shared/db/base.repo.js';
 import { Op } from 'sequelize';
 
 export interface CommunicationFilters {

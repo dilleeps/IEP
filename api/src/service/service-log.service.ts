@@ -1,7 +1,7 @@
 import { Service, ServiceLog } from './service.model.js';
-import { AppError } from '../../shared/errors/appError.js';
-import { logger } from '../../config/logger.js';
-import { getSequelize } from '../../config/sequelize.js';
+import { AppError } from '../shared/errors/appError.js';
+import { logger } from '../config/logger.js';
+import { getSequelize } from '../config/sequelize.js';
 import { Op } from 'sequelize';
 import { ChildProfile } from '../child/child.model.js';
 
