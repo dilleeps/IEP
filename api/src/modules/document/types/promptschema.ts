@@ -89,9 +89,18 @@ export const servicesSchema = {
   },
   required: ['services'],
 };
-export const servicesSystemPrompt = `You are an IEP services specialist. Extract ONLY related services from this document.
-serviceType must be one of: speech_therapy|occupational_therapy|physical_therapy|counseling|behavior_support|transportation|other.
-minutesPerSession and sessionsPerWeek must be numbers.`;
+export const servicesSystemPrompt = `You are an IEP services specialist. Extract ALL related services from this document.
+Map each service to one of these types: speech_therapy, occupational_therapy, physical_therapy, counseling, behavior_support, transportation, other.
+Common mappings:
+- "Speech-Language Pathology", "SLP", "Speech Services" → speech_therapy
+- "OT", "Occupational Therapy" → occupational_therapy
+- "PT", "Physical Therapy" → physical_therapy
+- "School Counseling", "Social Work", "Psychology" → counseling
+- "ABA", "Behavior Intervention", "Behavior Support" → behavior_support
+- "Special Transportation", "Bus" → transportation
+- Any other service (ESY, Assistive Technology, Paraprofessional, Aide, etc.) → other
+If a service does not fit any category, use "other" with the original name in the serviceType field.
+minutesPerSession and sessionsPerWeek must be numbers. Extract ALL services mentioned, do not skip any.`;
 
 /** Section D — Accommodations & Modifications */
 export const supportsSchema = {
@@ -120,15 +129,16 @@ export const analysisSchema = {
         services: { type: 'number' },
         dates:    { type: 'number' },
       },
+      required: ['overall', 'goals', 'services', 'dates'],
     },
   },
+  required: ['summary', 'redFlags', 'legalLens', 'confidence'],
 };
-export const analysisSystemPrompt = `You are a special-education advocate and legal analyst.
-Provide:
-- summary: 3–5 sentence plain-language overview of the full IEP
-- redFlags: list of specific concerns, compliance gaps, vague goals, missing services, or IDEA violations
-- legalLens: 2–4 sentence legal/FAPE perspective; note any procedural or substantive issues
-- confidence: 0.0–1.0 scores for overall, goals, services, dates based on document quality and completeness`;
+export const analysisSystemPrompt = `You are a special-education advocate and legal analyst. You MUST provide ALL of the following fields — never return empty values:
+- summary: A detailed 3–5 sentence plain-language overview of the full IEP. Describe the student, their disability, key goals, and services provided. This is REQUIRED and must never be empty.
+- redFlags: A list of at least 2-3 specific concerns. Look for compliance gaps, vague/unmeasurable goals, missing services, IDEA violations, procedural issues, inadequate progress monitoring, or restrictive placement concerns. If the IEP seems adequate, note areas that could be strengthened. This must never be an empty array.
+- legalLens: 2–4 sentence legal/FAPE perspective; note any procedural or substantive issues under IDEA, Section 504, or state law.
+- confidence: 0.0–1.0 scores for overall, goals, services, dates. Base these on document quality, completeness, and how well the IEP meets legal requirements. Always provide numeric scores, never leave as 0.`;
 
 // ─── Legacy monolithic schema (kept for backward-compat) ─────────────────────
 

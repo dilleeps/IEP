@@ -273,6 +273,40 @@ export class ExtractionService {
         metadata: { ...doc.metadata, extraction },
       } as any);
 
+      // ── Auto-update child profile from extraction ───────────────────────
+      try {
+        if (doc.childId && extraction) {
+          const { ChildProfile } = await import('../child/child.model.js');
+          const childUpdate: Record<string, any> = {};
+          if (extraction.grade) childUpdate.grade = extraction.grade;
+          if (extraction.schoolName) childUpdate.schoolName = extraction.schoolName;
+          if (extraction.schoolDistrict) childUpdate.schoolDistrict = extraction.schoolDistrict;
+          if (extraction.homeAddress) childUpdate.homeAddress = extraction.homeAddress;
+          if (extraction.phoneNumber) childUpdate.phoneNumber = extraction.phoneNumber;
+          if (extraction.country) childUpdate.country = extraction.country;
+          if (extraction.studentDob) {
+            const dob = new Date(extraction.studentDob);
+            if (!isNaN(dob.getTime())) {
+              childUpdate.dateOfBirth = dob;
+              const ageDiff = Date.now() - dob.getTime();
+              childUpdate.age = Math.floor(ageDiff / (365.25 * 24 * 60 * 60 * 1000));
+            }
+          }
+          if (extraction.primaryDisability) {
+            const disabilities = [extraction.primaryDisability];
+            if (extraction.secondaryDisability) disabilities.push(extraction.secondaryDisability);
+            if (extraction.otherDisabilities?.length) disabilities.push(...extraction.otherDisabilities);
+            childUpdate.disabilities = disabilities;
+          }
+          if (Object.keys(childUpdate).length > 0) {
+            await ChildProfile.update(childUpdate, { where: { id: doc.childId } });
+            logger.info(`[Extraction ${documentId}] Child profile auto-updated`, { childId: doc.childId, fields: Object.keys(childUpdate) });
+          }
+        }
+      } catch (childErr) {
+        logger.error('[Extraction] Child profile auto-update failed (non-fatal)', { error: childErr });
+      }
+
       stream.sendLog('Extraction complete!', 'complete');
       stream.sendResult(extraction);
       logger.info(`[Extraction ${documentId}] Complete — goals=${extraction.goals?.length} services=${extraction.services?.length}`);

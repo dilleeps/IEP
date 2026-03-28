@@ -71,34 +71,32 @@ export function ExtractionReviewStep({
       {/* Summary and Red Flags Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Summary Card */}
-        {data.summary && (
-          <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200">
-            <CardHeader>
-              <div className="flex items-center gap-2">
-                <Info className="h-5 w-5 text-blue-600" />
-                <CardTitle className="text-lg">Plain-Language Summary</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground italic leading-relaxed">
-                "{data.summary}"
-              </p>
-            </CardContent>
-          </Card>
-        )}
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200">
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Info className="h-5 w-5 text-blue-600" />
+              <CardTitle className="text-lg">Plain-Language Summary</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground italic leading-relaxed">
+              {data.summary ? `"${data.summary}"` : "Summary will be available after analysis completes. Try re-analyzing the document."}
+            </p>
+          </CardContent>
+        </Card>
 
         {/* Red Flags Card */}
-        {data.redFlags && data.redFlags.length > 0 && (
-          <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200">
-            <CardHeader>
-              <div className="flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-amber-600" />
-                <CardTitle className="text-lg text-amber-900 dark:text-amber-100">
-                  Advocacy Red Flags
-                </CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200">
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-amber-600" />
+              <CardTitle className="text-lg text-amber-900 dark:text-amber-100">
+                Advocacy Red Flags
+              </CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {data.redFlags && data.redFlags.length > 0 ? (
               <ul className="space-y-2">
                 {data.redFlags.map((flag: string, i: number) => (
                   <li key={i} className="text-sm text-amber-800 dark:text-amber-200 flex gap-2">
@@ -107,29 +105,29 @@ export function ExtractionReviewStep({
                   </li>
                 ))}
               </ul>
-            </CardContent>
-          </Card>
-        )}
+            ) : (
+              <p className="text-sm text-amber-700 dark:text-amber-300">No red flags identified yet. Try re-analyzing the document for a detailed assessment.</p>
+            )}
+          </CardContent>
+        </Card>
       </div>
 
       {/* Rights & Considerations Card */}
-      {data.legalLens && (
-        <Card className="bg-slate-900 dark:bg-slate-800 text-white border-slate-700">
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-              </svg>
-              <CardTitle className="text-lg">Rights & Considerations</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-slate-100 leading-relaxed">
-              {data.legalLens}
-            </p>
-          </CardContent>
-        </Card>
-      )}
+      <Card className="bg-slate-900 dark:bg-slate-800 text-white border-slate-700">
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+            </svg>
+            <CardTitle className="text-lg">Rights & Considerations</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-slate-100 leading-relaxed">
+            {data.legalLens || "Legal analysis will be available after re-analyzing the document."}
+          </p>
+        </CardContent>
+      </Card>
 
       {/* Main Content Card */}
       <Card>
