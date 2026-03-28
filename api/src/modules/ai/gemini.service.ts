@@ -168,22 +168,66 @@ export class GeminiService {
 
     if (finishReason === 'MAX_TOKENS') {
       console.warn(`Gemini output truncated (MAX_TOKENS) — ${jsonText.length} chars. Attempting to salvage partial JSON.`);
-      // Try to repair truncated JSON by closing open brackets/braces
-      let repaired = jsonText;
-      // Remove trailing incomplete key-value or string
-      repaired = repaired.replace(/,\s*"[^"]*"?\s*:?\s*"?[^"]*$/, '');
-      repaired = repaired.replace(/,\s*\{[^}]*$/, '');
-      // Count open brackets and close them
-      const openBraces = (repaired.match(/\{/g) || []).length - (repaired.match(/\}/g) || []).length;
-      const openBrackets = (repaired.match(/\[/g) || []).length - (repaired.match(/\]/g) || []).length;
-      for (let i = 0; i < openBrackets; i++) repaired += ']';
-      for (let i = 0; i < openBraces; i++) repaired += '}';
 
-      try {
-        parsedJson = JSON.parse(repaired) as T;
-        console.info(`Salvaged truncated JSON — parsed successfully`);
-      } catch (_e) {
-        throw new Error(`Gemini output truncated (MAX_TOKENS) — ${jsonText.length} chars, repair failed.`);
+      // Try multiple repair strategies
+      const strategies = [
+        // Strategy 1: Just close open brackets
+        () => {
+          let r = jsonText;
+          const ob = (r.match(/\{/g) || []).length - (r.match(/\}/g) || []).length;
+          const oq = (r.match(/\[/g) || []).length - (r.match(/\]/g) || []).length;
+          for (let i = 0; i < oq; i++) r += ']';
+          for (let i = 0; i < ob; i++) r += '}';
+          return r;
+        },
+        // Strategy 2: Remove last incomplete item then close
+        () => {
+          let r = jsonText;
+          // Find last complete object (ends with })
+          const lastComplete = r.lastIndexOf('}');
+          if (lastComplete > 0) {
+            r = r.substring(0, lastComplete + 1);
+          }
+          const ob = (r.match(/\{/g) || []).length - (r.match(/\}/g) || []).length;
+          const oq = (r.match(/\[/g) || []).length - (r.match(/\]/g) || []).length;
+          for (let i = 0; i < oq; i++) r += ']';
+          for (let i = 0; i < ob; i++) r += '}';
+          return r;
+        },
+        // Strategy 3: Aggressively trim to last complete array item
+        () => {
+          let r = jsonText;
+          // Find the last "},\n" or "}\n" pattern (end of a complete goal object)
+          const matches = [...r.matchAll(/\}\s*,?\s*\n/g)];
+          if (matches.length > 0) {
+            const lastMatch = matches[matches.length - 1];
+            r = r.substring(0, lastMatch.index! + 1);
+          }
+          const ob = (r.match(/\{/g) || []).length - (r.match(/\}/g) || []).length;
+          const oq = (r.match(/\[/g) || []).length - (r.match(/\]/g) || []).length;
+          for (let i = 0; i < oq; i++) r += ']';
+          for (let i = 0; i < ob; i++) r += '}';
+          return r;
+        },
+      ];
+
+      let repaired = false;
+      for (const strategy of strategies) {
+        try {
+          const attempt = strategy();
+          parsedJson = JSON.parse(attempt) as T;
+          console.info(`Salvaged truncated JSON — parsed successfully`);
+          repaired = true;
+          break;
+        } catch (_e) {
+          // Try next strategy
+        }
+      }
+
+      if (!repaired) {
+        // Last resort: return empty goals object
+        console.warn(`All repair strategies failed for ${jsonText.length} chars — returning empty result`);
+        parsedJson = { goals: [], services: [], accommodations: [], modifications: [] } as any;
       }
     } else {
       try {
