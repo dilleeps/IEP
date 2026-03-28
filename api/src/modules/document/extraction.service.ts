@@ -66,12 +66,14 @@ async function runSection<T>(
   systemPrompt: string,
   fileData: { mimeType: string; data: string },
   maxTokens = 8192,
+  skipSchema = false,
 ): Promise<T> {
   return withRetry(() =>
     gemini.chatAsObject<T>(prompt, schema, {
       systemPrompt,
       temperature: 0.0,
       maxTokens,
+      skipSchema,
       fileData,
     })
   );
@@ -163,7 +165,7 @@ export class ExtractionService {
         );
       };
 
-      const [metaRaw, goalsRaw1, goalsRaw2, servicesRaw, supportsRaw, analysisRaw] = await Promise.allSettled([
+      const [metaRaw, goalsRaw, servicesRaw, supportsRaw, analysisRaw] = await Promise.allSettled([
         limit(() =>
           runSection<any>(gemini,
             'Extract student identity and all date fields from this IEP document.',
@@ -172,15 +174,9 @@ export class ExtractionService {
         ),
         limit(() =>
           runSection<any>(gemini,
-            'Extract the FIRST HALF of annual goals from this IEP document (goals 1 through 5). Return only the first 5 goals.',
-            goalsSchema, goalsSystemPrompt, fileData, 65536
-          ).then(r => { sectionDone('goals batch 1'); return r; })
-        ),
-        limit(() =>
-          runSection<any>(gemini,
-            'Extract the SECOND HALF of annual goals from this IEP document (goals 6 onwards). Skip the first 5 goals and return only goals from goal 6 onwards.',
-            goalsSchema, goalsSystemPrompt, fileData, 65536
-          ).then(r => { sectionDone('goals batch 2'); return r; })
+            'Extract ALL annual goals from this IEP document. Return as JSON: {"goals": [...]}. Do not omit any goal.',
+            goalsSchema, goalsSystemPrompt, fileData, 65536, true
+          ).then(r => { sectionDone('goals'); return r; })
         ),
         limit(() =>
           runSection<any>(gemini,
@@ -204,10 +200,7 @@ export class ExtractionService {
 
       // ── Deterministic merge — failures fall back to empty defaults ─────────
       const meta     = metaRaw.status     === 'fulfilled' ? metaRaw.value     : {};
-      // Merge two goal batches
-      const goalsBatch1 = goalsRaw1.status === 'fulfilled' ? (goalsRaw1.value?.goals || []) : [];
-      const goalsBatch2 = goalsRaw2.status === 'fulfilled' ? (goalsRaw2.value?.goals || []) : [];
-      const goals    = { goals: [...goalsBatch1, ...goalsBatch2] };
+      const goals    = goalsRaw.status    === 'fulfilled' ? goalsRaw.value    : { goals: [] };
       const services = servicesRaw.status === 'fulfilled' ? servicesRaw.value : { services: [] };
       const supports = supportsRaw.status === 'fulfilled' ? supportsRaw.value : { accommodations: [], modifications: [] };
       const analysis = analysisRaw.status === 'fulfilled' ? analysisRaw.value : { summary: '', redFlags: [], legalLens: '', confidence: {} };
@@ -215,8 +208,7 @@ export class ExtractionService {
       // Log any section failures without crashing
       [
         ['identity & dates', metaRaw],
-        ['goals batch 1', goalsRaw1],
-        ['goals batch 2', goalsRaw2],
+        ['goals', goalsRaw],
         ['services', servicesRaw],
         ['accommodations', supportsRaw],
         ['analysis', analysisRaw],
@@ -250,11 +242,31 @@ export class ExtractionService {
         secondaryDisability: meta.secondaryDisability,
         otherDisabilities:   meta.otherDisabilities   || [],
         // Goals & services
-        goals:               goals.goals              || [],
-        services:            services.services        || [],
+        // Deduplicate goals by goalName
+        goals: (() => {
+          const raw = goals.goals || [];
+          const seen = new Set<string>();
+          return raw.filter((g: any) => {
+            const key = (g.goalName || g.goalText || '').toLowerCase().trim();
+            if (!key || seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          });
+        })(),
+        // Deduplicate services by serviceType+provider
+        services: (() => {
+          const raw = services.services || [];
+          const seen = new Set<string>();
+          return raw.filter((s: any) => {
+            const key = `${(s.serviceType || '').toLowerCase()}_${(s.provider || '').toLowerCase()}_${s.minutesPerSession || ''}_${s.sessionsPerWeek || ''}`;
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          });
+        })(),
         // Supports
-        accommodations:      supports.accommodations  || [],
-        modifications:       supports.modifications   || [],
+        accommodations:      [...new Set(supports.accommodations || [])],
+        modifications:       [...new Set(supports.modifications  || [])],
         // Analysis
         summary:             analysis.summary         || '',
         redFlags:            analysis.redFlags        || [],

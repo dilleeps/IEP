@@ -11,6 +11,7 @@ interface ChatOptions {
   temperature?: number;
   maxTokens?: number;
   systemPrompt?: string;
+  skipSchema?: boolean;
   fileData?: {
     mimeType: string;
     data: string; // Base64 encoded file data
@@ -106,7 +107,7 @@ export class GeminiService {
     schema: Record<string, any>,
     options: ChatOptions = {}
   ): Promise<T> {
-    const { temperature = 0.0, maxTokens = 2048, systemPrompt, fileData } = options;
+    const { temperature = 0.0, maxTokens = 2048, systemPrompt, fileData, skipSchema = false } = options;
 
     // Format messages for Gemini API
     const contents = [];
@@ -147,7 +148,7 @@ export class GeminiService {
             temperature,
             maxOutputTokens: maxTokens,
             responseMimeType: 'application/json',
-            responseSchema: schema,
+            ...(skipSchema ? {} : { responseSchema: schema }),
           },
         }),
       }
