@@ -162,18 +162,38 @@ export class GeminiService {
     const candidate = data.candidates?.[0];
     const jsonText = candidate?.content?.parts?.[0]?.text || '{}';
 
-    // Detect output truncation before parsing
+    // Detect output truncation — try to salvage partial JSON instead of throwing
     const finishReason = candidate?.finishReason;
+    let parsedJson: T;
+
     if (finishReason === 'MAX_TOKENS') {
-      throw new Error(`Gemini output truncated (MAX_TOKENS) — response was ${jsonText.length} chars. Increase maxTokens.`);
+      console.warn(`Gemini output truncated (MAX_TOKENS) — ${jsonText.length} chars. Attempting to salvage partial JSON.`);
+      // Try to repair truncated JSON by closing open brackets/braces
+      let repaired = jsonText;
+      // Remove trailing incomplete key-value or string
+      repaired = repaired.replace(/,\s*"[^"]*"?\s*:?\s*"?[^"]*$/, '');
+      repaired = repaired.replace(/,\s*\{[^}]*$/, '');
+      // Count open brackets and close them
+      const openBraces = (repaired.match(/\{/g) || []).length - (repaired.match(/\}/g) || []).length;
+      const openBrackets = (repaired.match(/\[/g) || []).length - (repaired.match(/\]/g) || []).length;
+      for (let i = 0; i < openBrackets; i++) repaired += ']';
+      for (let i = 0; i < openBraces; i++) repaired += '}';
+
+      try {
+        parsedJson = JSON.parse(repaired) as T;
+        console.info(`Salvaged truncated JSON — parsed successfully`);
+      } catch {
+        throw new Error(`Gemini output truncated (MAX_TOKENS) — ${jsonText.length} chars, repair failed.`);
+      }
+    } else {
+      try {
+        parsedJson = JSON.parse(jsonText) as T;
+      } catch (error) {
+        throw new Error(`Failed to parse JSON response (finishReason=${finishReason}, len=${jsonText.length}): ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
     }
 
-    try {
-      return JSON.parse(jsonText) as T;
-    } catch (error) {
-      throw new Error(`Failed to parse JSON response (finishReason=${finishReason}, len=${jsonText.length}): ${error instanceof Error ? error.message : 'Unknown error'}`);
-    }
-  }
+    return parsedJson;
 
   /**
    * Create vector embedding for text using Gemini
