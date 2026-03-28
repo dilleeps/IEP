@@ -182,7 +182,7 @@ export class GeminiService {
       try {
         parsedJson = JSON.parse(repaired) as T;
         console.info(`Salvaged truncated JSON — parsed successfully`);
-      } catch {
+      } catch (_e) {
         throw new Error(`Gemini output truncated (MAX_TOKENS) — ${jsonText.length} chars, repair failed.`);
       }
     } else {
@@ -194,6 +194,7 @@ export class GeminiService {
     }
 
     return parsedJson;
+  }
 
   /**
    * Create vector embedding for text using Gemini
