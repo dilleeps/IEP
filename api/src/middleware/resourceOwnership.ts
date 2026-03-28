@@ -27,7 +27,7 @@ export function requireResourceOwnership(options: ResourceOwnershipOptions) {
     
     try {
       // Import service dynamically to avoid circular dependencies
-      const servicePath = `../modules/${options.resourceType}/${options.resourceType}.service.js`;
+      const servicePath = `../${options.resourceType}/${options.resourceType}.service.js`;
       const { verifyOwnership } = await import(servicePath);
       const isOwner = await verifyOwnership(resourceId, req.user.id);
       
