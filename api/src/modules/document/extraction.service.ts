@@ -163,7 +163,7 @@ export class ExtractionService {
         );
       };
 
-      const [metaRaw, goalsRaw, servicesRaw, supportsRaw, analysisRaw] = await Promise.allSettled([
+      const [metaRaw, goalsRaw1, goalsRaw2, servicesRaw, supportsRaw, analysisRaw] = await Promise.allSettled([
         limit(() =>
           runSection<any>(gemini,
             'Extract student identity and all date fields from this IEP document.',
@@ -172,9 +172,15 @@ export class ExtractionService {
         ),
         limit(() =>
           runSection<any>(gemini,
-            'Extract ALL annual goals from this IEP document. Do not omit any goal.',
+            'Extract the FIRST HALF of annual goals from this IEP document (goals 1 through 5). Return only the first 5 goals.',
             goalsSchema, goalsSystemPrompt, fileData, 65536
-          ).then(r => { sectionDone('goals'); return r; })
+          ).then(r => { sectionDone('goals batch 1'); return r; })
+        ),
+        limit(() =>
+          runSection<any>(gemini,
+            'Extract the SECOND HALF of annual goals from this IEP document (goals 6 onwards). Skip the first 5 goals and return only goals from goal 6 onwards.',
+            goalsSchema, goalsSystemPrompt, fileData, 65536
+          ).then(r => { sectionDone('goals batch 2'); return r; })
         ),
         limit(() =>
           runSection<any>(gemini,
@@ -198,7 +204,10 @@ export class ExtractionService {
 
       // ── Deterministic merge — failures fall back to empty defaults ─────────
       const meta     = metaRaw.status     === 'fulfilled' ? metaRaw.value     : {};
-      const goals    = goalsRaw.status    === 'fulfilled' ? goalsRaw.value    : { goals: [] };
+      // Merge two goal batches
+      const goalsBatch1 = goalsRaw1.status === 'fulfilled' ? (goalsRaw1.value?.goals || []) : [];
+      const goalsBatch2 = goalsRaw2.status === 'fulfilled' ? (goalsRaw2.value?.goals || []) : [];
+      const goals    = { goals: [...goalsBatch1, ...goalsBatch2] };
       const services = servicesRaw.status === 'fulfilled' ? servicesRaw.value : { services: [] };
       const supports = supportsRaw.status === 'fulfilled' ? supportsRaw.value : { accommodations: [], modifications: [] };
       const analysis = analysisRaw.status === 'fulfilled' ? analysisRaw.value : { summary: '', redFlags: [], legalLens: '', confidence: {} };
@@ -206,7 +215,8 @@ export class ExtractionService {
       // Log any section failures without crashing
       [
         ['identity & dates', metaRaw],
-        ['goals', goalsRaw],
+        ['goals batch 1', goalsRaw1],
+        ['goals batch 2', goalsRaw2],
         ['services', servicesRaw],
         ['accommodations', supportsRaw],
         ['analysis', analysisRaw],
