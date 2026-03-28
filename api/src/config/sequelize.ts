@@ -183,68 +183,68 @@ export async function initDb(): Promise<void> {
  */
 async function initAllModels(sequelize: Sequelize): Promise<void> {
   // Auth domain
-  const { initUserModel } = await import("../auth/user.model.js");
+  const { initUserModel } = await import("../modules/auth/user.model.js");
   
   // Lead domain
-  const { initLeadModel } = await import("../lead/lead.model.js");
+  const { initLeadModel } = await import("../modules/lead/lead.model.js");
   
   // Child domain
-  const { initChildProfileModel } = await import("../child/child.model.js");
+  const { initChildProfileModel } = await import("../modules/child/child.model.js");
   
   // Document domain
-  const { initIepDocumentModel } = await import("../document/document.model.js");
-  const { initIepAnalysisModel } = await import("../document/analysis.model.js");
-  const { initExtractionCorrectionModel } = await import("../document/extraction-corrections.model.js");
+  const { initIepDocumentModel } = await import("../modules/document/document.model.js");
+  const { initIepAnalysisModel } = await import("../modules/document/analysis.model.js");
+  const { initExtractionCorrectionModel } = await import("../modules/document/extraction-corrections.model.js");
   
   // Goal domain
-  const { initGoalProgressModel } = await import("../goal/goal.model.js");
-  const { initProgressEntryModel } = await import("../goal/progress-entries.model.js");
+  const { initGoalProgressModel } = await import("../modules/goal/goal.model.js");
+  const { initProgressEntryModel } = await import("../modules/goal/progress-entries.model.js");
   
   // Service domain
-  const { initServiceModel, initServiceLogModel } = await import("../service/service.model.js");
+  const { initServiceModel, initServiceLogModel } = await import("../modules/service/service.model.js");
   
   // Compliance domain
-  const { initComplianceLogModel } = await import("../compliance/compliance.model.js");
-  const { initComplianceSummaryModel } = await import("../compliance/complianceSummary.model.js");
+  const { initComplianceLogModel } = await import("../modules/compliance/compliance.model.js");
+  const { initComplianceSummaryModel } = await import("../modules/compliance/complianceSummary.model.js");
   
   // Communication domain
-  const { initCommunicationLogModel } = await import("../communication/communication.model.js");
+  const { initCommunicationLogModel } = await import("../modules/communication/communication.model.js");
   
   // Behavior domain
-  const { initBehaviorLogModel } = await import("../behavior/behavior.model.js");
+  const { initBehaviorLogModel } = await import("../modules/behavior/behavior.model.js");
   
   // Letter domain
-  const { initLetterDraftModel } = await import("../letter/letter.model.js");
-  const { initLetterTemplateModel } = await import("../letter/template.model.js");
+  const { initLetterDraftModel } = await import("../modules/letter/letter.model.js");
+  const { initLetterTemplateModel } = await import("../modules/letter/template.model.js");
   
   // Advocacy domain
-  const { initAdvocacyInsightModel } = await import("../advocacy/advocacy.model.js");
-  const { initSmartPromptModel } = await import("../advocacy/smartPrompt.model.js");
+  const { initAdvocacyInsightModel } = await import("../modules/advocacy/advocacy.model.js");
+  const { initSmartPromptModel } = await import("../modules/advocacy/smartPrompt.model.js");
   
   // Resource domain
-  const { initResourceModel } = await import("../resource/resource.model.js");
+  const { initResourceModel } = await import("../modules/resource/resource.model.js");
   
   // Preference domain
-  const { initUserPreferenceModel } = await import("../preference/preference.model.js");
+  const { initUserPreferenceModel } = await import("../modules/preference/preference.model.js");
   
   // Audit domain
-  const { initAuditLogModel } = await import("../audit/audit.model.js");
+  const { initAuditLogModel } = await import("../modules/audit/audit.model.js");
   
   // Consent domain
-  const { initUserConsentModel } = await import("../consent/consent.model.js");
+  const { initUserConsentModel } = await import("../modules/consent/consent.model.js");
   
   // AI domain
-  const { initAiConversationModel } = await import("../ai/conversation.model.js");
-  const { initVectorEmbeddingModel } = await import("../ai/vectorEmbedding.model.js");
+  const { initAiConversationModel } = await import("../modules/ai/conversation.model.js");
+  const { initVectorEmbeddingModel } = await import("../modules/ai/vectorEmbedding.model.js");
   
   // Config domain
-  const { initSystemConfigurationModel } = await import("../config/config.model.js");
+  const { initSystemConfigurationModel } = await import("../modules/config/config.model.js");
   
   // Plans domain
-  const { initSubscriptionPlanModel } = await import("../plans/plan.model.js");
+  const { initSubscriptionPlanModel } = await import("../modules/plans/plan.model.js");
   
   // Admin domain
-  const { initUserRegistrationRequestModel } = await import("../admin/userRegistrationRequest.model.js");
+  const { initUserRegistrationRequestModel } = await import("../modules/admin/userRegistrationRequest.model.js");
 
   // Counselor domain
   const {
@@ -255,13 +255,13 @@ async function initAllModels(sequelize: Sequelize): Promise<void> {
     initCounselorGoogleTokenModel,
     initCounselorServiceCategoryModel,
     initCounselorServiceTemplateModel,
-  } = await import('../counselor/counselor.model.js');
+  } = await import('../modules/counselor/counselor.model.js');
 
   // Expert consultation domain
   const {
     initExpertConsultationSlotModel,
     initExpertConsultationModel,
-  } = await import('../consultation/consultation.model.js');
+  } = await import('../modules/consultation/consultation.model.js');
 
   // Initialize all models
   initUserModel(sequelize);
@@ -310,35 +310,35 @@ async function initAllModels(sequelize: Sequelize): Promise<void> {
  */
 async function setupAssociations(): Promise<void> {
   // Import all models
-  const { User } = await import("../auth/user.model.js");
-  const { ChildProfile } = await import("../child/child.model.js");
-  const { IepDocument } = await import("../document/document.model.js");
-  const { IepAnalysis } = await import("../document/analysis.model.js");
-  const { GoalProgress } = await import("../goal/goal.model.js");
-  const { ComplianceLog } = await import("../compliance/compliance.model.js");
-  const { ComplianceSummary } = await import("../compliance/complianceSummary.model.js");
-  const { CommunicationLog } = await import("../communication/communication.model.js");
-  const { BehaviorLog } = await import("../behavior/behavior.model.js");
-  const { LetterDraft } = await import("../letter/letter.model.js");
-  const { LetterTemplate } = await import("../letter/template.model.js");
-  const { AdvocacyInsight } = await import("../advocacy/advocacy.model.js");
-  const { SmartPrompt } = await import("../advocacy/smartPrompt.model.js");
-  const { Resource } = await import("../resource/resource.model.js");
-  const { UserPreference } = await import("../preference/preference.model.js");
-  const { AuditLog } = await import("../audit/audit.model.js");
-  const { UserConsent } = await import("../consent/consent.model.js");
-  const { AiConversation } = await import("../ai/conversation.model.js");
+  const { User } = await import("../modules/auth/user.model.js");
+  const { ChildProfile } = await import("../modules/child/child.model.js");
+  const { IepDocument } = await import("../modules/document/document.model.js");
+  const { IepAnalysis } = await import("../modules/document/analysis.model.js");
+  const { GoalProgress } = await import("../modules/goal/goal.model.js");
+  const { ComplianceLog } = await import("../modules/compliance/compliance.model.js");
+  const { ComplianceSummary } = await import("../modules/compliance/complianceSummary.model.js");
+  const { CommunicationLog } = await import("../modules/communication/communication.model.js");
+  const { BehaviorLog } = await import("../modules/behavior/behavior.model.js");
+  const { LetterDraft } = await import("../modules/letter/letter.model.js");
+  const { LetterTemplate } = await import("../modules/letter/template.model.js");
+  const { AdvocacyInsight } = await import("../modules/advocacy/advocacy.model.js");
+  const { SmartPrompt } = await import("../modules/advocacy/smartPrompt.model.js");
+  const { Resource } = await import("../modules/resource/resource.model.js");
+  const { UserPreference } = await import("../modules/preference/preference.model.js");
+  const { AuditLog } = await import("../modules/audit/audit.model.js");
+  const { UserConsent } = await import("../modules/consent/consent.model.js");
+  const { AiConversation } = await import("../modules/ai/conversation.model.js");
   const {
     CounselorAppointment,
     CounselorService,
     CounselorAvailabilityWindow,
     CounselorProfile,
     CounselorGoogleToken,
-  } = await import('../counselor/counselor.model.js');
+  } = await import('../modules/counselor/counselor.model.js');
   const {
     ExpertConsultation,
     ExpertConsultationSlot,
-  } = await import('../consultation/consultation.model.js');
+  } = await import('../modules/consultation/consultation.model.js');
 
   // User associations
   User.hasMany(ChildProfile, { foreignKey: 'userId', as: 'children' });
