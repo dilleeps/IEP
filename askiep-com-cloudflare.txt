@@ -1,0 +1,54 @@
+;;
+;; Domain:     askiep.com.
+;; Exported:   2026-03-28 01:50:55
+;; Updated:    2026-03-28 02:00:00 - Fixed api/app to DNS only for Cloud Run SSL
+;;
+;; This file is intended for use for informational and archival
+;; purposes ONLY and MUST be edited before use on a production
+;; DNS server.  In particular, you must:
+;;   -- update the SOA record with the correct authoritative name server
+;;   -- update the SOA record with the contact e-mail address information
+;;   -- update the NS record(s) with the authoritative name servers for this domain.
+;;
+;; For further information, please consult the BIND documentation
+;; located on the following website:
+;;
+;; http://www.isc.org/
+;;
+;; And RFC 1035:
+;;
+;; http://www.ietf.org/rfc/rfc1035.txt
+;;
+;; Please note that we do NOT offer technical support for any use
+;; of this zone data, the BIND name server, or any other third-party
+;; DNS software.
+;;
+;; Use at your own risk.
+;; SOA Record
+askiep.com	3600	IN	SOA	princess.ns.cloudflare.com. dns.cloudflare.com. 2052632925 10000 2400 604800 3600
+
+;; NS Records
+askiep.com.	86400	IN	NS	princess.ns.cloudflare.com.
+askiep.com.	86400	IN	NS	roman.ns.cloudflare.com.
+
+;; CNAME Records
+api.askiep.com.	1	IN	CNAME	ghs.googlehosted.com.
+app.askiep.com.	1	IN	CNAME	ghs.googlehosted.com.
+autodiscover.askiep.com.	1	IN	CNAME	autodiscover.outlook.com.
+console.askiep.com.	1	IN	CNAME	ghs.googlehosted.com.
+devapi.askiep.com.	1	IN	CNAME	ghs.googlehosted.com.
+dev.askiep.com.	1	IN	CNAME	ghs.googlehosted.com.
+prodapi.askiep.com.	1	IN	CNAME	ghs.googlehosted.com.
+prod.askiep.com.	1	IN	CNAME	ghs.googlehosted.com.
+selector1._domainkey.askiep.com.	1	IN	CNAME	selector1-askiep-com._domainkey.askiep.y-v1.dkim.mail.microsoft.
+selector2._domainkey.askiep.com.	1	IN	CNAME	selector2-askiep-com._domainkey.askiep.y-v1.dkim.mail.microsoft.
+
+;; MX Records
+askiep.com.	1	IN	MX	0 askiep-com.mail.protection.outlook.com.
+
+;; TXT Records
+askiep.com.	3600	IN	TXT	"google-site-verification=ERr2Cva6Pe3Hgjd3OaqN1l2K2cC5fIKCgjbn_n3VaQY"
+askiep.com.	1	IN	TXT	"v=spf1 include:spf.efwd.registrar-servers.com include:spf.protection.outlook.com ~all"
+askiep.com.	1	IN	TXT	"google-site-verification=CdwyE2PdNzdUdIkfMuD8XwOo5nciGOSg4D5XjbxAS58"
+askiep.com.	1	IN	TXT	"MS=ms38214743"
+_dmarc.askiep.com.	1	IN	TXT	"v=DMARC1; p=none; rua=mailto:postmaster@askiep.com; fo=1"
