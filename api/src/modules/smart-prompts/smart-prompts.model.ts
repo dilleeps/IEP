@@ -139,6 +139,7 @@ export function initSmartPromptModel(sequelize: Sequelize): void {
     {
       sequelize,
       tableName: 'smart_prompts',
+      underscored: true,
       paranoid: true,
       timestamps: true,
       indexes: [
