@@ -22,6 +22,7 @@ export const en: Translations = {
     counselorProfile: "Settings",
     counselorBooking: "Counselor Booking",
     expertConsultation: "Expert Consultation",
+    adminAnalytics: "User Analytics",
     adminPlans: "Subscription Plans",
     billing: "Billing",
     help: "Help Center",

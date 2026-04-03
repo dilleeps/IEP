@@ -39,6 +39,7 @@ import adminUsersRoutes from "./modules/admin/users/admin-users.routes.js";
 import publicPlansRoutes from "./modules/plans/plan.public.routes.js";
 import adminPlansRoutes from "./modules/plans/plan.admin.routes.js";
 import userManagementRoutes from "./modules/admin/userManagement.routes.js";
+import adminAnalyticsRoutes from "./modules/admin/analytics/admin-analytics.routes.js";
 import storageRoutes from "./modules/storage/storage.routes.js";
 import { consentRouter } from "./modules/consent/consent.routes.js";
 import counselorRoutes from './modules/counselor/counselor.routes.js';
@@ -158,6 +159,7 @@ v1Router.use("/admin/config", adminConfigRoutes); // Auth + RBAC inside routes
 v1Router.use("/admin/users", adminUsersRoutes); // Auth + RBAC inside routes
 v1Router.use("/admin/plans", adminPlansRoutes); // Auth + RBAC inside routes
 v1Router.use("/admin/user-management", userManagementRoutes); // Auth + RBAC inside routes - approval workflow
+v1Router.use("/admin/analytics", adminAnalyticsRoutes); // Auth + RBAC inside routes
 
 app.use("/api/v1", v1Router);
 

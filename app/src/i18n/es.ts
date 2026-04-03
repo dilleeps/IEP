@@ -22,6 +22,7 @@ export const es: Translations = {
     counselorProfile: "Configuración",
     counselorBooking: "Reservar Consejero",
     expertConsultation: "Consulta con Experto",
+    adminAnalytics: "Análisis de Usuarios",
     adminPlans: "Planes de Suscripción",
     billing: "Facturación",
     help: "Centro de Ayuda",
