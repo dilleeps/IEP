@@ -22,8 +22,8 @@ export class AdminAnalyticsRepository extends BaseRepo<User> {
       where: {
         createdAt: { [Op.gte]: from, [Op.lte]: to },
       },
-      group: [literal(`DATE_TRUNC('${trunc}', created_at)`)],
-      order: [[literal(`DATE_TRUNC('${trunc}', created_at)`), 'ASC']],
+      group: [literal(`DATE_TRUNC('${trunc}', created_at)`) as any],
+      order: [[literal(`DATE_TRUNC('${trunc}', created_at)`) as any, 'ASC']],
       raw: true,
     });
 
