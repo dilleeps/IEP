@@ -32,11 +32,17 @@ async function main() {
       const [results] = await seq.query(`SELECT id FROM users WHERE email = '${u.email}'`);
       if ((results as any[]).length === 0) {
         await seq.query(
-          `INSERT INTO users (id, email, password_hash, display_name, role, status, created_at, updated_at)
-           VALUES (gen_random_uuid(), $1, $2, $3, $4, 'active', NOW(), NOW())`,
+          `INSERT INTO users (id, email, password_hash, display_name, role, status, approved_at, created_at, updated_at)
+           VALUES (gen_random_uuid(), $1, $2, $3, $4, 'active', NOW(), NOW(), NOW())`,
           { bind: [u.email, hash, u.name, u.role] }
         );
         logger.info(`Seeded user: ${u.email} (${u.role})`);
+      } else {
+        // Ensure existing seed users are approved and active
+        await seq.query(
+          `UPDATE users SET approved_at = COALESCE(approved_at, NOW()), status = 'active' WHERE email = $1`,
+          { bind: [u.email] }
+        );
       }
     }
   } catch (seedErr) {
