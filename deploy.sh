@@ -71,7 +71,7 @@ _VITE_STRIPE_PUBLISHABLE_KEY=" \
     --region="$REGION" \
     --platform=managed \
     --allow-unauthenticated \
-    --memory=256Mi --cpu=1 \
+    --memory=512Mi --cpu=1 \
     --min-instances=0 --max-instances=3 \
     --timeout=60 \
     --quiet
