@@ -174,8 +174,8 @@ export class ExtractionService {
         ),
         limit(() =>
           runSection<any>(gemini,
-            'Extract ALL annual goals from this IEP document. Return as JSON: {"goals": [...]}. Do not omit any goal.',
-            goalsSchema, goalsSystemPrompt, fileData, 65536, true
+            'Extract ALL annual goals from this IEP document. Return as JSON object: {"goals": [...]}. Include every goal found, do not omit any.',
+            goalsSchema, goalsSystemPrompt, fileData, 32768
           ).then(r => { sectionDone('goals'); return r; })
         ),
         limit(() =>

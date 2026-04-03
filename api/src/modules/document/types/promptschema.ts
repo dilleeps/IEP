@@ -57,15 +57,15 @@ export const goalsSchema = {
       items: {
         type: 'object',
         properties: {
-          goalText:          { type: 'string', nullable: true },
-          goalName:          { type: 'string', nullable: true },
-          domain:            { type: 'string', nullable: true },
-          baseline:          { type: 'string', nullable: true },
-          target:            { type: 'string', nullable: true },
-          measurementMethod: { type: 'string', nullable: true },
-          criteria:          { type: 'string', nullable: true },
-          frequency:         { type: 'string', nullable: true },
-          startDate:         { type: 'string', nullable: true },
+          goalText:          { type: 'string' },
+          goalName:          { type: 'string' },
+          domain:            { type: 'string' },
+          baseline:          { type: 'string' },
+          target:            { type: 'string' },
+          measurementMethod: { type: 'string' },
+          criteria:          { type: 'string' },
+          frequency:         { type: 'string' },
+          startDate:         { type: 'string' },
         },
         required: ['goalText', 'goalName', 'domain'],
       },
@@ -73,17 +73,19 @@ export const goalsSchema = {
   },
   required: ['goals'],
 };
-export const goalsSystemPrompt = `You are an IEP goals specialist. Extract ONLY annual goals. Be extremely concise — keep total response under 4000 characters.
-For each goal:
-- goalText: ONE sentence summary only, max 100 chars. Never copy verbatim.
-- goalName: 5 words max
-- domain: reading|math|writing|behavior|social|communication|motor|adaptive|other
-- baseline: max 50 chars
-- target: max 50 chars
-- measurementMethod: max 30 chars
-- criteria: max 50 chars
-- frequency: e.g. weekly
-CRITICAL: Keep ALL field values SHORT. Do not include full paragraph text.`;
+export const goalsSystemPrompt = `You are an IEP goals specialist. Extract ALL annual goals from the IEP document. Return a JSON object with a "goals" array.
+
+For each goal, extract:
+- goalText: A 1-2 sentence description of the goal (required)
+- goalName: Short 3-6 word title (required)
+- domain: One of: reading, math, writing, behavior, social, communication, motor, adaptive, speech_language, occupational_therapy, physical_therapy, social_emotional, transition, vocational, other
+- baseline: Current performance level (brief)
+- target: Expected achievement level (brief)
+- measurementMethod: How progress is measured (brief)
+- criteria: Success criteria like "80% accuracy over 3 trials" (brief)
+- frequency: Measurement frequency like "weekly" or "monthly"
+
+IMPORTANT: Extract EVERY goal you find. Do not skip or omit any goals. Return valid JSON only.`;
 
 /** Section C — Services */
 export const servicesSchema = {
