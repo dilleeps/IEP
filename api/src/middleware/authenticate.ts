@@ -98,8 +98,8 @@ export function authenticate(req: AuthRequest, res: Response, next: NextFunction
       throw new AppError('Account is not active', 403, 'ACCOUNT_NOT_ACTIVE');
     }
 
-    // Check if user is approved (except for PARENT role which is auto-approved)
-    if (!req.user.isApproved && req.user.role !== 'PARENT') {
+    // Check if user is approved (ADMIN and PARENT roles skip approval check)
+    if (!req.user.isApproved && req.user.role !== 'PARENT' && req.user.role !== 'ADMIN') {
       throw new AppError('Account pending approval', 403, 'ACCOUNT_PENDING_APPROVAL');
     }
 
