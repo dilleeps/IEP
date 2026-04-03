@@ -87,6 +87,9 @@ export const ACCESS_POLICY: Record<Role, string[]> = {
     "/billing",
     "/settings",
     "/admin/users",
+    "/admin/analytics",
+    "/admin/plans",
+    "/expert-consultation",
   ],
 };
 
