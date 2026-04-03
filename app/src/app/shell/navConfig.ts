@@ -17,6 +17,7 @@ import {
   Briefcase,
   UserCircle,
   CreditCard,
+  BarChart3,
 } from "lucide-react";
 import type { Role } from "@/domain/auth/roles";
 import { ROLES } from "@/domain/auth/roles";
@@ -182,6 +183,14 @@ export const NAV_ITEMS: NavItem[] = [
     navKey: "userManagement",
     path: "/admin/users",
     icon: Users,
+    rolesAllowed: [ROLES.ADMIN],
+  },
+  {
+    key: "admin-analytics",
+    label: "User Analytics",
+    navKey: "adminAnalytics",
+    path: "/admin/analytics",
+    icon: BarChart3,
     rolesAllowed: [ROLES.ADMIN],
   },
   {

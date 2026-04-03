@@ -48,6 +48,7 @@ import AdminRequestsPage from "@/app/pages/admin/AdminRequestsPage";
 import AdminUserEditPage from "@/app/pages/admin/AdminUserEditPage";
 import AdminUserImportPage from "@/app/pages/admin/AdminUserImportPage";
 import AdminPlansPage from "@/app/pages/admin/AdminPlansPage";
+import AdminAnalyticsPage from "@/app/pages/admin/AdminAnalyticsPage";
 import { SubscriptionPage } from "@/app/pages/billing/SubscriptionPage";
 import { PaymentCheckoutPage } from "@/app/pages/billing/PaymentCheckoutPage";
 import { HelpPage } from "@/app/pages/HelpPage";
@@ -87,6 +88,7 @@ const routeTitles: Record<string, string> = {
   '/admin/users/requests': 'User Requests - IEP App',
   '/admin/users/import': 'Import Users - IEP App',
   '/admin/plans': 'Subscription Plans - IEP App',
+  '/admin/analytics': 'User Analytics - IEP App',
   '/billing': 'Subscription & Billing - IEP App',
   '/billing/checkout': 'Payment Checkout - IEP App',
   '/help': 'Help Center - IEP App',
@@ -478,6 +480,14 @@ export function AppRoutes() {
           element={
             <RequireRole allowedRoles={['ADMIN']}>
               <AdminUserImportPage />
+            </RequireRole>
+          }
+        />
+        <Route
+          path="admin/analytics"
+          element={
+            <RequireRole allowedRoles={['ADMIN']}>
+              <AdminAnalyticsPage />
             </RequireRole>
           }
         />

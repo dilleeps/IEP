@@ -21,6 +21,7 @@ export interface Translations {
     counselorProfile: string;
     counselorBooking: string;
     expertConsultation: string;
+    adminAnalytics: string;
     adminPlans: string;
     billing: string;
     help: string;

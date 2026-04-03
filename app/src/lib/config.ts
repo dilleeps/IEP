@@ -220,6 +220,7 @@ export const config = {
         rejectRequests: "/api/v1/admin/user-management/requests/reject",
         importTemplate: "/api/v1/admin/user-management/users/import/template",
         importCsv: "/api/v1/admin/user-management/users/import/csv",
+        analytics: "/api/v1/admin/analytics/users",
       },
     },
   },
@@ -276,6 +277,7 @@ export const config = {
     adminUsersRequests: "/admin/users/requests",
     adminUsersImport: "/admin/users/import",
     adminPlans: "/admin/plans",
+    adminAnalytics: "/admin/analytics",
 
     // Billing routes
     billing: "/billing",
