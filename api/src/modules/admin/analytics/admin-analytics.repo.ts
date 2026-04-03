@@ -79,8 +79,8 @@ export class AdminAnalyticsRepository extends BaseRepo<User> {
       where: {
         lastLoginAt: { [Op.gte]: from, [Op.lte]: to, [Op.ne]: null as any },
       },
-      group: [literal(`DATE_TRUNC('${trunc}', last_login_at)`)],
-      order: [[literal(`DATE_TRUNC('${trunc}', last_login_at)`), 'ASC']],
+      group: [literal(`DATE_TRUNC('${trunc}', last_login_at)`) as any],
+      order: [[literal(`DATE_TRUNC('${trunc}', last_login_at)`) as any, 'ASC']],
       raw: true,
     });
 
